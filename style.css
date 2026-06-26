@@ -342,3 +342,156 @@ filter:drop-shadow(0 40px 70px rgba(212,175,55,.35));
 100%{transform:translateY(0);}
 
 }
+/* ===========================
+   PRODUCTS
+=========================== */
+
+.products{
+padding:100px 8%;
+background:#0b0b0b;
+}
+
+.products h2{
+text-align:center;
+font-size:48px;
+color:#d4af37;
+margin-bottom:60px;
+}
+
+.product-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:35px;
+}
+
+.card{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.08);
+border-radius:25px;
+padding:25px;
+text-align:center;
+transition:.4s;
+backdrop-filter:blur(15px);
+overflow:hidden;
+}
+
+.card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 25px 60px rgba(212,175,55,.25);
+border-color:#d4af37;
+}
+
+.card img{
+width:100%;
+height:280px;
+object-fit:contain;
+transition:.5s;
+}
+
+.card:hover img{
+transform:scale(1.08) rotate(-2deg);
+}
+
+.card h3{
+margin-top:20px;
+font-size:28px;
+color:#fff;
+}
+
+.card p{
+margin:15px 0;
+font-size:24px;
+color:#d4af37;
+font-weight:bold;
+}
+
+.card button{
+padding:15px 35px;
+border:none;
+border-radius:50px;
+background:#d4af37;
+color:#000;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.card button:hover{
+transform:scale(1.08);
+box-shadow:0 15px 40px rgba(212,175,55,.4);
+}
+
+/* Footer */
+
+footer{
+padding:70px 8%;
+background:#000;
+text-align:center;
+}
+
+footer h2{
+color:#d4af37;
+margin-bottom:20px;
+font-size:36px;
+}
+
+footer p{
+color:#bbb;
+line-height:1.8;
+}
+
+.socials{
+margin-top:30px;
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.socials a{
+width:55px;
+height:55px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#111;
+color:#d4af37;
+font-size:22px;
+text-decoration:none;
+transition:.3s;
+}
+
+.socials a:hover{
+background:#d4af37;
+color:#000;
+transform:translateY(-6px);
+}
+
+/* Responsive */
+
+@media(max-width:1000px){
+
+.hero{
+flex-direction:column;
+text-align:center;
+padding-top:140px;
+}
+
+.hero-image img{
+width:90%;
+margin-top:50px;
+}
+
+.hero-content h1{
+font-size:48px;
+}
+
+nav ul{
+display:none;
+}
+
+.products h2{
+font-size:36px;
+}
+
+}
