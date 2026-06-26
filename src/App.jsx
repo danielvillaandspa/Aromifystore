@@ -90,7 +90,7 @@ export default function App() {
     )}
   </AnimatePresence>
 
-  <div className="min-h-screen bg-black text-white">
+ 
 <div className="min-h-screen bg-black text-white">
 
   <nav className="fixed top-0 left-0 w-full backdrop-blur-xl bg-black/40 border-b border-yellow-500/20 z-40">
