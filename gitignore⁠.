@@ -1,1 +1,19 @@
+# تجاهل مكتبات Node
+node_modules/
+npm-debug.log
+dist/
+build/
+
+# تجاهل ملفات البيئة الحساسة (مهم جداً!)
+.env
+.env.local
+.env.*.local
+
+# تجاهل ملفات النظام
+.DS_Store
+Thumbs.db
+
+# تجاهل ملفات التداول أو أي إعدادات خاصة
+*.log
+*.tmp
 
