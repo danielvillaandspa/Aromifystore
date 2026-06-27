@@ -1,33 +1,1701 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="he" dir="rtl">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0a0b" />
+<title>Aromifystore | מכשירי ריח חכמים יוקרתיים</title>
+<meta name="description" content="Aromifystore — מכשירי ריחות חכמים ופתרונות ארומה יוקרתיים לעסקים ולבית, לרכב ולמשרד." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a0a0b%22/><text x=%2216%22 y=%2222%22 font-family=%22Georgia,serif%22 font-size=%2218%22 fill=%22%23c9a227%22 text-anchor=%22middle%22>A</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Frank+Ruhl+Libre:wght@400;500;700&family=Aref+Ruqaa:wght@400;700&family=Inter:wght@300;400;500;600&family=Assistant:wght@300;400;500;600;700&family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+/* =========================================================
+   Aromifystore — style.css
+   Black / Gold / White luxury theme, glassmorphism, RTL-aware
+   ========================================================= */
 
-  <title>AromifyStore | Premium Aroma Diffusers</title>
+:root {
+  --ink: #0a0a0b;
+  --ink-soft: #141316;
+  --ink-raised: #1c1a1d;
+  --ivory: #f7f3ec;
+  --ivory-dim: rgba(232, 225, 211, 0.75);
+  --gold-light: #f1e0b0;
+  --gold: #c9a227;
+  --gold-dark: #6b5212;
+  --gold-gradient: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 45%, var(--gold-dark) 100%);
+  --glass-bg: rgba(255, 255, 255, 0.045);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --radius: 22px;
+  color-scheme: dark;
+}
 
-  <meta
-    name="description"
-    content="Luxury aroma diffusers and fragrance systems for homes, offices, hotels and cars." />
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
 
-  <link rel="icon" href="/favicon.ico" />
+html { scroll-behavior: smooth; }
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+body {
+  background: linear-gradient(180deg, #0a0a0b 0%, #121113 100%);
+  color: var(--ivory);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+/* Per-language type stacks */
+html[lang="he"] body { font-family: "Assistant", sans-serif; }
+html[lang="ar"] body { font-family: "Cairo", sans-serif; }
+html[lang="en"] body { font-family: "Inter", sans-serif; }
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+html[lang="he"] .font-display { font-family: "Frank Ruhl Libre", serif; }
+html[lang="ar"] .font-display { font-family: "Aref Ruqaa", serif; }
+html[lang="en"] .font-display { font-family: "Cormorant Garamond", serif; }
 
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+img { max-width: 100%; display: block; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- Reusable utility classes ---------- */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+
+.gold-text {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gold-shimmer {
+  background-image: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 25%, var(--gold) 50%, var(--gold-dark) 75%, var(--gold) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 5s linear infinite;
+}
+
+.gold-divider {
+  width: 90px;
+  height: 1px;
+  background: var(--gold-gradient);
+  margin: 18px auto;
+}
+
+.section-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--gold-light);
+  opacity: 0.85;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  white-space: nowrap;
+}
+.btn-gold { background: var(--gold-gradient); color: var(--ink); box-shadow: 0 0 18px rgba(201, 162, 39, 0.18); }
+.btn-gold:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 40px rgba(201, 162, 39, 0.3); }
+.btn-ghost { border: 1px solid rgba(201, 162, 39, 0.4); color: var(--ivory); }
+.btn-ghost:hover { border-color: var(--gold); background: rgba(201, 162, 39, 0.1); }
+.btn-block { width: 100%; }
+
+/* ---------- Header / Nav ---------- */
+#site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+  padding: 18px 0;
+  transition: padding 0.4s ease;
+}
+#site-header .nav-wrap {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 28px;
+  border-radius: 18px;
+  transition: all 0.4s ease;
+}
+#site-header.scrolled { padding: 8px 0; }
+#site-header.scrolled .nav-wrap {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  margin: 0 16px;
+  padding: 10px 22px;
+}
+
+.brand {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 30px;
+}
+.nav-link {
+  position: relative;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(247, 243, 236, 0.8);
+  padding-bottom: 4px;
+  transition: color 0.25s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--gold-gradient);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+.nav-link:hover, .nav-link.active { color: var(--ivory); }
+.nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+
+.nav-cta { display: none; }
+
+#burger {
+  display: flex;
+  color: var(--ivory);
+  padding: 4px;
+}
+
+@media (min-width: 860px) {
+  .nav-links { display: flex; }
+  .nav-cta { display: inline-flex; padding: 9px 22px; font-size: 13px; }
+  #burger { display: none; }
+}
+
+/* Language selector — fixed visual top-left, independent of RTL/LTR */
+#lang-switch {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 50;
+}
+#lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ivory);
+}
+#lang-toggle:hover { border-color: rgba(201, 162, 39, 0.5); }
+#lang-menu {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 140px;
+  border-radius: 16px;
+  padding: 6px;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.96);
+  pointer-events: none;
+  transition: all 0.18s ease;
+}
+#lang-menu.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+.lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 11px;
+  font-size: 14px;
+  color: rgba(247, 243, 236, 0.9);
+  transition: background-color 0.2s ease;
+}
+.lang-option:hover { background: rgba(201, 162, 39, 0.12); }
+.lang-option.active::after { content: "✓"; color: var(--gold); }
+
+/* Mobile menu */
+#mobile-menu {
+  position: fixed;
+  inset-inline: 16px;
+  top: 84px;
+  z-index: 35;
+  border-radius: 18px;
+  padding: 14px;
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+}
+#mobile-menu.open { display: flex; }
+#mobile-menu .nav-link { padding: 13px 16px; border-radius: 12px; }
+#mobile-menu .nav-link:hover { background: rgba(255, 255, 255, 0.05); }
+#mobile-menu .btn { margin-top: 6px; justify-content: center; }
+
+/* ---------- View switching ---------- */
+.view { display: none; }
+.view.active { display: block; animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+main { padding-top: 96px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 106, 0.16), transparent 60%);
+}
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: grid;
+  gap: 50px;
+  text-align: center;
+}
+@media (min-width: 860px) {
+  .hero-grid { grid-template-columns: 1.1fr 0.9fr; text-align: start; align-items: center; }
+}
+
+.hero h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(34px, 6vw, 58px);
+  line-height: 1.15;
+  margin: 18px 0;
+}
+html[lang="he"] .hero h1, html[lang="he"] h1, html[lang="he"] h2 { font-family: "Frank Ruhl Libre", serif; }
+html[lang="ar"] .hero h1, html[lang="ar"] h1, html[lang="ar"] h2 { font-family: "Aref Ruqaa", serif; }
+html[lang="en"] h1, html[lang="en"] h2 { font-family: "Cormorant Garamond", serif; }
+
+.hero p.subtitle { max-width: 460px; color: var(--ivory-dim); margin: 0 auto 0 0; }
+@media (max-width: 859px) { .hero p.subtitle { margin: 0 auto; } }
+
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 36px; justify-content: center; }
+@media (min-width: 860px) { .hero-ctas { justify-content: flex-start; } }
+
+.hero-visual {
+  position: relative;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-glow {
+  position: absolute;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: rgba(201, 162, 39, 0.12);
+  filter: blur(40px);
+}
+.diffuser-graphic {
+  position: relative;
+  z-index: 2;
+  width: 190px;
+  animation: float 5s ease-in-out infinite;
+  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.55));
+}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: rgba(247, 243, 236, 0.5);
+  z-index: 2;
+}
+.scroll-hint .chev { animation: bounce 1.8s ease-in-out infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+
+/* Particles */
+.particles { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.particle {
+  position: absolute;
+  bottom: 0;
+  border-radius: 50%;
+  background: rgba(241, 224, 176, 0.75);
+  box-shadow: 0 0 12px rgba(201, 162, 39, 0.4);
+  animation-name: drift;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+}
+@keyframes drift {
+  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  12% { opacity: 0.8; }
+  100% { transform: translateY(-360px) translateX(24px) scale(1.6); opacity: 0; }
+}
+
+/* ---------- Sections ---------- */
+section.block { padding: 88px 0; }
+.heading { max-width: 640px; margin: 0 auto; text-align: center; }
+.heading h2 { font-size: clamp(26px, 4vw, 36px); margin: 10px 0 0; }
+.heading p { color: var(--ivory-dim); margin-top: 16px; }
+
+.intro-text { max-width: 720px; margin: 0 auto; text-align: center; color: var(--ivory-dim); }
+
+.feature-grid, .values-grid {
+  display: grid;
+  gap: 22px;
+  margin-top: 50px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 620px) { .feature-grid, .values-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1000px) { .feature-grid { grid-template-columns: repeat(4, 1fr); } .values-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.feature-card {
+  border-radius: 18px;
+  padding: 28px;
+  text-align: start;
+  transition: border-color 0.3s ease;
+}
+.feature-card:hover { border-color: rgba(201, 162, 39, 0.4); }
+.feature-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  background: var(--gold-gradient);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+.feature-card h3, .value-card h3 { font-size: 18px; margin: 0 0 8px; }
+.feature-card p, .value-card p { color: var(--ivory-dim); font-size: 14px; margin: 0; }
+.value-card { border-radius: 18px; padding: 28px; text-align: center; }
+.value-card .feature-icon { margin: 0 auto 16px; }
+
+.cta-band {
+  position: relative;
+  border-radius: 26px;
+  padding: 60px 28px;
+  text-align: center;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 106, 0.16), transparent 60%);
+}
+.cta-band h2 { font-size: clamp(22px, 4vw, 30px); margin: 0 0 12px; }
+.cta-band p { color: var(--ivory-dim); max-width: 480px; margin: 0 auto 28px; }
+
+/* ---------- Product grid / cards ---------- */
+.grid-3 { display: grid; gap: 26px; grid-template-columns: 1fr; margin-top: 28px; }
+@media (min-width: 640px) { .grid-3 { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 980px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
+
+.product-card {
+  display: block;
+  border-radius: 22px;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: 0 0 40px rgba(201, 162, 39, 0.22); }
+.product-card .badge {
+  position: absolute; top: 14px; inset-inline-start: 14px; z-index: 3;
+  background: var(--gold-gradient); color: var(--ink);
+  font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px;
+}
+.product-card-media { position: relative; aspect-ratio: 4/5; background: var(--ink-soft); overflow: hidden; }
+.product-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.product-card:hover .product-card-media img { transform: scale(1.06); }
+.product-card-media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,10,11,0.85), transparent 55%);
+}
+.product-card-body { padding: 20px; }
+.product-card-body h3 { font-size: 19px; margin: 0 0 6px; font-family: inherit; }
+.product-card-body p { font-size: 13.5px; color: var(--ivory-dim); margin: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.product-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+.coverage-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-light); opacity: 0.85; }
+.view-link { font-size: 13px; font-weight: 600; color: var(--gold); }
+
+.category-filters { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 36px; }
+.filter-btn {
+  padding: 9px 20px; border-radius: 999px; font-size: 13.5px; font-weight: 600;
+  border: 1px solid var(--glass-border); color: rgba(247,243,236,0.78);
+  transition: all 0.25s ease;
+}
+.filter-btn:hover { border-color: rgba(201,162,39,0.45); }
+.filter-btn.active { background: var(--gold-gradient); color: var(--ink); border-color: transparent; }
+
+/* ---------- Product detail ---------- */
+.product-detail-grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
+@media (min-width: 960px) { .product-detail-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+.gallery { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; }
+.gallery-track { display: flex; height: 100%; transition: transform 0.45s ease; }
+.gallery-slide { min-width: 100%; height: 100%; }
+.gallery-slide img { width: 100%; height: 100%; object-fit: cover; }
+.slide-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, #1c1a1d, #0a0a0b);
+  color: rgba(201,162,39,0.5);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+}
+.gallery-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(10,10,11,0.55);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--ivory);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  z-index: 3;
+  transition: background-color 0.2s ease;
+}
+.gallery-nav:hover { background: rgba(201,162,39,0.55); }
+.gallery-nav.prev { inset-inline-start: 12px; }
+.gallery-nav.next { inset-inline-end: 12px; }
+.gallery-dots { position: absolute; bottom: 14px; left: 0; right: 0; display: flex; justify-content: center; gap: 7px; z-index: 3; }
+.gallery-dots .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: all 0.2s ease; }
+.gallery-dots .dot.active { background: var(--gold); width: 18px; border-radius: 4px; }
+
+.product-info .badge.inline { display: inline-block; margin-bottom: 14px; }
+.product-info h1 { font-size: clamp(26px, 4vw, 36px); margin: 0 0 8px; }
+.product-info .muted { color: var(--ivory-dim); margin: 0 0 10px; }
+.product-info .price { color: var(--gold-light); font-size: 17px; margin: 0 0 22px; }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
+.pill { font-size: 13px; padding: 9px 16px; border-radius: 999px; }
+
+.product-info .description { color: var(--ivory-dim); margin-bottom: 28px; }
+.product-info h2 { font-size: 18px; margin: 0 0 14px; }
+
+.feature-list { margin-bottom: 28px; }
+.feature-list li { position: relative; padding-inline-start: 20px; margin-bottom: 9px; font-size: 14.5px; color: var(--ivory-dim); }
+.feature-list li::before { content: ""; position: absolute; inset-inline-start: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+.spec-list { margin-bottom: 30px; }
+.spec-row {
+  display: flex; justify-content: space-between; gap: 16px;
+  padding: 11px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
+}
+.spec-row dt { color: rgba(247,243,236,0.55); margin: 0; }
+.spec-row dd { margin: 0; text-align: end; }
+
+.color-swatches { display: flex; gap: 12px; margin-bottom: 28px; align-items: center; }
+.color-swatch {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
+
+.related-section { margin-top: 80px; }
+.related-section h2 { font-size: 24px; margin-bottom: 6px; }
+
+/* ---------- About ---------- */
+.about-card { border-radius: 24px; padding: 32px; max-width: 760px; margin: 40px auto 0; }
+.about-card p { color: var(--ivory-dim); margin: 0 0 16px; }
+.about-card p:last-child { margin-bottom: 0; }
+
+/* ---------- Contact ---------- */
+.contact-grid { display: grid; gap: 30px; grid-template-columns: 1fr; margin-top: 50px; }
+@media (min-width: 900px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+
+.contact-form { border-radius: 24px; padding: 32px; display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; gap: 16px; grid-template-columns: 1fr; }
+@media (min-width: 480px) { .form-row.two { grid-template-columns: 1fr 1fr; } }
+.field label { display: block; font-size: 12.5px; color: rgba(247,243,236,0.6); margin-bottom: 6px; }
+.field input, .field textarea {
+  width: 100%; padding: 12px 14px; border-radius: 12px;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--ivory); font-size: 14px; font-family: inherit;
+  resize: none; transition: border-color 0.2s ease;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: rgba(201,162,39,0.6); }
+
+.contact-direct { border-radius: 24px; padding: 32px; display: flex; flex-direction: column; }
+.contact-direct h3 { margin: 0 0 18px; font-size: 18px; }
+.contact-link-list { display: flex; flex-direction: column; gap: 16px; margin-bottom: 26px; }
+.contact-link-list a, .contact-link-list .row { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: rgba(247,243,236,0.85); }
+.contact-link-list a:hover { color: var(--gold-light); }
+.map-embed { border-radius: 16px; overflow: hidden; margin-top: auto; min-height: 180px; }
+.map-embed iframe { width: 100%; height: 100%; min-height: 180px; border: 0; opacity: 0.85; }
+
+/* ---------- FAQ ---------- */
+.faq-list { max-width: 700px; margin: 40px auto 0; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { border-radius: 18px; overflow: hidden; }
+.faq-question {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  gap: 14px; padding: 18px 22px; text-align: start; font-size: 15px; font-weight: 600;
+}
+.faq-plus { color: var(--gold); font-size: 20px; transition: transform 0.3s ease; flex-shrink: 0; }
+.faq-item.open .faq-plus { transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+.faq-item.open .faq-answer { max-height: 240px; }
+.faq-answer p { padding: 0 22px 18px; margin: 0; color: var(--ivory-dim); font-size: 14px; }
+
+/* ---------- Footer ---------- */
+footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-soft); margin-top: 40px; }
+.footer-grid { display: grid; gap: 36px; grid-template-columns: 1fr; padding: 60px 0; }
+@media (min-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 960px) { .footer-grid { grid-template-columns: 1.3fr 1fr 1.3fr; } }
+.footer-col p { color: rgba(247,243,236,0.65); font-size: 14px; max-width: 280px; }
+.footer-col h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-light); opacity: 0.85; margin: 0 0 16px; }
+.footer-links { display: flex; flex-direction: column; gap: 10px; }
+.footer-links a { font-size: 14px; color: rgba(247,243,236,0.78); }
+.footer-links a:hover { color: var(--gold-light); }
+.footer-contact { display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: rgba(247,243,236,0.78); }
+.footer-contact a:hover { color: var(--gold-light); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); text-align: center; padding: 20px 0; font-size: 12px; color: rgba(247,243,236,0.35); }
+
+/* ---------- WhatsApp floating button ---------- */
+#wa-button {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+  animation: popIn 0.5s ease 1.2s backwards;
+}
+#wa-button svg { width: 28px; height: 28px; fill: #fff; }
+#wa-button .ping {
+  position: absolute; inset: 0; border-radius: 50%;
+  background: rgba(37, 211, 102, 0.45);
+  animation: ping 1.8s ease-out infinite;
+}
+@keyframes ping { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.7); opacity: 0; } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
+
+/* ---------- Misc ---------- */
+@keyframes shimmer { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+</style>
 </head>
-
 <body>
 
-  <div id="root"></div>
+<!-- Language selector — always top-left -->
+<div id="lang-switch">
+  <button id="lang-toggle" class="glass">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9s1.3-6.5 3.8-9Z"/></svg>
+    <span id="current-lang-label">עברית</span>
+  </button>
+  <div id="lang-menu" class="glass">
+    <button class="lang-option active" data-lang-label="he">עברית</button>
+    <button class="lang-option" data-lang-label="ar">العربية</button>
+    <button class="lang-option" data-lang-label="en">English</button>
+  </div>
+</div>
 
-  <script type="module" src="/src/main.jsx"></script>
+<!-- Header -->
+<header id="site-header">
+  <div class="nav-wrap">
+    <a href="#home" class="brand">Aromify<span class="gold-text">store</span></a>
+    <nav class="nav-links">
+      <a href="#home" class="nav-link" data-route="home" data-i18n="nav.home">Home</a>
+      <a href="#products" class="nav-link" data-route="products" data-i18n="nav.products">Products</a>
+      <a href="#about" class="nav-link" data-route="about" data-i18n="nav.about">About</a>
+      <a href="#faq" class="nav-link" data-route="faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" class="nav-link" data-route="contact" data-i18n="nav.contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn btn-gold nav-cta" data-i18n="nav.cta">Get in touch</a>
+    <button id="burger" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
 
+<div id="mobile-menu" class="glass">
+  <a href="#home" class="nav-link" data-route="home" data-i18n="nav.home">Home</a>
+  <a href="#products" class="nav-link" data-route="products" data-i18n="nav.products">Products</a>
+  <a href="#about" class="nav-link" data-route="about" data-i18n="nav.about">About</a>
+  <a href="#faq" class="nav-link" data-route="faq" data-i18n="nav.faq">FAQ</a>
+  <a href="#contact" class="nav-link" data-route="contact" data-i18n="nav.contact">Contact</a>
+  <a href="#contact" class="btn btn-gold" data-i18n="nav.cta">Get in touch</a>
+</div>
+
+<main>
+
+  <!-- ============ HOME ============ -->
+  <section id="view-home" class="view active">
+
+    <section class="hero">
+      <div class="particles" id="hero-particles"></div>
+      <div class="hero-grid">
+        <div>
+          <p class="section-eyebrow" data-i18n="hero.eyebrow">Luxury scent diffusion</p>
+          <h1>
+            <span data-i18n="hero.title1">The Scent That Tells</span><br/>
+            <span class="gold-shimmer" data-i18n="hero.title2">Your Story</span>
+          </h1>
+          <p class="subtitle" data-i18n="hero.subtitle">Professional-grade smart fragrance systems.</p>
+          <div class="hero-ctas">
+            <a href="#products" class="btn btn-gold" data-i18n="hero.ctaPrimary">Explore the Collection</a>
+            <a href="#" data-whatsapp-link target="_blank" rel="noopener" class="btn btn-ghost" data-i18n="hero.ctaSecondary">Chat on WhatsApp</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-glow"></div>
+          <svg class="diffuser-graphic" viewBox="0 0 240 320" fill="none">
+            <defs>
+              <linearGradient id="bodyGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#1c1a1d"/><stop offset="100%" stop-color="#0a0a0b"/>
+              </linearGradient>
+              <linearGradient id="capGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f1e0b0"/><stop offset="100%" stop-color="#8f6f18"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="120" cy="300" rx="58" ry="10" fill="#000" opacity="0.35"/>
+            <path d="M70 280 C 64 200 60 140 78 90 C 86 65 154 65 162 90 C 180 140 176 200 170 280 Z" fill="url(#bodyGradient)" stroke="#d4af6a" stroke-opacity="0.25"/>
+            <rect x="68" y="170" width="104" height="6" fill="url(#capGradient)" opacity="0.85"/>
+            <path d="M82 90 C 82 70 158 70 158 90 L 150 70 C 150 58 90 58 90 70 Z" fill="url(#capGradient)"/>
+            <ellipse cx="120" cy="68" rx="14" ry="5" fill="#0a0a0b"/>
+          </svg>
+        </div>
+      </div>
+      <div class="scroll-hint">
+        <span data-i18n="hero.scroll">Keep scrolling</span>
+        <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container intro-text">
+        <p class="section-eyebrow" data-i18n="home.introEyebrow">Aromifystore</p>
+        <h2 class="font-display" style="margin:10px 0 0;" data-i18n="home.introTitle">The art of fragrance</h2>
+        <p style="margin-top:16px" data-i18n="home.introBody">We specialize in smart scent solutions.</p>
+      </div>
+    </section>
+
+    <section class="block" style="padding-top:0">
+      <div class="container">
+        <div class="heading">
+          <p class="section-eyebrow" data-i18n="home.featuresEyebrow">Why Aromifystore</p>
+          <h2 class="font-display" data-i18n="home.featuresTitle">Quality you feel</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card glass">
+            <div class="feature-icon">📍</div>
+            <h3 data-i18n="features.coverage.title">Flexible coverage</h3>
+            <p data-i18n="features.coverage.body">From small rooms to large halls.</p>
+          </div>
+          <div class="feature-card glass">
+            <div class="feature-icon">📱</div>
+            <h3 data-i18n="features.smart.title">Smart control</h3>
+            <p data-i18n="features.smart.body">Managed from your phone.</p>
+          </div>
+          <div class="feature-card glass">
+            <div class="feature-icon">✨</div>
+            <h3 data-i18n="features.quality.title">Exclusive fragrances</h3>
+            <p data-i18n="features.quality.body">Premium curated scents.</p>
+          </div>
+          <div class="feature-card glass">
+            <div class="feature-icon">🛡️</div>
+            <h3 data-i18n="features.warranty.title">Full warranty</h3>
+            <p data-i18n="features.warranty.body">Complete manufacturer warranty.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="container">
+        <div class="heading">
+          <p class="section-eyebrow" data-i18n="home.productsEyebrow">The Collection</p>
+          <h2 class="font-display" data-i18n="home.productsTitle">Featured Products</h2>
+        </div>
+        <div id="featured-products-grid" class="grid-3"></div>
+        <div style="text-align:center;margin-top:40px">
+          <a href="#products" class="btn btn-ghost" data-i18n="home.productsCta">View all products</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" style="padding-top:0">
+      <div class="container">
+        <div class="cta-band glass">
+          <h2 class="font-display" data-i18n="home.ctaBandTitle">Ready to elevate your space?</h2>
+          <p data-i18n="home.ctaBandBody">We'll guide you from choice to installation.</p>
+          <a href="#contact" class="btn btn-gold" data-i18n="home.ctaBandButton">Request a Quote</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ PRODUCTS ============ -->
+  <section id="view-products" class="view">
+    <section class="block">
+      <div class="container">
+        <div class="heading">
+          <p class="section-eyebrow" data-i18n="nav.products">Products</p>
+          <h2 class="font-display" data-i18n="products.title">All Products</h2>
+          <p data-i18n="products.subtitle">Our curated collection.</p>
+        </div>
+        <div id="category-filters" class="category-filters"></div>
+        <div id="products-grid" class="grid-3"></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ PRODUCT DETAIL ============ -->
+  <section id="view-product" class="view">
+    <section class="block">
+      <div class="container">
+        <a href="#products" class="btn-ghost btn" style="margin-bottom:34px;display:inline-flex">
+          <span data-i18n="product.back">Back to all products</span>
+        </a>
+        <div id="product-detail-content"></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section id="view-about" class="view">
+    <section class="block">
+      <div class="container">
+        <div class="heading">
+          <p class="section-eyebrow" data-i18n="about.eyebrow">Who we are</p>
+          <h2 class="font-display" data-i18n="about.title">A scent that speaks for you</h2>
+        </div>
+        <div class="about-card glass">
+          <p data-i18n="about.p1">...</p>
+          <p data-i18n="about.p2">...</p>
+          <p data-i18n="about.p3">...</p>
+        </div>
+      </div>
+    </section>
+    <section class="block" style="padding-top:0">
+      <div class="container">
+        <div class="heading"><h2 class="font-display" data-i18n="about.valuesTitle">Our principles</h2></div>
+        <div class="values-grid">
+          <div class="value-card glass">
+            <div class="feature-icon">💎</div>
+            <h3 data-i18n="about.v1t">Precision</h3>
+            <p data-i18n="about.v1b">...</p>
+          </div>
+          <div class="value-card glass">
+            <div class="feature-icon">🎧</div>
+            <h3 data-i18n="about.v2t">Service</h3>
+            <p data-i18n="about.v2b">...</p>
+          </div>
+          <div class="value-card glass">
+            <div class="feature-icon">✨</div>
+            <h3 data-i18n="about.v3t">Exclusivity</h3>
+            <p data-i18n="about.v3b">...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section id="view-contact" class="view">
+    <section class="block">
+      <div class="container">
+        <div class="heading">
+          <p class="section-eyebrow" data-i18n="contact.eyebrow">Get in touch</p>
+          <h2 class="font-display" data-i18n="contact.title">We'd love to hear from you</h2>
+          <p data-i18n="contact.subtitle">Leave your details or reach us directly.</p>
+        </div>
+        <div class="contact-grid">
+          <form id="contact-form" class="contact-form glass">
+            <div class="field">
+              <label data-i18n="contact.formName">Full name</label>
+              <input type="text" id="f-name" required />
+            </div>
+            <div class="form-row two">
+              <div class="field">
+                <label data-i18n="contact.formPhone">Phone</label>
+                <input type="tel" id="f-phone" />
+              </div>
+              <div class="field">
+                <label data-i18n="contact.formEmail">Email</label>
+                <input type="email" id="f-email" />
+              </div>
+            </div>
+            <div class="field">
+              <label data-i18n="contact.formMessage">Message</label>
+              <textarea id="f-message" rows="4" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-gold btn-block" data-i18n="contact.formSubmit">Send</button>
+          </form>
+
+          <div class="contact-direct glass">
+            <h3 data-i18n="contact.directTitle">Contact details</h3>
+            <div class="contact-link-list">
+              <a data-email-link href="#">✉️ <span data-email-text>email@example.com</span></a>
+              <a data-phone-link href="#">📞 <span data-phone-text>000-000-0000</span></a>
+              <a data-alt-phone-link href="#">📞 <span data-alt-phone-text>000-000-0000</span></a>
+              <div class="row">🗺️ <span data-i18n="contact.locationValue">Isfiya, Israel</span></div>
+            </div>
+            <a href="#" data-whatsapp-link target="_blank" rel="noopener" class="btn btn-gold btn-block" data-i18n="contact.whatsappCta">Message us on WhatsApp</a>
+            <div class="map-embed">
+              <iframe title="map" loading="lazy" src="https://www.google.com/maps?q=Isfiya,Israel&output=embed"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="view-faq" class="view">
+    <section class="block">
+      <div class="container">
+        <div class="heading">
+          <p class="section-eyebrow" data-i18n="faq.eyebrow">FAQ</p>
+          <h2 class="font-display" data-i18n="faq.title">Everything you wanted to know</h2>
+        </div>
+        <div id="faq-list" class="faq-list"></div>
+      </div>
+    </section>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <a href="#home" class="brand">Aromify<span class="gold-text">store</span></a>
+      <p data-i18n="footer.tagline">Luxury scent diffusion.</p>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.quickLinks">Quick links</h4>
+      <div class="footer-links">
+        <a href="#home" data-i18n="nav.home">Home</a>
+        <a href="#products" data-i18n="nav.products">Products</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.contactTitle">Contact</h4>
+      <div class="footer-contact">
+        <a data-email-link href="#">✉️ <span data-email-text>email@example.com</span></a>
+        <a data-phone-link href="#">📞 <span data-phone-text>000-000-0000</span> / <span data-alt-phone-text>000-000-0000</span></a>
+        <span data-i18n="contact.locationValue">Isfiya, Israel</span>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="footer-year"></span> <span data-i18n="footer.rights">Aromifystore. All rights reserved.</span></div>
+</footer>
+
+<a id="wa-button" data-whatsapp-link href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <span class="ping"></span>
+  <svg viewBox="0 0 32 32"><path d="M16.04 3C9.4 3 4 8.36 4 15c0 2.32.66 4.49 1.8 6.33L4 29l7.86-1.78A11.9 11.9 0 0 0 16.04 27C22.68 27 28 21.64 28 15S22.68 3 16.04 3Zm6.86 16.7c-.3.84-1.7 1.6-2.36 1.7-.6.1-1.36.14-2.2-.14-.5-.16-1.14-.36-1.96-.7-3.46-1.5-5.72-5-5.9-5.24-.16-.24-1.4-1.86-1.4-3.54 0-1.68.88-2.5 1.2-2.84.3-.34.66-.42.88-.42h.62c.2 0 .46-.02.7.56.3.7 1 2.44 1.08 2.62.1.18.16.4.02.64-.14.24-.22.4-.42.62-.2.22-.4.5-.58.66-.2.18-.4.38-.18.76.22.38 1 1.66 2.16 2.7 1.5 1.32 2.78 1.74 3.18 1.94.4.2.64.16.88-.1.24-.26 1.02-1.16 1.3-1.56.26-.4.54-.32.9-.2.36.14 2.3 1.08 2.7 1.28.4.2.66.3.76.46.1.18.1 1.04-.2 1.88Z"/></svg>
+</a>
+
+<script>
+/* =========================================================
+   Aromifystore — script.js
+   Plain JavaScript: language switching, hash-based routing,
+   product rendering, slider, FAQ accordion, contact form.
+   ========================================================= */
+
+/* ---------- Contact info (edit here, it propagates everywhere) ---------- */
+const CONTACT = {
+  email: "yosefabo111y@gmail.com",
+  phone: "0506075320",
+  phoneIntl: "+972506075320",
+  altPhone: "0545700913",
+  altPhoneIntl: "+972545700913",
+  whatsappNumber: "972506075320",
+};
+function waLink(msg) {
+  const base = `https://wa.me/${CONTACT.whatsappNumber}`;
+  return msg ? `${base}?text=${encodeURIComponent(msg)}` : base;
+}
+
+/* ---------- UI translations ---------- */
+const translations = {
+  he: {
+    brand: "Aromifystore",
+    nav: { home: "בית", products: "מוצרים", about: "אודות", contact: "צור קשר", faq: "שאלות נפוצות", cta: "השאירו פנייה" },
+    hero: {
+      eyebrow: "ארומה יוקרתית לעסקים ולבית",
+      title1: "הניחוח שמספר",
+      title2: "את הסיפור שלכם",
+      subtitle: "מכשירי ריח חכמים ברמה מקצועית, המעניקים לכל חלל אופי, אווירה וזיכרון חושי שנשאר.",
+      ctaPrimary: "גלו את הקולקציה",
+      ctaSecondary: "דברו איתנו בוואטסאפ",
+      scroll: "המשיכו לגלוש",
+    },
+    home: {
+      introEyebrow: "Aromifystore",
+      introTitle: "אומנות הריח, בדיוק תעשייתי",
+      introBody: "אנו מתמחים בפתרונות ארומה חכמים למלונות, מרפאות, חנויות יוקרה ובתים פרטיים — ממכשירים קומפקטיים ועד מערכות מסחריות שלמות.",
+      featuresEyebrow: "למה Aromifystore",
+      featuresTitle: "איכות שמורגשת בכל נשימה",
+      productsEyebrow: "הקולקציה",
+      productsTitle: "מוצרים נבחרים",
+      productsCta: "לכל המוצרים",
+      ctaBandTitle: "מוכנים לשדרג את האווירה במרחב שלכם?",
+      ctaBandBody: "צוות Aromifystore ילווה אתכם מהבחירה הראשונה ועד ההתקנה המושלמת.",
+      ctaBandButton: "קבלו הצעת מחיר",
+    },
+    features: {
+      coverage: { title: "כיסוי שטחים גמיש", body: "ממרחבים של 40 מ״ר ועד אולמות ומשרדים בשטח 500 מ״ר ויותר." },
+      smart: { title: "שליטה חכמה מהנייד", body: "תזמון, עצימות ופרופילי ריח — הכול נשלט מהסמארטפון בלחיצה." },
+      quality: { title: "ריחות איכותיים בלעדיים", body: "מבחר רחב של ריחות מיוחדים שמיוצרים ונבחרים בקפידה." },
+      warranty: { title: "אחריות ושירות מלא", body: "אחריות יצרן מלאה וזמינות שירות אישית בכל שלב." },
+    },
+    product: {
+      from: "התחלה מ-",
+      priceOnRequest: "מחיר לפי פנייה",
+      coverageArea: "כיסוי שטח",
+      warranty: "אחריות",
+      features: "תכונות עיקריות",
+      specifications: "מפרט טכני",
+      contactUs: "השאירו פנייה",
+      whatsapp: "שאלו בוואטסאפ",
+      related: "מוצרים שיתאימו לכם",
+      back: "חזרה לכל המוצרים",
+      colors: "צבעים זמינים",
+    },
+    products: { title: "כל המוצרים", subtitle: "מבחר מכשירי הארומה היוקרתיים שלנו — לכל חלל ולכל אופי", all: "הכול", home: "לבית", office: "למשרד", commercial: "מסחרי", car: "לרכב" },
+    about: {
+      eyebrow: "מי אנחנו",
+      title: "ניחוח שמדבר בשמכם",
+      p1: "Aromifystore נוסדה מתוך אמונה שריח הוא חלק בלתי נפרד מהחוויה והמותג — לא פחות חשוב מעיצוב או תאורה.",
+      p2: "אנו עובדים עם בתי מלון, מרפאות, חנויות יוקרה ובתים פרטיים, ומספקים מכשירי ריח חכמים המשלבים טכנולוגיה מתקדמת עם ריחות איכותיים ובלעדיים.",
+      p3: "כל מכשיר עובר בדיקת התאמה לחלל, כך שתקבלו כיסוי מדויק, עוצמה נכונה ותחזוקה פשוטה לאורך זמן.",
+      valuesTitle: "העקרונות שמובילים אותנו",
+      v1t: "דיוק בכל פרט", v1b: "כל מכשיר עובר בקרת איכות קפדנית לפני שהוא מגיע אליכם.",
+      v2t: "שירות אישי", v2b: "ליווי מקצועי מהבחירה הראשונית ועד התחזוקה השוטפת.",
+      v3t: "בלעדיות בריחות", v3b: "פיתוח וקבלת ריחות מיוחדים שלא תמצאו בכל מקום.",
+    },
+    contact: {
+      eyebrow: "צרו קשר", title: "נשמח לשמוע מכם",
+      subtitle: "השאירו פרטים ונחזור אליכם, או דברו איתנו ישירות בטלפון ובוואטסאפ.",
+      formName: "שם מלא", formPhone: "טלפון", formEmail: "אימייל", formMessage: "הודעה", formSubmit: "שליחה",
+      directTitle: "פרטי התקשרות", location: "מיקום", locationValue: "אִסְפִיָּה, השכונה המזרחית, ישראל",
+      whatsappCta: "שלחו הודעה בוואטסאפ",
+    },
+    faq: { eyebrow: "שאלות נפוצות", title: "כל מה שרציתם לדעת" },
+    footer: { tagline: "ארומה יוקרתית לעסקים ולבית.", quickLinks: "קישורים מהירים", contactTitle: "צרו קשר", rights: "Aromifystore. כל הזכויות שמורות." },
+  },
+  ar: {
+    brand: "Aromifystore",
+    nav: { home: "الرئيسية", products: "المنتجات", about: "من نحن", contact: "تواصل معنا", faq: "الأسئلة الشائعة", cta: "اطلب الآن" },
+    hero: {
+      eyebrow: "عطور فاخرة للأعمال والمنازل",
+      title1: "العبير الذي يروي",
+      title2: "قصتكم",
+      subtitle: "أجهزة عطر ذكية بمعايير مهنية، تمنح كل مساحة طابعها وأجواءها وذكرى حسية تدوم.",
+      ctaPrimary: "اكتشفوا المجموعة",
+      ctaSecondary: "تواصلوا معنا عبر واتساب",
+      scroll: "استمروا بالتمرير",
+    },
+    home: {
+      introEyebrow: "Aromifystore",
+      introTitle: "فن العطر، بدقة صناعية",
+      introBody: "نحن متخصصون في حلول العطور الذكية للفنادق والعيادات ومتاجر الفخامة والمنازل — من أجهزة مدمجة إلى أنظمة تجارية كاملة.",
+      featuresEyebrow: "لماذا Aromifystore",
+      featuresTitle: "جودة تُحس في كل نفس",
+      productsEyebrow: "المجموعة",
+      productsTitle: "منتجات مختارة",
+      productsCta: "جميع المنتجات",
+      ctaBandTitle: "مستعدون لإضافة لمسة فاخرة لمساحتكم؟",
+      ctaBandBody: "فريق Aromifystore يرافقكم من الاختيار الأول وحتى التركيب المثالي.",
+      ctaBandButton: "اطلبوا عرض سعر",
+    },
+    features: {
+      coverage: { title: "تغطية مساحات مرنة", body: "من مساحات 40 م² إلى قاعات ومكاتب بمساحة 500 م² وأكثر." },
+      smart: { title: "تحكم ذكي من الهاتف", body: "الجدولة والشدة وملفات العطر — كل ذلك يُدار من هاتفكم بضغطة واحدة." },
+      quality: { title: "عطور حصرية وعالية الجودة", body: "تشكيلة واسعة من العطور المميزة المُصنّعة والمختارة بعناية." },
+      warranty: { title: "ضمان وخدمة كاملة", body: "ضمان كامل من الشركة المصنعة وخدمة شخصية في كل مرحلة." },
+    },
+    product: {
+      from: "يبدأ من",
+      priceOnRequest: "السعر عند الطلب",
+      coverageArea: "مساحة التغطية",
+      warranty: "الضمان",
+      features: "أهم المزايا",
+      specifications: "المواصفات التقنية",
+      contactUs: "اتركوا طلبكم",
+      whatsapp: "اسألوا عبر واتساب",
+      related: "منتجات تناسبكم",
+      back: "العودة إلى جميع المنتجات",
+      colors: "الألوان المتوفرة",
+    },
+    products: { title: "جميع المنتجات", subtitle: "تشكيلتنا الفاخرة من أجهزة العطر — لكل مساحة وكل طابع", all: "الكل", home: "للمنزل", office: "للمكتب", commercial: "تجاري", car: "للسيارة" },
+    about: {
+      eyebrow: "من نحن",
+      title: "عبير يتحدث باسمكم",
+      p1: "تأسست Aromifystore من قناعة بأن العطر جزء لا يتجزأ من التجربة والهوية — لا يقل أهمية عن التصميم أو الإضاءة.",
+      p2: "نعمل مع الفنادق والعيادات ومتاجر الفخامة والمنازل، ونوفر أجهزة عطر ذكية تجمع بين التقنية المتقدمة والعطور الحصرية.",
+      p3: "يخضع كل جهاز لفحص توافق مع المساحة، لتحصلوا على تغطية دقيقة وشدة مناسبة وصيانة بسيطة على المدى الطويل.",
+      valuesTitle: "المبادئ التي توجهنا",
+      v1t: "دقة في كل تفصيل", v1b: "كل جهاز يخضع لفحص جودة دقيق قبل أن يصل إليكم.",
+      v2t: "خدمة شخصية", v2b: "مرافقة مهنية من الاختيار الأول وحتى الصيانة الدورية.",
+      v3t: "عطور حصرية", v3b: "تطوير واختيار عطور مميزة لن تجدوها في كل مكان.",
+    },
+    contact: {
+      eyebrow: "تواصلوا معنا", title: "نسعد بسماع أخباركم",
+      subtitle: "اتركوا بياناتكم وسنعاود الاتصال بكم، أو تواصلوا معنا مباشرة عبر الهاتف وواتساب.",
+      formName: "الاسم الكامل", formPhone: "رقم الهاتف", formEmail: "البريد الإلكتروني", formMessage: "الرسالة", formSubmit: "إرسال",
+      directTitle: "بيانات التواصل", location: "الموقع", locationValue: "إسفيا، الحي الشرقي، إسرائيل",
+      whatsappCta: "أرسلوا رسالة عبر واتساب",
+    },
+    faq: { eyebrow: "الأسئلة الشائعة", title: "كل ما تريدون معرفته" },
+    footer: { tagline: "عطور فاخرة للأعمال والمنازل.", quickLinks: "روابط سريعة", contactTitle: "تواصلوا معنا", rights: "Aromifystore. جميع الحقوق محفوظة." },
+  },
+  en: {
+    brand: "Aromifystore",
+    nav: { home: "Home", products: "Products", about: "About", contact: "Contact", faq: "FAQ", cta: "Get in Touch" },
+    hero: {
+      eyebrow: "Luxury scent diffusion, for business & home",
+      title1: "The Scent That Tells",
+      title2: "Your Story",
+      subtitle: "Professional-grade smart fragrance systems that give every space character, atmosphere, and a memory that lingers.",
+      ctaPrimary: "Explore the Collection",
+      ctaSecondary: "Chat on WhatsApp",
+      scroll: "Keep scrolling",
+    },
+    home: {
+      introEyebrow: "Aromifystore",
+      introTitle: "The art of fragrance, engineered with precision",
+      introBody: "We specialize in smart scent solutions for hotels, clinics, luxury boutiques and private homes — from compact units to full commercial-grade systems.",
+      featuresEyebrow: "Why Aromifystore",
+      featuresTitle: "Quality you feel in every breath",
+      productsEyebrow: "The Collection",
+      productsTitle: "Featured Products",
+      productsCta: "View all products",
+      ctaBandTitle: "Ready to elevate the atmosphere of your space?",
+      ctaBandBody: "The Aromifystore team will guide you from your first choice to a flawless installation.",
+      ctaBandButton: "Request a Quote",
+    },
+    features: {
+      coverage: { title: "Flexible area coverage", body: "From intimate 40 m² spaces to halls and offices of 500 m² and beyond." },
+      smart: { title: "Smart control from your phone", body: "Scheduling, intensity and scent profiles — all managed from your phone in one tap." },
+      quality: { title: "Exclusive, premium fragrances", body: "A wide range of signature scents, carefully crafted and curated." },
+      warranty: { title: "Full warranty & service", body: "Complete manufacturer warranty with personal support at every step." },
+    },
+    product: {
+      from: "Starting from",
+      priceOnRequest: "Price on request",
+      coverageArea: "Coverage area",
+      warranty: "Warranty",
+      features: "Key features",
+      specifications: "Specifications",
+      contactUs: "Get in touch",
+      whatsapp: "Ask on WhatsApp",
+      related: "You may also like",
+      back: "Back to all products",
+      colors: "Available colors",
+    },
+    products: { title: "All Products", subtitle: "Our curated collection of luxury scent diffusion systems — for every space and character", all: "All", home: "Home", office: "Office", commercial: "Commercial", car: "Car" },
+    about: {
+      eyebrow: "Who we are",
+      title: "A scent that speaks for you",
+      p1: "Aromifystore was founded on the belief that fragrance is an inseparable part of experience and identity — every bit as important as design or lighting.",
+      p2: "We work with hotels, clinics, luxury boutiques and private homes, delivering smart scent devices that combine advanced technology with exclusive, premium fragrances.",
+      p3: "Every device is matched to your space, so you get precise coverage, the right intensity, and simple long-term maintenance.",
+      valuesTitle: "The principles that guide us",
+      v1t: "Precision in every detail", v1b: "Each device passes rigorous quality control before it reaches you.",
+      v2t: "Personal service", v2b: "Professional guidance from first selection through ongoing maintenance.",
+      v3t: "Exclusive fragrances", v3b: "Signature scents developed and curated — you won't find them everywhere.",
+    },
+    contact: {
+      eyebrow: "Get in touch", title: "We'd love to hear from you",
+      subtitle: "Leave your details and we'll get back to you, or reach us directly by phone and WhatsApp.",
+      formName: "Full name", formPhone: "Phone", formEmail: "Email", formMessage: "Message", formSubmit: "Send",
+      directTitle: "Contact details", location: "Location", locationValue: "Isfiya, Eastern Neighborhood, Israel",
+      whatsappCta: "Message us on WhatsApp",
+    },
+    faq: { eyebrow: "FAQ", title: "Everything you wanted to know" },
+    footer: { tagline: "Luxury scent diffusion for business & home.", quickLinks: "Quick links", contactTitle: "Contact", rights: "Aromifystore. All rights reserved." },
+  },
+};
+
+const faqItems = {
+  he: [
+    { q: "כמה שטח מכשיר ריח אחד מכסה?", a: "בהתאם לדגם — מ-40 מ״ר במכשירים הקומפקטיים ועד 500 מ״ר במערכות המסחריות. נעזור לכם לבחור את הדגם המתאים." },
+    { q: "האם ניתן לשלוט במכשיר מהטלפון?", a: "כן, כל מכשירי Aromifystore כוללים שליטה חכמה מהאפליקציה — תזמון, עוצמה ובחירת ריח." },
+    { q: "מה כלול באחריות?", a: "כל מכשיר מגיע עם אחריות יצרן מלאה הכוללת תמיכה טכנית ושירות אישי." },
+    { q: "איך מזמינים ריחות חילוף?", a: "ניתן להזמין דרך האתר או בפנייה ישירה בוואטסאפ ובטלפון, ואנו נדאג למשלוח מהיר." },
+  ],
+  ar: [
+    { q: "كم مساحة يغطيها جهاز العطر الواحد؟", a: "بحسب الموديل — من 40 م² في الأجهزة المدمجة إلى 500 م² في الأنظمة التجارية. سنساعدكم على اختيار الموديل المناسب." },
+    { q: "هل يمكن التحكم بالجهاز من الهاتف؟", a: "نعم، تشمل جميع أجهزة Aromifystore تحكمًا ذكيًا من التطبيق — جدولة وشدة واختيار العطر." },
+    { q: "ما الذي يشمله الضمان؟", a: "يأتي كل جهاز بضمان كامل من الشركة المصنعة يشمل الدعم التقني والخدمة الشخصية." },
+    { q: "كيف أطلب عطورًا بديلة؟", a: "يمكنكم الطلب عبر الموقع أو التواصل المباشر عبر واتساب والهاتف، وسنهتم بالشحن السريع." },
+  ],
+  en: [
+    { q: "How much area does one diffuser cover?", a: "It depends on the model — from 40 m² for compact units up to 500 m² for commercial systems. We'll help you choose the right one." },
+    { q: "Can the device be controlled from my phone?", a: "Yes, every Aromifystore device includes smart app control — scheduling, intensity, and scent selection." },
+    { q: "What does the warranty include?", a: "Every device comes with a full manufacturer warranty including technical support and personal service." },
+    { q: "How do I order replacement fragrances?", a: "You can order through the website or reach out via WhatsApp and phone, and we'll handle fast delivery." },
+  ],
+};
+
+/* ---------- Product catalog (real products, real image filenames) ---------- */
+/*
+  IMPORTANT: the JPEG files referenced below (IMG_0014.jpeg, IMG_0043.jpeg, etc.)
+  must sit in the SAME FOLDER as index.html — exactly like in your GitHub repo.
+  Do not rename them and do not move them into a subfolder, or the images
+  won't load. Each product only uses its own listed files — nothing is mixed.
+*/
+const products = [
+  {
+    id: "p1", slug: "battery-electric-diffuser", category: "home",
+    images: ["IMG_0043.jpeg", "IMG_0041.jpeg", "IMG_0044.jpeg"],
+    badge: { he: "הנמכר ביותר", ar: "الأكثر مبيعًا", en: "Best seller" },
+    coverageArea: "30–60 m²",
+    warranty: { he: "אחריות יצרן ל-12 חודשים", ar: "ضمان لمدة 12 شهرًا", en: "12-month warranty" },
+    price: null,
+    t: {
+      he: { name: "Battery & Electric Smart Diffuser", shortDescription: "מכשיר ארומה חכם הפועל על סוללה ובחיבור לחשמל",
+        description: "מכשיר נייד וגמיש שעובד גם על סוללה נטענת וגם בחיבור ישיר לחשמל — כך שתוכלו להעביר אותו בין החדרים בבית או להשתמש בו במקום שאין בו שקע פנוי. שליטה מלאה מהאפליקציה ועיצוב שחור-זהב אלגנטי.",
+        features: ["פעולה כפולה: סוללה נטענת או חשמל", "שליטה מלאה מהאפליקציה הסלולרית", "כיבוי אוטומטי כשהמיכל מתרוקן", "עיצוב קומפקטי וקליל לנשיאה"],
+        specs: [["מקור הספק", "סוללה נטענת + חשמל"], ["חיי סוללה", "כ-30 יום בטעינה אחת"], ["נפח מיכל", "100 מ״ל"], ["חיבוריות", "Wi-Fi / Bluetooth + אפליקציה"]] },
+      ar: { name: "Battery & Electric Smart Diffuser", shortDescription: "جهاز عطر ذكي يعمل بالبطارية وبالتوصيل الكهربائي معًا",
+        description: "جهاز محمول ومرن يعمل ببطارية قابلة للشحن أو بالتوصيل المباشر بالكهرباء، مما يتيح لكم نقله بين الغرف أو استخدامه في أي مكان دون الحاجة لمقبس قريب. تحكم كامل من التطبيق وتصميم أسود-ذهبي أنيق.",
+        features: ["تشغيل مزدوج: بطارية قابلة للشحن أو كهرباء", "تحكم كامل من تطبيق الهاتف", "إيقاف تشغيل تلقائي عند نفاد الخزان", "تصميم مدمج وخفيف للنقل"],
+        specs: [["مصدر الطاقة", "بطارية قابلة للشحن + كهرباء"], ["عمر البطارية", "حوالي 30 يومًا بشحنة واحدة"], ["سعة الخزان", "100 مل"], ["الاتصال", "Wi-Fi / Bluetooth + تطبيق"]] },
+      en: { name: "Battery & Electric Smart Diffuser", shortDescription: "A smart diffuser that runs on battery or wall power",
+        description: "A flexible, portable diffuser that runs on either a rechargeable battery or a direct power connection — so you can move it between rooms or use it anywhere, even without a free outlet nearby. Full app control in an elegant black-and-gold body.",
+        features: ["Dual power: rechargeable battery or mains", "Full control from the mobile app", "Auto shut-off when the tank runs dry", "Compact, lightweight design for easy carrying"],
+        specs: [["Power source", "Rechargeable battery + electric"], ["Battery life", "~30 days per charge"], ["Tank capacity", "100 ml"], ["Connectivity", "Wi-Fi / Bluetooth + app"]] },
+    },
+    related: ["p4", "p8"],
+  },
+  {
+    id: "p2", slug: "smart-office-diffuser", category: "office",
+    images: ["IMG_0040.jpeg", "IMG_0039.jpeg", "IMG_0038.jpeg", "IMG_0037.jpeg", "IMG_0036.jpeg"],
+    badge: null,
+    coverageArea: "60–120 m²",
+    warranty: { he: "אחריות יצרן ל-24 חודשים", ar: "ضمان لمدة 24 شهرًا", en: "24-month warranty" },
+    price: null,
+    t: {
+      he: { name: "Smart Office Diffuser", shortDescription: "מכשיר ארומה למשרדים ולחללי עבודה פתוחים",
+        description: "מכשיר שקט ואלגנטי שתוכנן במיוחד לחללי משרד — מקבל קבלה, חדרי ישיבות ואזורי עבודה פתוחים. תזמון לפי שעות הפעילות, פעולה שקטה שלא מפריעה לריכוז, וגוף מינימליסטי שמשתלב בכל עיצוב משרדי.",
+        features: ["פעולה שקטה המתאימה לחללי עבודה", "תזמון אוטומטי לפי שעות הפעילות", "גוף אלומיניום בגימור מינימליסטי", "התראת מילוי כשרמת הריח נמוכה"],
+        specs: [["כיסוי שטח", "60–120 מ״ר"], ["נפח מיכל", "200 מ״ל"], ["חיבוריות", "Wi-Fi + אפליקציה"], ["רמת רעש", "מתחת ל-25dB"]] },
+      ar: { name: "Smart Office Diffuser", shortDescription: "جهاز عطر للمكاتب ومساحات العمل المفتوحة",
+        description: "جهاز هادئ وأنيق مصمم خصيصًا لمساحات المكاتب — صالات الاستقبال وغرف الاجتماعات ومناطق العمل المفتوحة. جدولة حسب ساعات العمل، تشغيل هادئ لا يشتت التركيز، وهيكل بسيط يتناسب مع أي تصميم مكتبي.",
+        features: ["تشغيل هادئ مناسب لمساحات العمل", "جدولة تلقائية حسب ساعات العمل", "هيكل ألمنيوم بتشطيب بسيط", "تنبيه تعبئة عند انخفاض مستوى العطر"],
+        specs: [["مساحة التغطية", "60–120 م²"], ["سعة الخزان", "200 مل"], ["الاتصال", "Wi-Fi + تطبيق"], ["مستوى الضجيج", "أقل من 25 ديسيبل"]] },
+      en: { name: "Smart Office Diffuser", shortDescription: "A scent device built for offices and open work spaces",
+        description: "A quiet, elegant device designed specifically for office environments — reception areas, meeting rooms and open work zones. Scheduling around business hours, near-silent operation that won't break focus, and a minimalist body that fits any office design.",
+        features: ["Quiet operation suited to work spaces", "Automatic scheduling by business hours", "Aluminum body with a minimalist finish", "Refill alert when scent level runs low"],
+        specs: [["Coverage area", "60–120 m²"], ["Tank capacity", "200 ml"], ["Connectivity", "Wi-Fi + app"], ["Noise level", "Below 25dB"]] },
+    },
+    related: ["p8", "p3"],
+  },
+  {
+    id: "p3", slug: "large-commercial-diffuser", category: "commercial",
+    images: ["IMG_0028.jpeg", "IMG_0029.jpeg", "IMG_0030.jpeg"],
+    badge: { he: "מערכת דגל", ar: "نظام رائد", en: "Flagship" },
+    coverageArea: "Up to 500 m²",
+    warranty: { he: "אחריות יצרן ל-48 חודשים + שירות מקצועי", ar: "ضمان لمدة 48 شهرًا + خدمة احترافية", en: "48-month warranty + on-site service" },
+    price: null,
+    t: {
+      he: { name: "Large Commercial Diffuser", shortDescription: "מערכת ארומה מסחרית למלונות וחללים גדולים",
+        description: "מערכת הדגל שלנו לחללים מסחריים גדולים — מלונות, אולמות אירועים ולובי מרכזיים. מתחברת למערכת המיזוג הקיימת לפיזור אחיד בכל החלל, עם שליטה נפרדת לכל אזור וניטור תפעולי מרחוק.",
+        features: ["התקנה מודולרית המתחברת למיזוג", "שליטה נפרדת לכל אזור או קומה", "משאבה תעשייתית לעבודה רציפה", "ניטור וניהול מרחוק"],
+        specs: [["כיסוי שטח", "עד 500 מ״ר"], ["נפח מיכל", "1,000 מ״ל ומעלה"], ["חיבוריות", "Wi-Fi / חיבור קווי + לוח בקרה"], ["מתח הפעלה", "220–240V"]] },
+      ar: { name: "Large Commercial Diffuser", shortDescription: "نظام عطري تجاري للفنادق والمساحات الكبيرة",
+        description: "نظامنا الرائد للمساحات التجارية الكبيرة — الفنادق وقاعات الفعاليات والردهات الرئيسية. يتكامل مع نظام التكييف القائم لانتشار متساوٍ في كل المساحة، مع تحكم مستقل لكل منطقة ومراقبة تشغيلية عن بُعد.",
+        features: ["تركيب معياري يتكامل مع التكييف", "تحكم مستقل لكل منطقة أو طابق", "مضخة صناعية للعمل المستمر", "مراقبة وإدارة عن بُعد"],
+        specs: [["مساحة التغطية", "حتى 500 م²"], ["سعة الخزان", "1000 مل وأكثر"], ["الاتصال", "Wi-Fi / سلكي + لوحة تحكم"], ["الجهد الكهربائي", "220–240 فولت"]] },
+      en: { name: "Large Commercial Diffuser", shortDescription: "A commercial-grade scent system for hotels & large spaces",
+        description: "Our flagship system for large commercial spaces — hotels, event halls and main lobbies. Integrates with existing HVAC for even diffusion across the whole space, with independent zone control and remote operational monitoring.",
+        features: ["Modular install that integrates with HVAC", "Independent control per zone or floor", "Industrial-grade pump for continuous operation", "Remote monitoring and management"],
+        specs: [["Coverage area", "Up to 500 m²"], ["Tank capacity", "1,000 ml and up"], ["Connectivity", "Wi-Fi / wired + control panel"], ["Operating voltage", "220–240V"]] },
+    },
+    related: ["p2", "p1"],
+  },
+  {
+    id: "p4", slug: "wall-plug-diffuser", category: "home",
+    images: ["IMG_0031.jpeg", "IMG_0032.jpeg"],
+    badge: null,
+    coverageArea: "30–60 m²",
+    warranty: { he: "אחריות יצרן ל-12 חודשים", ar: "ضمان لمدة 12 شهرًا", en: "12-month warranty" },
+    price: null,
+    t: {
+      he: { name: "Wall Plug Smart Diffuser", shortDescription: "מכשיר ארומה קומפקטי המתחבר ישירות לשקע בקיר",
+        description: "מכשיר זעיר שמתחבר ישירות לשקע החשמל בקיר — בלי כבלים ובלי צורך במקום על השולחן. מושלם למבואות, מסדרונות וחדרי אמבטיה. עוצמת הריח נשלטת מהאפליקציה בהתאם לגודל החלל.",
+        features: ["מתחבר ישירות לשקע — בלי כבלים", "לא תופס מקום על השולחן", "עוצמה מתכווננת מהאפליקציה", "עיצוב דיסקרטי ואלגנטי"],
+        specs: [["כיסוי שטח", "30–60 מ״ר"], ["נפח מחסנית", "50 מ״ל"], ["חיבוריות", "Wi-Fi + אפליקציה"], ["סוג חיבור", "שקע קיר תקני"]] },
+      ar: { name: "Wall Plug Smart Diffuser", shortDescription: "جهاز عطر مدمج يتوصل مباشرة بمقبس الحائط",
+        description: "جهاز صغير الحجم يتوصل مباشرة بمقبس الكهرباء في الحائط — بلا أسلاك وبلا حاجة لمساحة على الطاولة. مثالي للممرات والمداخل وغرف الحمام. شدة العطر تُضبط من التطبيق بحسب حجم المساحة.",
+        features: ["يتوصل مباشرة بالمقبس بلا أسلاك", "لا يأخذ مساحة على الطاولة", "شدة قابلة للتعديل من التطبيق", "تصميم أنيق وغير لافت"],
+        specs: [["مساحة التغطية", "30–60 م²"], ["سعة الخرطوشة", "50 مل"], ["الاتصال", "Wi-Fi + تطبيق"], ["نوع التوصيل", "مقبس حائط قياسي"]] },
+      en: { name: "Wall Plug Smart Diffuser", shortDescription: "A compact diffuser that plugs straight into a wall outlet",
+        description: "A tiny device that plugs directly into a wall socket — no cables, no need for table space. Perfect for hallways, entryways and bathrooms. Fragrance intensity is controlled from the app to suit the size of the room.",
+        features: ["Plugs straight into the outlet — no cables", "Takes up no table space", "Adjustable intensity from the app", "Discreet, elegant design"],
+        specs: [["Coverage area", "30–60 m²"], ["Cartridge capacity", "50 ml"], ["Connectivity", "Wi-Fi + app"], ["Connection type", "Standard wall socket"]] },
+    },
+    related: ["p1", "p8"],
+  },
+  {
+    id: "p5", slug: "car-fragrance-series-1", category: "car",
+    images: ["IMG_0024.jpeg", "IMG_0025.jpeg", "IMG_0026.jpeg"],
+    badge: { he: "צבעים חדשים", ar: "ألوان جديدة", en: "New colors" },
+    coverageArea: { he: "מתאים לכל סוגי הרכב", ar: "يناسب جميع أنواع السيارات", en: "Fits any vehicle interior" },
+    warranty: { he: "החלפה במקרה של פגם ייצור", ar: "استبدال في حال وجود عيب تصنيع", en: "Replacement for manufacturing defects" },
+    price: null,
+    colors: [
+      { hex: "#19181b", he: "שחור", ar: "أسود", en: "Black" },
+      { hex: "#f3eee3", he: "לבן", ar: "أبيض", en: "White" },
+      { hex: "#d9a3b0", he: "פינק", ar: "وردي", en: "Pink" },
+    ],
+    t: {
+      he: { name: "Car Fragrance Spray — Series 1", shortDescription: "מבחר ארומה לרכב הנצמד לפתח המזגן, בשלושה צבעים",
+        description: "מכשיר ארומה אלגנטי לרכב שמתקבע בקלות על פתח המזגן ומפזר ריח עדין ועקבי בכל נסיעה. זמין בשלושה צבעים — שחור, לבן ופינק — כך שתוכלו לבחור את הגוון שמתאים לעיצוב הרכב שלכם.",
+        features: ["זמין בשלושה צבעי גימור אלגנטיים", "מתקבע בקלות לפתח המזגן", "ריח עדין ועקבי לאורך זמן", "מחסנית חילופית קלה להחלפה"],
+        specs: [["מתאים לרכב", "כל סוגי הרכב"], ["חיי מחסנית", "כ-30 יום"], ["שיטת התקנה", "קליפס לפתח המזגן"], ["צבעים", "שחור / לבן / פינק"]] },
+      ar: { name: "Car Fragrance Spray — Series 1", shortDescription: "معطر سيارة يثبت على فتحة التكييف، بثلاثة ألوان",
+        description: "جهاز عطر أنيق للسيارة يثبت بسهولة على فتحة التكييف وينشر رائحة لطيفة وثابتة في كل رحلة. متوفر بثلاثة ألوان — أسود وأبيض ووردي — لتختاروا ما يناسب تصميم سيارتكم.",
+        features: ["متوفر بثلاثة ألوان أنيقة", "يثبت بسهولة على فتحة التكييف", "رائحة لطيفة وثابتة لفترة طويلة", "خرطوشة بديلة سهلة التغيير"],
+        specs: [["يناسب", "جميع أنواع السيارات"], ["عمر الخرطوشة", "حوالي 30 يومًا"], ["طريقة التثبيت", "مشبك على فتحة التكييف"], ["الألوان", "أسود / أبيض / وردي"]] },
+      en: { name: "Car Fragrance Spray — Series 1", shortDescription: "A vent-clip car fragrance, available in three colors",
+        description: "An elegant car fragrance device that clips easily onto the AC vent and releases a gentle, consistent scent on every drive. Available in three colors — black, white and pink — so you can match your car's interior.",
+        features: ["Available in three elegant color finishes", "Clips easily onto the AC vent", "Gentle, long-lasting fragrance", "Easy-to-swap refill cartridge"],
+        specs: [["Suitable for", "Any vehicle"], ["Cartridge life", "~30 days"], ["Mounting", "AC vent clip"], ["Colors", "Black / White / Pink"]] },
+    },
+    related: ["p6", "p7"],
+  },
+  {
+    id: "p6", slug: "car-fragrance-series-2", category: "car",
+    images: ["IMG_0021.jpeg", "IMG_0022.jpeg"],
+    badge: null,
+    coverageArea: { he: "מתאים לכל סוגי הרכב", ar: "يناسب جميع أنواع السيارات", en: "Fits any vehicle interior" },
+    warranty: { he: "החלפה במקרה של פגם ייצור", ar: "استبدال في حال وجود عيب تصنيع", en: "Replacement for manufacturing defects" },
+    price: null,
+    t: {
+      he: { name: "Car Fragrance Spray — Series 2", shortDescription: "מכשיר ארומה לרכב עם חוגת עוצמה מתכווננת",
+        description: "עיצוב מינימליסטי לרכב עם חוגת עוצמה הניתנת לכיוונון ביד, להתאמה מדויקת לגודל תא הנוסעים. ניתן להתקין על פתח המזגן או על לוח המחוונים.",
+        features: ["חוגת עוצמה מתכווננת בשלוש רמות", "התקנה גמישה — מזגן או לוח מחוונים", "עיצוב מינימליסטי ואיכותי", "מחסנית חילופית"],
+        specs: [["מתאים לרכב", "כל סוגי הרכב"], ["חיי מחסנית", "כ-25 יום"], ["שיטת התקנה", "פתח מזגן / לוח מחוונים"], ["רמות עוצמה", "3"]] },
+      ar: { name: "Car Fragrance Spray — Series 2", shortDescription: "معطر سيارة بمؤشر شدة قابل للتعديل",
+        description: "تصميم بسيط للسيارة مزود بمؤشر شدة يمكن ضبطه باليد للتناسب الدقيق مع حجم المقصورة. يمكن تثبيته على فتحة التكييف أو على لوحة القيادة.",
+        features: ["مؤشر شدة قابل للتعديل بثلاث درجات", "تثبيت مرن — تكييف أو لوحة القيادة", "تصميم بسيط وعالي الجودة", "خرطوشة بديلة"],
+        specs: [["يناسب", "جميع أنواع السيارات"], ["عمر الخرطوشة", "حوالي 25 يومًا"], ["طريقة التثبيت", "فتحة تكييف / لوحة قيادة"], ["درجات الشدة", "3"]] },
+      en: { name: "Car Fragrance Spray — Series 2", shortDescription: "A car fragrance with an adjustable intensity dial",
+        description: "A minimalist car fragrance device with a hand-adjustable intensity dial for a precise match to your cabin size. Mounts on the AC vent or the dashboard.",
+        features: ["Adjustable intensity dial, 3 levels", "Flexible mounting — vent or dashboard", "Minimalist, premium design", "Replaceable refill cartridge"],
+        specs: [["Suitable for", "Any vehicle"], ["Cartridge life", "~25 days"], ["Mounting", "AC vent / dashboard"], ["Intensity levels", "3"]] },
+    },
+    related: ["p5", "p7"],
+  },
+  {
+    id: "p7", slug: "car-fragrance-series-3", category: "car",
+    images: ["IMG_0020.jpeg"],
+    badge: null,
+    coverageArea: { he: "מתאים לכל סוגי הרכב", ar: "يناسب جميع أنواع السيارات", en: "Fits any vehicle interior" },
+    warranty: { he: "החלפה במקרה של פגם ייצור", ar: "استبدال في حال وجود عيب تصنيع", en: "Replacement for manufacturing defects" },
+    price: null,
+    t: {
+      he: { name: "Car Fragrance Spray — Series 3", shortDescription: "מכשיר ארומה זעיר ונייד לרכב, אידיאלי לנסיעות",
+        description: "הדגם הקומפקטי ביותר בסדרה — קליפס מגנטי לפתח המזגן ולחיצה אחת לריסוס. גודל זעיר שמתאים גם לתיק או למחזיק כוסות, ומושלם לנסיעות ולשימוש מזדמן.",
+        features: ["עיצוב זעיר וקומפקטי במיוחד", "קליפס מגנטי לפתח המזגן", "ריסוס בלחיצה אחת", "גודל נוח לנשיאה ולנסיעות"],
+        specs: [["מתאים לרכב", "כל סוגי הרכב"], ["נפח", "גודל נסיעות"], ["שיטת התקנה", "קליפס מגנטי לפתח המזגן"], ["משקל", "קל ונייד"]] },
+      ar: { name: "Car Fragrance Spray — Series 3", shortDescription: "جهاز عطر صغير ومحمول للسيارة، مثالي للرحلات",
+        description: "أصغر موديل في السلسلة — مشبك مغناطيسي لفتحة التكييف ورش بضغطة واحدة. حجم صغير يناسب الحقيبة أو حامل الأكواب، ومثالي للرحلات والاستخدام العرضي.",
+        features: ["تصميم صغير الحجم للغاية", "مشبك مغناطيسي لفتحة التكييف", "رش بضغطة واحدة", "حجم مناسب للحمل والسفر"],
+        specs: [["يناسب", "جميع أنواع السيارات"], ["السعة", "حجم سفر"], ["طريقة التثبيت", "مشبك مغناطيسي لفتحة التكييف"], ["الوزن", "خفيف ومحمول"]] },
+      en: { name: "Car Fragrance Spray — Series 3", shortDescription: "An ultra-compact, travel-friendly car fragrance",
+        description: "The most compact model in the series — a magnetic AC vent clip with single-press spraying. Small enough to fit in a bag or cup holder, perfect for road trips and occasional use.",
+        features: ["Ultra-compact design", "Magnetic AC vent clip", "Single-press spray action", "Travel-friendly size and weight"],
+        specs: [["Suitable for", "Any vehicle"], ["Capacity", "Travel size"], ["Mounting", "Magnetic vent clip"], ["Weight", "Light and portable"]] },
+    },
+    related: ["p5", "p6"],
+  },
+  {
+    id: "p8", slug: "compact-office-diffuser", category: "office",
+    images: ["IMG_0014.jpeg", "IMG_0015.jpeg"],
+    badge: null,
+    coverageArea: "20–40 m²",
+    warranty: { he: "אחריות יצרן ל-12 חודשים", ar: "ضمان لمدة 12 شهرًا", en: "12-month warranty" },
+    price: null,
+    t: {
+      he: { name: "Compact Office Diffuser", shortDescription: "מכשיר ארומה זעיר לשולחן העבודה, מופעל ב-USB",
+        description: "מכשיר ארומה זעיר שתוכנן לשולחן העבודה האישי — מתחבר ב-USB או לשקע קיר, ופועל בשקט מוחלט לצד מסך המחשב. שליטה מהאפליקציה או ידנית בלחיצת כפתור.",
+        features: ["מופעל ב-USB או בשקע קיר", "פעולה שקטה לצד שולחן העבודה", "שליטה מהאפליקציה או ידנית", "גודל זעיר שלא תופס מקום"],
+        specs: [["כיסוי שטח", "20–40 מ״ר"], ["נפח מיכל", "80 מ״ל"], ["חיבוריות", "Wi-Fi + אפליקציה / הפעלה ידנית"], ["מקור הספק", "USB או מטען קיר"]] },
+      ar: { name: "Compact Office Diffuser", shortDescription: "جهاز عطر صغير لمكتب العمل، يعمل عبر USB",
+        description: "جهاز عطر صغير صُمم لمكتب العمل الشخصي — يتوصل عبر USB أو مقبس الحائط، ويعمل بصمت تام بجانب شاشة الكمبيوتر. تحكم من التطبيق أو يدويًا بضغطة زر.",
+        features: ["يعمل عبر USB أو مقبس الحائط", "تشغيل هادئ بجانب مكتب العمل", "تحكم من التطبيق أو يدويًا", "حجم صغير لا يأخذ مساحة"],
+        specs: [["مساحة التغطية", "20–40 م²"], ["سعة الخزان", "80 مل"], ["الاتصال", "Wi-Fi + تطبيق / تشغيل يدوي"], ["مصدر الطاقة", "USB أو شاحن حائط"]] },
+      en: { name: "Compact Office Diffuser", shortDescription: "A tiny USB-powered diffuser for your desk",
+        description: "A small scent device designed for a personal desk — connects via USB or a wall adapter, running in complete silence next to your monitor. Control it from the app or manually with one button.",
+        features: ["USB or wall-adapter powered", "Silent operation next to your desk", "App control or manual button", "Tiny footprint, takes no desk space"],
+        specs: [["Coverage area", "20–40 m²"], ["Tank capacity", "80 ml"], ["Connectivity", "Wi-Fi + app / manual"], ["Power source", "USB or wall adapter"]] },
+    },
+    related: ["p2", "p1"],
+  },
+];
+
+/* ---------- Language state ---------- */
+const RTL = ["he", "ar"];
+let currentLang = localStorage.getItem("aromify-lang") || "he";
+
+function tr(path) {
+  const parts = path.split(".");
+  let node = translations[currentLang];
+  for (const p of parts) node = node?.[p];
+  return node ?? path;
+}
+
+function applyLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem("aromify-lang", lang);
+  document.documentElement.lang = lang;
+  document.documentElement.dir = RTL.includes(lang) ? "rtl" : "ltr";
+  document.querySelectorAll("[data-lang-label]").forEach((el) => {
+    el.classList.toggle("active", el.dataset.langLabel === lang);
+  });
+  translateStaticText();
+  // Re-render whichever dynamic view is currently active
+  router();
+}
+
+function translateStaticText() {
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = tr(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    el.setAttribute("placeholder", tr(el.dataset.i18nPlaceholder));
+  });
+  const langNames = { he: "עברית", ar: "العربية", en: "English" };
+  document.getElementById("current-lang-label").textContent = langNames[currentLang];
+}
+
+/* Returns the right coverage-area string whether it's a plain string
+   (same in every language) or a per-language object like the car items use */
+function coverageText(p) {
+  return typeof p.coverageArea === "string" ? p.coverageArea : p.coverageArea[currentLang];
+}
+
+/* ---------- Gallery slide: renders the real product photo.
+   If a file is missing/not-yet-uploaded, it falls back to a clean
+   placeholder instead of a broken-image icon. ---------- */
+function renderSlide(src, alt) {
+  return `<div class="slide-placeholder" style="display:none"><span>Aromifystore</span></div>
+          <img src="${src}" alt="${alt}" loading="lazy"
+               onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';" />`;
+}
+
+
+/* ---------- Product card ---------- */
+function productCardHTML(p) {
+  const t = p.t[currentLang];
+  const badge = p.badge ? p.badge[currentLang] : null;
+  return `
+    <a class="product-card glass" href="#product/${p.slug}">
+      ${badge ? `<span class="badge">${badge}</span>` : ""}
+      <div class="product-card-media">${renderSlide(p.images[0], t.name)}</div>
+      <div class="product-card-body">
+        <h3>${t.name}</h3>
+        <p>${t.shortDescription}</p>
+        <div class="product-card-footer">
+          <span class="coverage-tag">${coverageText(p)}</span>
+          <span class="view-link">→</span>
+        </div>
+      </div>
+    </a>`;
+}
+
+/* ---------- Views ---------- */
+function renderFeaturedProducts() {
+  const el = document.getElementById("featured-products-grid");
+  if (!el) return;
+  el.innerHTML = products.slice(0, 3).map(productCardHTML).join("");
+}
+
+function renderProductsGrid(filter = "all") {
+  const el = document.getElementById("products-grid");
+  if (!el) return;
+  const list = filter === "all" ? products : products.filter((p) => p.category === filter);
+  el.innerHTML = list.map(productCardHTML).join("");
+}
+
+function setupProductFilters() {
+  const wrap = document.getElementById("category-filters");
+  if (!wrap) return;
+  const cats = ["all", "home", "office", "commercial", "car"];
+  wrap.innerHTML = cats
+    .map((c) => `<button class="filter-btn${c === "all" ? " active" : ""}" data-cat="${c}">${tr("products." + c)}</button>`)
+    .join("");
+  wrap.querySelectorAll(".filter-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      wrap.querySelectorAll(".filter-btn").forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+      renderProductsGrid(btn.dataset.cat);
+    });
+  });
+}
+
+function renderProductDetail(slug) {
+  const container = document.getElementById("product-detail-content");
+  const product = products.find((p) => p.slug === slug);
+  if (!product) {
+    container.innerHTML = `<p>Product not found.</p>`;
+    return;
+  }
+  const t = product.t[currentLang];
+  const priceText = product.price ? `${tr("product.from")} ₪${product.price}` : tr("product.priceOnRequest");
+
+  container.innerHTML = `
+    <div class="product-detail-grid">
+      <div class="gallery glass" id="gallery">
+        <div class="gallery-track" id="gallery-track">
+          ${product.images.map((src) => `<div class="gallery-slide">${renderSlide(src, t.name)}</div>`).join("")}
+        </div>
+        ${product.images.length > 1 ? `
+        <button class="gallery-nav prev" id="gallery-prev" aria-label="Previous">&#8592;</button>
+        <button class="gallery-nav next" id="gallery-next" aria-label="Next">&#8594;</button>
+        <div class="gallery-dots" id="gallery-dots">
+          ${product.images.map((_, i) => `<span class="dot${i === 0 ? " active" : ""}" data-i="${i}"></span>`).join("")}
+        </div>` : ""}
+      </div>
+
+      <div class="product-info">
+        ${product.badge ? `<span class="badge inline">${product.badge[currentLang]}</span>` : ""}
+        <h1>${t.name}</h1>
+        <p class="muted">${t.shortDescription}</p>
+        <p class="price">${priceText}</p>
+
+        <div class="pill-row">
+          <span class="pill glass">📍 ${tr("product.coverageArea")}: ${coverageText(product)}</span>
+          <span class="pill glass">🛡 ${product.warranty[currentLang]}</span>
+        </div>
+
+        ${product.colors ? `
+        <h2>${tr("product.colors")}</h2>
+        <div class="color-swatches">
+          ${product.colors.map((c) => `<span class="color-swatch" style="background:${c.hex}" title="${c[currentLang]}"></span>`).join("")}
+        </div>` : ""}
+
+        <p class="description">${t.description}</p>
+
+        <h2>${tr("product.features")}</h2>
+        <ul class="feature-list">${t.features.map((f) => `<li>${f}</li>`).join("")}</ul>
+
+        <h2>${tr("product.specifications")}</h2>
+        <dl class="spec-list">
+          ${t.specs.map(([label, value]) => `<div class="spec-row"><dt>${label}</dt><dd>${value}</dd></div>`).join("")}
+        </dl>
+
+        <div class="cta-row">
+          <a href="#contact" class="btn btn-gold">${tr("product.contactUs")}</a>
+          <a href="${waLink(tr("product.whatsapp") + " — " + t.name)}" target="_blank" rel="noopener" class="btn btn-ghost">${tr("product.whatsapp")}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="related-section">
+      <h2>${tr("product.related")}</h2>
+      <div class="grid-3">
+        ${product.related.map((id) => productCardHTML(products.find((p) => p.id === id))).join("")}
+      </div>
+    </div>
+  `;
+
+  if (product.images.length > 1) setupGallery();
+}
+
+function setupGallery() {
+  const track = document.getElementById("gallery-track");
+  const dots = document.querySelectorAll("#gallery-dots .dot");
+  let index = 0;
+  function goTo(i) {
+    index = (i + dots.length) % dots.length;
+    track.style.transform = `translateX(${currentLang !== "en" ? "" : "-"}${index * 100}%)`;
+    track.style.transform = document.documentElement.dir === "rtl" ? `translateX(${index * 100}%)` : `translateX(-${index * 100}%)`;
+    dots.forEach((d, di) => d.classList.toggle("active", di === index));
+  }
+  document.getElementById("gallery-prev").onclick = () => goTo(index - 1);
+  document.getElementById("gallery-next").onclick = () => goTo(index + 1);
+  dots.forEach((d) => (d.onclick = () => goTo(Number(d.dataset.i))));
+  goTo(0);
+}
+
+function renderFAQ() {
+  const el = document.getElementById("faq-list");
+  if (!el) return;
+  const items = faqItems[currentLang];
+  el.innerHTML = items
+    .map(
+      (item, i) => `
+      <div class="faq-item glass">
+        <button class="faq-question" data-i="${i}">
+          <span>${item.q}</span><span class="faq-plus">+</span>
+        </button>
+        <div class="faq-answer"><p>${item.a}</p></div>
+      </div>`
+    )
+    .join("");
+  el.querySelectorAll(".faq-question").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains("open");
+      el.querySelectorAll(".faq-item").forEach((i) => i.classList.remove("open"));
+      if (!wasOpen) item.classList.add("open");
+    });
+  });
+}
+
+/* ---------- WhatsApp + contact links ---------- */
+function setupContactLinks() {
+  document.querySelectorAll("[data-whatsapp-link]").forEach((el) => (el.href = waLink()));
+  document.querySelectorAll("[data-email-link]").forEach((el) => (el.href = `mailto:${CONTACT.email}`));
+  document.querySelectorAll("[data-phone-link]").forEach((el) => (el.href = `tel:${CONTACT.phoneIntl}`));
+  document.querySelectorAll("[data-alt-phone-link]").forEach((el) => (el.href = `tel:${CONTACT.altPhoneIntl}`));
+  document.querySelectorAll("[data-email-text]").forEach((el) => (el.textContent = CONTACT.email));
+  document.querySelectorAll("[data-phone-text]").forEach((el) => (el.textContent = CONTACT.phone));
+  document.querySelectorAll("[data-alt-phone-text]").forEach((el) => (el.textContent = CONTACT.altPhone));
+}
+
+function setupContactForm() {
+  const form = document.getElementById("contact-form");
+  if (!form) return;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = form.querySelector("#f-name").value;
+    const phone = form.querySelector("#f-phone").value;
+    const email = form.querySelector("#f-email").value;
+    const message = form.querySelector("#f-message").value;
+    const body = `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n\n${message}`;
+    window.location.href = `mailto:${CONTACT.email}?subject=Aromifystore Inquiry&body=${encodeURIComponent(body)}`;
+  });
+}
+
+/* ---------- Particles (ambient hero animation) ---------- */
+function buildParticles(containerId, count = 18) {
+  const el = document.getElementById(containerId);
+  if (!el || el.dataset.built) return;
+  el.dataset.built = "true";
+  let html = "";
+  for (let i = 0; i < count; i++) {
+    const left = Math.random() * 100;
+    const size = 2 + Math.random() * 4;
+    const delay = Math.random() * 6;
+    const duration = 5 + Math.random() * 5;
+    html += `<span class="particle" style="left:${left}%;width:${size}px;height:${size}px;animation-delay:${delay}s;animation-duration:${duration}s"></span>`;
+  }
+  el.innerHTML = html;
+}
+
+/* ---------- Router (hash-based, no backend needed) ---------- */
+const views = ["home", "products", "product", "about", "contact", "faq"];
+
+function router() {
+  const hash = location.hash.replace("#", "") || "home";
+  const [route, param] = hash.split("/");
+  const target = views.includes(route) ? route : "home";
+
+  views.forEach((v) => {
+    const section = document.getElementById("view-" + v);
+    if (section) section.classList.toggle("active", v === target);
+  });
+
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    link.classList.toggle("active", link.dataset.route === target);
+  });
+
+  window.scrollTo({ top: 0, behavior: "instant" });
+
+  if (target === "home") renderFeaturedProducts();
+  if (target === "products") {
+    setupProductFilters();
+    renderProductsGrid();
+  }
+  if (target === "product") renderProductDetail(param);
+  if (target === "faq") renderFAQ();
+
+  document.getElementById("mobile-menu").classList.remove("open");
+}
+
+/* ---------- Init ---------- */
+document.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.lang = currentLang;
+  document.documentElement.dir = RTL.includes(currentLang) ? "rtl" : "ltr";
+
+  translateStaticText();
+  setupContactLinks();
+  setupContactForm();
+  buildParticles("hero-particles", 22);
+
+  // language dropdown
+  const langToggle = document.getElementById("lang-toggle");
+  const langMenu = document.getElementById("lang-menu");
+  langToggle.addEventListener("click", () => langMenu.classList.toggle("open"));
+  document.querySelectorAll("[data-lang-label]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      applyLanguage(btn.dataset.langLabel);
+      langMenu.classList.remove("open");
+    });
+  });
+  document.addEventListener("click", (e) => {
+    if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) langMenu.classList.remove("open");
+  });
+
+  // mobile menu
+  const burger = document.getElementById("burger");
+  const mobileMenu = document.getElementById("mobile-menu");
+  burger.addEventListener("click", () => mobileMenu.classList.toggle("open"));
+
+  // sticky header style on scroll
+  const header = document.getElementById("site-header");
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 24);
+  });
+
+  window.addEventListener("hashchange", router);
+  router();
+});
+
+</script>
+<script>document.getElementById("footer-year").textContent = new Date().getFullYear();</script>
 </body>
-
 </html>
