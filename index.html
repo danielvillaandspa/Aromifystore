@@ -311,26 +311,62 @@ html[lang="en"] h1, html[lang="en"] h2 { font-family: "Cormorant Garamond", seri
 
 .hero-visual {
   position: relative;
-  height: 420px;
+  height: 440px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .hero-glow {
   position: absolute;
-  width: 280px; height: 280px;
+  width: 320px; height: 320px;
   border-radius: 50%;
-  background: rgba(201, 162, 39, 0.12);
-  filter: blur(40px);
+  background: rgba(201, 162, 39, 0.16);
+  filter: blur(50px);
+  z-index: 0;
 }
-.diffuser-graphic {
+
+/* Real product photo, centered, with a soft vignette so the edges
+   blend into the dark background instead of showing a hard rectangle.
+   Remove the mask-image line below once you have a true transparent PNG. */
+.hero-product-frame {
   position: relative;
   z-index: 2;
-  width: 190px;
+  width: clamp(200px, 30vw, 280px);
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   animation: float 5s ease-in-out infinite;
-  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
+  mask-image: radial-gradient(ellipse 68% 68% at 50% 50%, #000 72%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 68% 68% at 50% 50%, #000 72%, transparent 100%);
+}
+.hero-product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+
+/* Elegant rising mist behind/around the diffuser */
+.mist { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.mist span {
+  position: absolute;
+  bottom: 38%;
+  left: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(247, 243, 236, 0.4), rgba(247, 243, 236, 0) 70%);
+  filter: blur(6px);
+  animation: riseMist 6s ease-in infinite;
+}
+.mist-1 { width: 50px; height: 80px; margin-left: -70px; animation-delay: 0s; }
+.mist-2 { width: 60px; height: 95px; margin-left: -15px; animation-delay: 1.6s; }
+.mist-3 { width: 46px; height: 72px; margin-left: 40px; animation-delay: 3.2s; }
+@keyframes riseMist {
+  0% { transform: translate(-50%, 0) scale(0.75); opacity: 0; }
+  25% { opacity: 0.55; }
+  100% { transform: translate(-50%, -180px) scale(1.7); opacity: 0; }
+}
 
 .scroll-hint {
   position: absolute;
@@ -422,31 +458,40 @@ section.block { padding: 88px 0; }
 @media (min-width: 980px) { .grid-3 { grid-template-columns: 1fr 1fr 1fr; } }
 
 .product-card {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border-radius: 22px;
   overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.4s ease;
   position: relative;
 }
-.product-card:hover { transform: translateY(-6px); box-shadow: 0 0 40px rgba(201, 162, 39, 0.22); }
+.product-card:hover {
+  transform: translateY(-8px) scale(1.012);
+  box-shadow: 0 0 44px rgba(201, 162, 39, 0.28);
+  border-color: rgba(201, 162, 39, 0.4);
+}
 .product-card .badge {
   position: absolute; top: 14px; inset-inline-start: 14px; z-index: 3;
   background: var(--gold-gradient); color: var(--ink);
   font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px;
 }
-.product-card-media { position: relative; aspect-ratio: 4/5; background: var(--ink-soft); overflow: hidden; }
+.product-card-media { position: relative; aspect-ratio: 4/5; background: var(--ink-soft); overflow: hidden; flex-shrink: 0; }
 .product-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-.product-card:hover .product-card-media img { transform: scale(1.06); }
+.product-card:hover .product-card-media img { transform: scale(1.08); }
 .product-card-media::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to top, rgba(10,10,11,0.85), transparent 55%);
 }
-.product-card-body { padding: 20px; }
-.product-card-body h3 { font-size: 19px; margin: 0 0 6px; font-family: inherit; }
-.product-card-body p { font-size: 13.5px; color: var(--ivory-dim); margin: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
-.product-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
+.product-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+.product-card-body h3 { font-size: 19px; margin: 0 0 4px; font-family: inherit; }
+.product-card-price { font-size: 16px; font-weight: 700; margin: 0 0 8px; background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.product-card-desc { font-size: 13.5px; color: var(--ivory-dim); margin: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.product-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
 .coverage-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-light); opacity: 0.85; }
-.view-link { font-size: 13px; font-weight: 600; color: var(--gold); }
+.view-link { font-size: 13px; font-weight: 600; color: var(--gold); transition: transform 0.3s ease; }
+.product-card:hover .view-link { transform: translateX(3px); }
+html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
 
 .category-filters { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 36px; }
 .filter-btn {
@@ -683,21 +728,21 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
         </div>
         <div class="hero-visual">
           <div class="hero-glow"></div>
-          <svg class="diffuser-graphic" viewBox="0 0 240 320" fill="none">
-            <defs>
-              <linearGradient id="bodyGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="#1c1a1d"/><stop offset="100%" stop-color="#0a0a0b"/>
-              </linearGradient>
-              <linearGradient id="capGradient" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#f1e0b0"/><stop offset="100%" stop-color="#8f6f18"/>
-              </linearGradient>
-            </defs>
-            <ellipse cx="120" cy="300" rx="58" ry="10" fill="#000" opacity="0.35"/>
-            <path d="M70 280 C 64 200 60 140 78 90 C 86 65 154 65 162 90 C 180 140 176 200 170 280 Z" fill="url(#bodyGradient)" stroke="#d4af6a" stroke-opacity="0.25"/>
-            <rect x="68" y="170" width="104" height="6" fill="url(#capGradient)" opacity="0.85"/>
-            <path d="M82 90 C 82 70 158 70 158 90 L 150 70 C 150 58 90 58 90 70 Z" fill="url(#capGradient)"/>
-            <ellipse cx="120" cy="68" rx="14" ry="5" fill="#0a0a0b"/>
-          </svg>
+          <div class="mist" aria-hidden="true">
+            <span class="mist-1"></span>
+            <span class="mist-2"></span>
+            <span class="mist-3"></span>
+          </div>
+          <!--
+            Real product photo as the Hero image. Swap the filename below to
+            feature a different product — and once you have a true
+            transparent-background cutout (e.g. via remove.bg), you can
+            delete the `mask-image` line in .hero-product-frame in style.css
+            and drop the cutout PNG straight in here for an even cleaner look.
+          -->
+          <div class="hero-product-frame">
+            <img src="IMG_0043.jpeg" alt="Aromifystore — Battery & Electric Smart Diffuser" class="hero-product-img" />
+          </div>
         </div>
       </div>
       <div class="scroll-hint">
@@ -807,7 +852,6 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
         <div class="about-card glass">
           <p data-i18n="about.p1">...</p>
           <p data-i18n="about.p2">...</p>
-          <p data-i18n="about.p3">...</p>
         </div>
       </div>
     </section>
@@ -981,9 +1025,9 @@ const translations = {
       ctaBandButton: "קבלו הצעת מחיר",
     },
     features: {
-      coverage: { title: "כיסוי שטחים גמיש", body: "ממרחבים של 40 מ״ר ועד אולמות ומשרדים בשטח 500 מ״ר ויותר." },
-      smart: { title: "שליטה חכמה מהנייד", body: "תזמון, עצימות ופרופילי ריח — הכול נשלט מהסמארטפון בלחיצה." },
-      quality: { title: "ריחות איכותיים בלעדיים", body: "מבחר רחב של ריחות מיוחדים שמיוצרים ונבחרים בקפידה." },
+      coverage: { title: "כיסוי לחללים קטנים וגדולים", body: "מכסים כל חלל – החל מ-40 מ״ר ועד אולמות, משרדים וחללים מסחריים בשטח של 500 מ״ר ויותר, עם פתרון בישום המותאם באופן מושלם לכל צורך." },
+      smart: { title: "שליטה חכמה מהנייד באמצעות אפליקציה", body: "נהלו את מערכת הבישום מכל מקום באמצעות אפליקציה ייעודית – קבעו לוחות זמנים, התאימו את עוצמת הניחוח ובחרו פרופילי ריח, הכול בלחיצת כפתור." },
+      quality: { title: "ריחות איכותיים ובלעדיים", body: "מבחר רחב של ניחוחות ייחודיים, המיוצרים ונבחרים בקפידה. כל הניחוחות שלנו עומדים בתקנים בינלאומיים ומאושרים על ידי IFRA, להבטחת איכות, בטיחות וחוויית ריח יוקרתית." },
       warranty: { title: "אחריות ושירות מלא", body: "אחריות יצרן מלאה וזמינות שירות אישית בכל שלב." },
     },
     product: {
@@ -1002,10 +1046,9 @@ const translations = {
     products: { title: "כל המוצרים", subtitle: "מבחר מכשירי הארומה היוקרתיים שלנו — לכל חלל ולכל אופי", all: "הכול", home: "לבית", office: "למשרד", commercial: "מסחרי", car: "לרכב" },
     about: {
       eyebrow: "מי אנחנו",
-      title: "ניחוח שמדבר בשמכם",
-      p1: "Aromifystore נוסדה מתוך אמונה שריח הוא חלק בלתי נפרד מהחוויה והמותג — לא פחות חשוב מעיצוב או תאורה.",
-      p2: "אנו עובדים עם בתי מלון, מרפאות, חנויות יוקרה ובתים פרטיים, ומספקים מכשירי ריח חכמים המשלבים טכנולוגיה מתקדמת עם ריחות איכותיים ובלעדיים.",
-      p3: "כל מכשיר עובר בדיקת התאמה לחלל, כך שתקבלו כיסוי מדויק, עוצמה נכונה ותחזוקה פשוטה לאורך זמן.",
+      title: "אומנות הריח, בדיוק תעשייתי",
+      p1: "אנו מתמחים בפתרונות בישום חכמים המותאמים לבתי מלון, מלונות בוטיק, חנויות יוקרה, מרפאות ובתים פרטיים.",
+      p2: "אנו מציעים מגוון רחב של מערכות – ממכשירי בישום קומפקטיים ועד מערכות מסחריות מתקדמות – תוך שימוש בטכנולוגיה חדשנית המבטיחה פיזור אחיד של הניחוח ויצירת חוויית ריח יוקרתית המשקפת את אופי המקום ומשאירה רושם בלתי נשכח.",
       valuesTitle: "העקרונות שמובילים אותנו",
       v1t: "דיוק בכל פרט", v1b: "כל מכשיר עובר בקרת איכות קפדנית לפני שהוא מגיע אליכם.",
       v2t: "שירות אישי", v2b: "ליווי מקצועי מהבחירה הראשונית ועד התחזוקה השוטפת.",
@@ -1047,9 +1090,9 @@ const translations = {
       ctaBandButton: "اطلبوا عرض سعر",
     },
     features: {
-      coverage: { title: "تغطية مساحات مرنة", body: "من مساحات 40 م² إلى قاعات ومكاتب بمساحة 500 م² وأكثر." },
-      smart: { title: "تحكم ذكي من الهاتف", body: "الجدولة والشدة وملفات العطر — كل ذلك يُدار من هاتفكم بضغطة واحدة." },
-      quality: { title: "عطور حصرية وعالية الجودة", body: "تشكيلة واسعة من العطور المميزة المُصنّعة والمختارة بعناية." },
+      coverage: { title: "تغطية للمساحات الصغيرة والكبيرة", body: "نغطي كل مساحة – من 40 م² وحتى القاعات والمكاتب والمساحات التجارية بمساحة 500 م² وأكثر، مع حل تعطير مُكيّف بشكل مثالي لكل حاجة." },
+      smart: { title: "تحكم ذكي من الهاتف عبر التطبيق", body: "أدِر نظام التعطير من أي مكان من خلال تطبيق مخصص – حدد جداول زمنية، اضبط شدة العطر واختر ملفات الروائح، كل ذلك بضغطة زر." },
+      quality: { title: "روائح فاخرة وحصرية", body: "تشكيلة واسعة من العطور المميزة، التي يتم تصنيعها واختيارها بعناية. تتوافق جميع عطورنا مع المعايير الدولية ومعتمدة من IFRA، لضمان الجودة والسلامة وتجربة عطرية فاخرة." },
       warranty: { title: "ضمان وخدمة كاملة", body: "ضمان كامل من الشركة المصنعة وخدمة شخصية في كل مرحلة." },
     },
     product: {
@@ -1068,10 +1111,9 @@ const translations = {
     products: { title: "جميع المنتجات", subtitle: "تشكيلتنا الفاخرة من أجهزة العطر — لكل مساحة وكل طابع", all: "الكل", home: "للمنزل", office: "للمكتب", commercial: "تجاري", car: "للسيارة" },
     about: {
       eyebrow: "من نحن",
-      title: "عبير يتحدث باسمكم",
-      p1: "تأسست Aromifystore من قناعة بأن العطر جزء لا يتجزأ من التجربة والهوية — لا يقل أهمية عن التصميم أو الإضاءة.",
-      p2: "نعمل مع الفنادق والعيادات ومتاجر الفخامة والمنازل، ونوفر أجهزة عطر ذكية تجمع بين التقنية المتقدمة والعطور الحصرية.",
-      p3: "يخضع كل جهاز لفحص توافق مع المساحة، لتحصلوا على تغطية دقيقة وشدة مناسبة وصيانة بسيطة على المدى الطويل.",
+      title: "فن العطر، بدقة صناعية",
+      p1: "نحن متخصصون في حلول تعطير ذكية مصممة للفنادق، الفنادق البوتيكية، متاجر الفخامة، العيادات والمنازل الخاصة.",
+      p2: "نقدم مجموعة واسعة من الأنظمة — من أجهزة التعطير المدمجة إلى الأنظمة التجارية المتقدمة — باستخدام تقنية مبتكرة تضمن انتشارًا متساويًا للعطر وتخلق تجربة عطرية فاخرة تعكس طابع المكان وتترك انطباعًا لا يُنسى.",
       valuesTitle: "المبادئ التي توجهنا",
       v1t: "دقة في كل تفصيل", v1b: "كل جهاز يخضع لفحص جودة دقيق قبل أن يصل إليكم.",
       v2t: "خدمة شخصية", v2b: "مرافقة مهنية من الاختيار الأول وحتى الصيانة الدورية.",
@@ -1113,9 +1155,9 @@ const translations = {
       ctaBandButton: "Request a Quote",
     },
     features: {
-      coverage: { title: "Flexible area coverage", body: "From intimate 40 m² spaces to halls and offices of 500 m² and beyond." },
-      smart: { title: "Smart control from your phone", body: "Scheduling, intensity and scent profiles — all managed from your phone in one tap." },
-      quality: { title: "Exclusive, premium fragrances", body: "A wide range of signature scents, carefully crafted and curated." },
+      coverage: { title: "Coverage for Spaces Big and Small", body: "We cover every space — from 40 m² up to halls, offices, and commercial spaces of 500 m² and beyond, with a scenting solution perfectly tailored to every need." },
+      smart: { title: "Smart Control from Your Phone via App", body: "Manage your scenting system from anywhere with a dedicated app — set schedules, adjust fragrance intensity, and choose scent profiles, all at the tap of a button." },
+      quality: { title: "Premium & Exclusive Fragrances", body: "A wide selection of signature scents, carefully crafted and curated. All our fragrances meet international standards and are IFRA-certified, ensuring quality, safety, and a luxurious scent experience." },
       warranty: { title: "Full warranty & service", body: "Complete manufacturer warranty with personal support at every step." },
     },
     product: {
@@ -1134,10 +1176,9 @@ const translations = {
     products: { title: "All Products", subtitle: "Our curated collection of luxury scent diffusion systems — for every space and character", all: "All", home: "Home", office: "Office", commercial: "Commercial", car: "Car" },
     about: {
       eyebrow: "Who we are",
-      title: "A scent that speaks for you",
-      p1: "Aromifystore was founded on the belief that fragrance is an inseparable part of experience and identity — every bit as important as design or lighting.",
-      p2: "We work with hotels, clinics, luxury boutiques and private homes, delivering smart scent devices that combine advanced technology with exclusive, premium fragrances.",
-      p3: "Every device is matched to your space, so you get precise coverage, the right intensity, and simple long-term maintenance.",
+      title: "The Art of Fragrance, Engineered with Precision",
+      p1: "We specialize in smart fragrance solutions tailored for hotels, boutique hotels, luxury stores, clinics, and private homes.",
+      p2: "We offer a wide range of systems — from compact diffusers to advanced commercial-grade systems — using innovative technology that ensures even fragrance distribution and creates a luxurious scent experience that reflects the character of the space and leaves an unforgettable impression.",
       valuesTitle: "The principles that guide us",
       v1t: "Precision in every detail", v1b: "Each device passes rigorous quality control before it reaches you.",
       v2t: "Personal service", v2b: "Professional guidance from first selection through ongoing maintenance.",
@@ -1190,7 +1231,7 @@ const products = [
     badge: { he: "הנמכר ביותר", ar: "الأكثر مبيعًا", en: "Best seller" },
     coverageArea: "30–60 m²",
     warranty: { he: "אחריות יצרן ל-12 חודשים", ar: "ضمان لمدة 12 شهرًا", en: "12-month warranty" },
-    price: null,
+    price: 650,
     t: {
       he: { name: "Battery & Electric Smart Diffuser", shortDescription: "מכשיר ארומה חכם הפועל על סוללה ובחיבור לחשמל",
         description: "מכשיר נייד וגמיש שעובד גם על סוללה נטענת וגם בחיבור ישיר לחשמל — כך שתוכלו להעביר אותו בין החדרים בבית או להשתמש בו במקום שאין בו שקע פנוי. שליטה מלאה מהאפליקציה ועיצוב שחור-זהב אלגנטי.",
@@ -1205,7 +1246,7 @@ const products = [
         features: ["Dual power: rechargeable battery or mains", "Full control from the mobile app", "Auto shut-off when the tank runs dry", "Compact, lightweight design for easy carrying"],
         specs: [["Power source", "Rechargeable battery + electric"], ["Battery life", "~30 days per charge"], ["Tank capacity", "100 ml"], ["Connectivity", "Wi-Fi / Bluetooth + app"]] },
     },
-    related: ["p4", "p8"],
+    related: ["p4", "p9"],
   },
   {
     id: "p2", slug: "smart-office-diffuser", category: "office",
@@ -1213,7 +1254,7 @@ const products = [
     badge: null,
     coverageArea: "60–120 m²",
     warranty: { he: "אחריות יצרן ל-24 חודשים", ar: "ضمان لمدة 24 شهرًا", en: "24-month warranty" },
-    price: null,
+    price: 470,
     t: {
       he: { name: "Smart Office Diffuser", shortDescription: "מכשיר ארומה למשרדים ולחללי עבודה פתוחים",
         description: "מכשיר שקט ואלגנטי שתוכנן במיוחד לחללי משרד — מקבל קבלה, חדרי ישיבות ואזורי עבודה פתוחים. תזמון לפי שעות הפעילות, פעולה שקטה שלא מפריעה לריכוז, וגוף מינימליסטי שמשתלב בכל עיצוב משרדי.",
@@ -1236,7 +1277,7 @@ const products = [
     badge: { he: "מערכת דגל", ar: "نظام رائد", en: "Flagship" },
     coverageArea: "Up to 500 m²",
     warranty: { he: "אחריות יצרן ל-48 חודשים + שירות מקצועי", ar: "ضمان لمدة 48 شهرًا + خدمة احترافية", en: "48-month warranty + on-site service" },
-    price: null,
+    price: 1299,
     t: {
       he: { name: "Large Commercial Diffuser", shortDescription: "מערכת ארומה מסחרית למלונות וחללים גדולים",
         description: "מערכת הדגל שלנו לחללים מסחריים גדולים — מלונות, אולמות אירועים ולובי מרכזיים. מתחברת למערכת המיזוג הקיימת לפיזור אחיד בכל החלל, עם שליטה נפרדת לכל אזור וניטור תפעולי מרחוק.",
@@ -1259,7 +1300,7 @@ const products = [
     badge: null,
     coverageArea: "30–60 m²",
     warranty: { he: "אחריות יצרן ל-12 חודשים", ar: "ضمان لمدة 12 شهرًا", en: "12-month warranty" },
-    price: null,
+    price: 350,
     t: {
       he: { name: "Wall Plug Smart Diffuser", shortDescription: "מכשיר ארומה קומפקטי המתחבר ישירות לשקע בקיר",
         description: "מכשיר זעיר שמתחבר ישירות לשקע החשמל בקיר — בלי כבלים ובלי צורך במקום על השולחן. מושלם למבואות, מסדרונות וחדרי אמבטיה. עוצמת הריח נשלטת מהאפליקציה בהתאם לגודל החלל.",
@@ -1274,7 +1315,7 @@ const products = [
         features: ["Plugs straight into the outlet — no cables", "Takes up no table space", "Adjustable intensity from the app", "Discreet, elegant design"],
         specs: [["Coverage area", "30–60 m²"], ["Cartridge capacity", "50 ml"], ["Connectivity", "Wi-Fi + app"], ["Connection type", "Standard wall socket"]] },
     },
-    related: ["p1", "p8"],
+    related: ["p1", "p9"],
   },
   {
     id: "p5", slug: "car-fragrance-series-1", category: "car",
@@ -1282,7 +1323,7 @@ const products = [
     badge: { he: "צבעים חדשים", ar: "ألوان جديدة", en: "New colors" },
     coverageArea: { he: "מתאים לכל סוגי הרכב", ar: "يناسب جميع أنواع السيارات", en: "Fits any vehicle interior" },
     warranty: { he: "החלפה במקרה של פגם ייצור", ar: "استبدال في حال وجود عيب تصنيع", en: "Replacement for manufacturing defects" },
-    price: null,
+    price: 390,
     colors: [
       { hex: "#19181b", he: "שחור", ar: "أسود", en: "Black" },
       { hex: "#f3eee3", he: "לבן", ar: "أبيض", en: "White" },
@@ -1310,7 +1351,7 @@ const products = [
     badge: null,
     coverageArea: { he: "מתאים לכל סוגי הרכב", ar: "يناسب جميع أنواع السيارات", en: "Fits any vehicle interior" },
     warranty: { he: "החלפה במקרה של פגם ייצור", ar: "استبدال في حال وجود عيب تصنيع", en: "Replacement for manufacturing defects" },
-    price: null,
+    price: 350,
     t: {
       he: { name: "Car Fragrance Spray — Series 2", shortDescription: "מכשיר ארומה לרכב עם חוגת עוצמה מתכווננת",
         description: "עיצוב מינימליסטי לרכב עם חוגת עוצמה הניתנת לכיוונון ביד, להתאמה מדויקת לגודל תא הנוסעים. ניתן להתקין על פתח המזגן או על לוח המחוונים.",
@@ -1333,7 +1374,7 @@ const products = [
     badge: null,
     coverageArea: { he: "מתאים לכל סוגי הרכב", ar: "يناسب جميع أنواع السيارات", en: "Fits any vehicle interior" },
     warranty: { he: "החלפה במקרה של פגם ייצור", ar: "استبدال في حال وجود عيب تصنيع", en: "Replacement for manufacturing defects" },
-    price: null,
+    price: 300,
     t: {
       he: { name: "Car Fragrance Spray — Series 3", shortDescription: "מכשיר ארומה זעיר ונייד לרכב, אידיאלי לנסיעות",
         description: "הדגם הקומפקטי ביותר בסדרה — קליפס מגנטי לפתח המזגן ולחיצה אחת לריסוס. גודל זעיר שמתאים גם לתיק או למחזיק כוסות, ומושלם לנסיעות ולשימוש מזדמן.",
@@ -1356,7 +1397,7 @@ const products = [
     badge: null,
     coverageArea: "20–40 m²",
     warranty: { he: "אחריות יצרן ל-12 חודשים", ar: "ضمان لمدة 12 شهرًا", en: "12-month warranty" },
-    price: null,
+    price: 650,
     t: {
       he: { name: "Compact Office Diffuser", shortDescription: "מכשיר ארומה זעיר לשולחן העבודה, מופעל ב-USB",
         description: "מכשיר ארומה זעיר שתוכנן לשולחן העבודה האישי — מתחבר ב-USB או לשקע קיר, ופועל בשקט מוחלט לצד מסך המחשב. שליטה מהאפליקציה או ידנית בלחיצת כפתור.",
@@ -1372,6 +1413,29 @@ const products = [
         specs: [["Coverage area", "20–40 m²"], ["Tank capacity", "80 ml"], ["Connectivity", "Wi-Fi + app / manual"], ["Power source", "USB or wall adapter"]] },
     },
     related: ["p2", "p1"],
+  },
+  {
+    id: "p9", slug: "wall-mounted-smart-diffuser", category: "home",
+    images: ["f55c48c6-0e1b-4cef-8136-0f1aba89d13a.jpeg", "024e2569-2dea-4d11-b861-fa320b899290.jpeg"],
+    badge: { he: "חדש", ar: "جديد", en: "New" },
+    coverageArea: "100–150 m²",
+    warranty: { he: "אחריות יצרן ל-24 חודשים", ar: "ضمان لمدة 24 شهرًا", en: "24-month warranty" },
+    price: 650,
+    t: {
+      he: { name: "Wall-Mounted Smart Diffuser", shortDescription: "מכשיר ארומה רב-תכליתי לתלייה על הקיר או להעמדה",
+        description: "מכשיר ארומה חדש וגמיש שניתן לתלות על הקיר או להעמיד באופן רגיל, ומתאים לבית, למשרד ולחללים מסחריים כאחד. עוצמת פיזור חזקה אך פעולה שקטה מאוד, עם שליטה מלאה מהאפליקציה ומהירות מאוורר מתכווננת.",
+        features: ["שליטה מלאה מהאפליקציה", "פעולה שקטה מאוד", "מהירות מאוורר מתכווננת", "ניתן לתלייה על הקיר או להעמדה רגילה"],
+        specs: [["הספק", "8W"], ["נפח מיכל", "500 מ״ל"], ["כיסוי שטח", "כ-100–150 מ״ר"], ["התקנה", "תלייה על הקיר או העמדה חופשית"]] },
+      ar: { name: "Wall-Mounted Smart Diffuser", shortDescription: "جهاز عطر متعدد الاستخدامات، للتثبيت على الحائط أو الوضع العادي",
+        description: "جهاز عطر جديد ومرن يمكن تثبيته على الحائط أو وضعه بشكل عادي، ويناسب المنازل والمكاتب والمساحات التجارية على حد سواء. قوة انتشار عالية مع تشغيل هادئ جدًا، وتحكم كامل من التطبيق وسرعة مروحة قابلة للتعديل.",
+        features: ["تحكم كامل من التطبيق", "تشغيل هادئ جدًا", "سرعة مروحة قابلة للتعديل", "يمكن تثبيته على الحائط أو وضعه بشكل عادي"],
+        specs: [["الطاقة", "8 واط"], ["سعة الخزان", "500 مل"], ["مساحة التغطية", "حوالي 100–150 م²"], ["التركيب", "تثبيت على الحائط أو وضع حر"]] },
+      en: { name: "Wall-Mounted Smart Diffuser", shortDescription: "A versatile diffuser for wall mounting or standing use",
+        description: "A new, flexible diffuser that can be wall-mounted or simply stood on a surface, suited equally to homes, offices, and commercial spaces. Strong diffusion power with very quiet operation, full app control, and an adjustable fan speed.",
+        features: ["Full control from the app", "Very quiet operation", "Adjustable fan speed", "Wall-mountable or freestanding"],
+        specs: [["Power", "8W"], ["Tank capacity", "500 ml"], ["Coverage area", "~100–150 m²"], ["Mounting", "Wall-mount or freestanding"]] },
+    },
+    related: ["p1", "p4"],
   },
 ];
 
@@ -1430,13 +1494,15 @@ function renderSlide(src, alt) {
 function productCardHTML(p) {
   const t = p.t[currentLang];
   const badge = p.badge ? p.badge[currentLang] : null;
+  const priceTag = p.price ? `₪${p.price}` : tr("product.priceOnRequest");
   return `
     <a class="product-card glass" href="#product/${p.slug}">
       ${badge ? `<span class="badge">${badge}</span>` : ""}
       <div class="product-card-media">${renderSlide(p.images[0], t.name)}</div>
       <div class="product-card-body">
         <h3>${t.name}</h3>
-        <p>${t.shortDescription}</p>
+        <p class="product-card-price">${priceTag}</p>
+        <p class="product-card-desc">${t.shortDescription}</p>
         <div class="product-card-footer">
           <span class="coverage-tag">${coverageText(p)}</span>
           <span class="view-link">→</span>
@@ -1483,7 +1549,7 @@ function renderProductDetail(slug) {
     return;
   }
   const t = product.t[currentLang];
-  const priceText = product.price ? `${tr("product.from")} ₪${product.price}` : tr("product.priceOnRequest");
+  const priceText = product.price ? `₪${product.price}` : tr("product.priceOnRequest");
 
   container.innerHTML = `
     <div class="product-detail-grid">
