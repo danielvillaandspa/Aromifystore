@@ -316,52 +316,46 @@ html[lang="en"] h1, html[lang="en"] h2 { font-family: "Cormorant Garamond", seri
   align-items: center;
   justify-content: center;
 }
-.hero-glow {
-  position: absolute;
-  width: 320px; height: 320px;
-  border-radius: 50%;
-  background: rgba(201, 162, 39, 0.16);
-  filter: blur(50px);
-  z-index: 0;
-}
 
-/* Real product photo, centered, with a soft vignette so the edges
-   blend into the dark background instead of showing a hard rectangle.
-   Remove the mask-image line below once you have a true transparent PNG. */
+/* Real product photo (background removed), centered on the site's own
+   dark background — no extra frame, glow or backdrop added around it. */
 .hero-product-frame {
   position: relative;
   z-index: 2;
   width: clamp(200px, 30vw, 280px);
-  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: float 5s ease-in-out infinite;
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.6));
-  mask-image: radial-gradient(ellipse 68% 68% at 50% 50%, #000 72%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 68% 68% at 50% 50%, #000 72%, transparent 100%);
+  animation: floatSway 6s ease-in-out infinite;
+  filter: drop-shadow(0 28px 38px rgba(0, 0, 0, 0.55));
+  transform-origin: 50% 85%;
 }
 .hero-product-img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
+}
+@keyframes floatSway {
+  0%, 100% { transform: translateY(0) rotate(-1.4deg); }
+  50% { transform: translateY(-14px) rotate(1.4deg); }
 }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-/* Elegant rising mist behind/around the diffuser */
+/* Elegant rising mist behind/around the diffuser — the only animated
+   effect added around the product, as requested (a light fragrance-spray cue). */
 .mist { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .mist span {
   position: absolute;
-  bottom: 38%;
+  bottom: 48%;
   left: 50%;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(247, 243, 236, 0.4), rgba(247, 243, 236, 0) 70%);
   filter: blur(6px);
   animation: riseMist 6s ease-in infinite;
 }
-.mist-1 { width: 50px; height: 80px; margin-left: -70px; animation-delay: 0s; }
-.mist-2 { width: 60px; height: 95px; margin-left: -15px; animation-delay: 1.6s; }
-.mist-3 { width: 46px; height: 72px; margin-left: 40px; animation-delay: 3.2s; }
+.mist-1 { width: 50px; height: 80px; margin-left: -50px; animation-delay: 0s; }
+.mist-2 { width: 60px; height: 95px; margin-left: -10px; animation-delay: 1.6s; }
+.mist-3 { width: 46px; height: 72px; margin-left: 30px; animation-delay: 3.2s; }
 @keyframes riseMist {
   0% { transform: translate(-50%, 0) scale(0.75); opacity: 0; }
   25% { opacity: 0.55; }
@@ -614,6 +608,54 @@ html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
 .faq-item.open .faq-answer { max-height: 240px; }
 .faq-answer p { padding: 0 22px 18px; margin: 0; color: var(--ivory-dim); font-size: 14px; }
 
+/* ---------- Scroll reveal (generic fade+rise on first viewport entry) ---------- */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* ---------- Fragrance oils section ---------- */
+.pricing-cards { display: grid; gap: 22px; grid-template-columns: 1fr; max-width: 760px; margin: 46px auto 0; }
+@media (min-width: 640px) { .pricing-cards { grid-template-columns: 1fr 1fr; } }
+
+.pricing-card { border-radius: 22px; padding: 28px; text-align: center; transition: border-color 0.3s ease, transform 0.3s ease; }
+.pricing-card:hover { transform: translateY(-4px); border-color: rgba(201,162,39,0.35); }
+.pricing-card h3 { font-size: 19px; margin: 6px 0 18px; font-family: inherit; }
+.pricing-card.premium { border: 1px solid rgba(201,162,39,0.45); box-shadow: 0 0 30px rgba(201,162,39,0.12); }
+.pricing-card .badge.inline { display: inline-block; margin-bottom: 10px; }
+.pricing-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 10px 4px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 14.5px; color: rgba(247,243,236,0.8);
+}
+.pricing-row:last-of-type { border-bottom: none; }
+.pricing-value { font-weight: 700; font-size: 17px; background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.pricing-note { margin: 14px 0 0; font-size: 12.5px; color: rgba(247,243,236,0.5); }
+
+.fragrances-grid-title { text-align: center; font-size: 22px; margin: 70px 0 8px; font-family: inherit; }
+.fragrances-grid { display: flex; flex-direction: column; gap: 30px; margin-top: 30px; }
+
+.fragrance-group-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--gold-light); opacity: 0.85; margin: 0 0 16px; text-align: center;
+}
+.fragrance-chips { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+
+.fragrance-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 18px; border-radius: 999px; font-size: 13.5px; font-weight: 500;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  color: rgba(247,243,236,0.85);
+  transition: transform 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.fragrance-chip:hover { transform: translateY(-3px); border-color: rgba(201,162,39,0.5); color: var(--ivory); }
+.fragrance-chip.premium {
+  border-color: rgba(201,162,39,0.55);
+  background: linear-gradient(135deg, rgba(201,162,39,0.16), rgba(201,162,39,0.04));
+  color: var(--gold-light);
+  font-weight: 600;
+}
+.fragrance-chip.premium:hover { box-shadow: 0 0 18px rgba(201,162,39,0.3); }
+.chip-star { color: var(--gold); font-size: 11px; }
+
 /* ---------- Footer ---------- */
 footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-soft); margin-top: 40px; }
 .footer-grid { display: grid; gap: 36px; grid-template-columns: 1fr; padding: 60px 0; }
@@ -686,6 +728,7 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
     <nav class="nav-links">
       <a href="#home" class="nav-link" data-route="home" data-i18n="nav.home">Home</a>
       <a href="#products" class="nav-link" data-route="products" data-i18n="nav.products">Products</a>
+      <a href="#fragrances" class="nav-link" data-route="fragrances" data-i18n="nav.fragrances">Fragrances</a>
       <a href="#about" class="nav-link" data-route="about" data-i18n="nav.about">About</a>
       <a href="#faq" class="nav-link" data-route="faq" data-i18n="nav.faq">FAQ</a>
       <a href="#contact" class="nav-link" data-route="contact" data-i18n="nav.contact">Contact</a>
@@ -700,6 +743,7 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
 <div id="mobile-menu" class="glass">
   <a href="#home" class="nav-link" data-route="home" data-i18n="nav.home">Home</a>
   <a href="#products" class="nav-link" data-route="products" data-i18n="nav.products">Products</a>
+  <a href="#fragrances" class="nav-link" data-route="fragrances" data-i18n="nav.fragrances">Fragrances</a>
   <a href="#about" class="nav-link" data-route="about" data-i18n="nav.about">About</a>
   <a href="#faq" class="nav-link" data-route="faq" data-i18n="nav.faq">FAQ</a>
   <a href="#contact" class="nav-link" data-route="contact" data-i18n="nav.contact">Contact</a>
@@ -727,21 +771,19 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
           </div>
         </div>
         <div class="hero-visual">
-          <div class="hero-glow"></div>
           <div class="mist" aria-hidden="true">
             <span class="mist-1"></span>
             <span class="mist-2"></span>
             <span class="mist-3"></span>
           </div>
           <!--
-            Real product photo as the Hero image. Swap the filename below to
-            feature a different product — and once you have a true
-            transparent-background cutout (e.g. via remove.bg), you can
-            delete the `mask-image` line in .hero-product-frame in style.css
-            and drop the cutout PNG straight in here for an even cleaner look.
+            Real product photo, background removed. This expects a TRUE
+            transparent PNG named hero-product.png sitting next to this
+            index.html file — see the chat reply for exactly how to export
+            one from your photo (98981c7e-...jpeg) in under a minute.
           -->
           <div class="hero-product-frame">
-            <img src="IMG_0043.jpeg" alt="Aromifystore — Battery & Electric Smart Diffuser" class="hero-product-img" />
+            <img src="hero-product.png" alt="Aromifystore — featured diffuser" class="hero-product-img" />
           </div>
         </div>
       </div>
@@ -837,6 +879,52 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
           <span data-i18n="product.back">Back to all products</span>
         </a>
         <div id="product-detail-content"></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ FRAGRANCE OILS ============ -->
+  <section id="view-fragrances" class="view">
+    <section class="block">
+      <div class="container">
+        <div class="heading">
+          <p class="section-eyebrow" data-i18n="fragrances.eyebrow">Our Collection</p>
+          <h2 class="font-display" data-i18n="fragrances.title">Premium Fragrance Oils</h2>
+          <p data-i18n="fragrances.subtitle">A curated selection of premium fragrances.</p>
+        </div>
+
+        <!-- Pricing tiers -->
+        <div class="pricing-cards">
+          <div class="pricing-card glass reveal">
+            <h3 data-i18n="fragrances.standardName">Signature Fragrances</h3>
+            <div class="pricing-row">
+              <span data-i18n="fragrances.size500">500ml</span>
+              <span class="pricing-value">₪200</span>
+            </div>
+            <div class="pricing-row">
+              <span data-i18n="fragrances.size1l">1 Liter</span>
+              <span class="pricing-value">₪350</span>
+            </div>
+            <p class="pricing-note" data-i18n="fragrances.standardNote">Applies to every fragrance below, except Royal Oud.</p>
+          </div>
+
+          <div class="pricing-card premium glass reveal">
+            <span class="badge inline" data-i18n="fragrances.premiumBadge">Premium Fragrance</span>
+            <h3 dir="ltr">Royal Oud</h3>
+            <div class="pricing-row">
+              <span data-i18n="fragrances.size500">500ml</span>
+              <span class="pricing-value">₪230</span>
+            </div>
+            <div class="pricing-row">
+              <span data-i18n="fragrances.size1l">1 Liter</span>
+              <span class="pricing-value">₪450</span>
+            </div>
+            <p class="pricing-note" data-i18n="fragrances.premiumNote">Contains higher-quality ingredients.</p>
+          </div>
+        </div>
+
+        <h3 class="fragrances-grid-title" data-i18n="fragrances.gridTitle">All Fragrances</h3>
+        <div id="fragrances-grid" class="fragrances-grid"></div>
       </div>
     </section>
   </section>
@@ -1001,7 +1089,7 @@ function waLink(msg) {
 const translations = {
   he: {
     brand: "Aromifystore",
-    nav: { home: "בית", products: "מוצרים", about: "אודות", contact: "צור קשר", faq: "שאלות נפוצות", cta: "השאירו פנייה" },
+    nav: { home: "בית", products: "מוצרים", fragrances: "ניחוחות", about: "אודות", contact: "צור קשר", faq: "שאלות נפוצות", cta: "השאירו פנייה" },
     hero: {
       eyebrow: "ארומה יוקרתית לעסקים ולבית",
       title1: "הניחוח שמספר",
@@ -1044,6 +1132,19 @@ const translations = {
       colors: "צבעים זמינים",
     },
     products: { title: "כל המוצרים", subtitle: "מבחר מכשירי הארומה היוקרתיים שלנו — לכל חלל ולכל אופי", all: "הכול", home: "לבית", office: "למשרד", commercial: "מסחרי", car: "לרכב" },
+    fragrances: {
+      eyebrow: "האוסף שלנו",
+      title: "שמני בישום יוקרתיים",
+      subtitle: "מבחר ניחוחות יוקרתיים המאושרים על ידי IFRA ומתאימים לכל מכשירי הבישום שלנו.",
+      pricingTitle: "מחירון",
+      standardName: "ניחוחות קלאסיים",
+      standardNote: "המחיר חל על כל הניחוחות המופיעים למטה, פרט ל-Royal Oud",
+      size500: "500 מ״ל",
+      size1l: "1 ליטר",
+      premiumBadge: "ניחוח פרימיום",
+      premiumNote: "מכיל מרכיבים איכותיים יותר",
+      gridTitle: "כל הניחוחות",
+    },
     about: {
       eyebrow: "מי אנחנו",
       title: "אומנות הריח, בדיוק תעשייתי",
@@ -1066,7 +1167,7 @@ const translations = {
   },
   ar: {
     brand: "Aromifystore",
-    nav: { home: "الرئيسية", products: "المنتجات", about: "من نحن", contact: "تواصل معنا", faq: "الأسئلة الشائعة", cta: "اطلب الآن" },
+    nav: { home: "الرئيسية", products: "المنتجات", fragrances: "العطور", about: "من نحن", contact: "تواصل معنا", faq: "الأسئلة الشائعة", cta: "اطلب الآن" },
     hero: {
       eyebrow: "عطور فاخرة للأعمال والمنازل",
       title1: "العبير الذي يروي",
@@ -1109,6 +1210,19 @@ const translations = {
       colors: "الألوان المتوفرة",
     },
     products: { title: "جميع المنتجات", subtitle: "تشكيلتنا الفاخرة من أجهزة العطر — لكل مساحة وكل طابع", all: "الكل", home: "للمنزل", office: "للمكتب", commercial: "تجاري", car: "للسيارة" },
+    fragrances: {
+      eyebrow: "تشكيلتنا",
+      title: "زيوت تعطير فاخرة",
+      subtitle: "تشكيلة من العطور الفاخرة المعتمدة من IFRA، تناسب جميع أجهزة التعطير الخاصة بنا.",
+      pricingTitle: "قائمة الأسعار",
+      standardName: "العطور الكلاسيكية",
+      standardNote: "السعر ينطبق على جميع العطور أدناه، باستثناء Royal Oud",
+      size500: "500 مل",
+      size1l: "1 لتر",
+      premiumBadge: "عطر فاخر مميز",
+      premiumNote: "يحتوي على مكونات ذات جودة أعلى",
+      gridTitle: "جميع العطور",
+    },
     about: {
       eyebrow: "من نحن",
       title: "فن العطر، بدقة صناعية",
@@ -1131,7 +1245,7 @@ const translations = {
   },
   en: {
     brand: "Aromifystore",
-    nav: { home: "Home", products: "Products", about: "About", contact: "Contact", faq: "FAQ", cta: "Get in Touch" },
+    nav: { home: "Home", products: "Products", fragrances: "Fragrances", about: "About", contact: "Contact", faq: "FAQ", cta: "Get in Touch" },
     hero: {
       eyebrow: "Luxury scent diffusion, for business & home",
       title1: "The Scent That Tells",
@@ -1174,6 +1288,19 @@ const translations = {
       colors: "Available colors",
     },
     products: { title: "All Products", subtitle: "Our curated collection of luxury scent diffusion systems — for every space and character", all: "All", home: "Home", office: "Office", commercial: "Commercial", car: "Car" },
+    fragrances: {
+      eyebrow: "Our Collection",
+      title: "Premium Fragrance Oils",
+      subtitle: "A curated selection of premium fragrances, IFRA-certified and compatible with all our scenting devices.",
+      pricingTitle: "Pricing",
+      standardName: "Signature Fragrances",
+      standardNote: "This price applies to every fragrance listed below, except Royal Oud",
+      size500: "500ml",
+      size1l: "1 Liter",
+      premiumBadge: "Premium Fragrance",
+      premiumNote: "Contains higher-quality ingredients",
+      gridTitle: "All Fragrances",
+    },
     about: {
       eyebrow: "Who we are",
       title: "The Art of Fragrance, Engineered with Precision",
@@ -1439,6 +1566,80 @@ const products = [
   },
 ];
 
+/* ---------- Fragrance oils catalog ----------
+   Grouped thematically so the section stays easy to browse despite
+   having many items. `premium: true` marks Royal Oud, which gets its
+   own pricing tier and a small badge wherever it appears. */
+const fragranceGroups = [
+  {
+    key: "hotel",
+    title: { he: "מלונות ויוקרה", ar: "فخامة وفنادق", en: "Hotel & Luxury" },
+    items: [
+      { he: "ישרוטל", ar: "إيسروتيل", en: "Isrotel" },
+      { he: "הילטון", ar: "هيلتون", en: "Hilton" },
+      { he: "הייאט", ar: "حياة", en: "Hyatt" },
+      { he: "ריץ קרלטון", ar: "ريتز كارلتون", en: "Ritz Carlton" },
+      { he: "ויקטוריה", ar: "فيكتوريا", en: "Victoria" },
+      { he: "ברצלונה", ar: "برشلونة", en: "Barcelona" },
+      { he: "רויאל ביץ׳", ar: "رويال بيتش", en: "Royal Beach" },
+      { he: "רויאל אוד", ar: "عود رويال", en: "Royal Oud", premium: true },
+    ],
+  },
+  {
+    key: "designer",
+    title: { he: "בשמי מעצבים", ar: "عطور المصممين", en: "Designer-Inspired" },
+    items: [
+      { he: "דיור סוואג", ar: "ديور سوفاج", en: "Dior Sauvage" },
+      { he: "שאנל בלו", ar: "شانيل بلو", en: "Chanel Blue" },
+      { he: "הוגו בוס", ar: "هوغو بوس", en: "Hugo Boss" },
+      { he: "פאקו רבאן", ar: "باكو رابان", en: "Paco Rabanne" },
+      { he: "אדידס", ar: "أديداس", en: "Adidas" },
+      { he: "גאנט", ar: "غانت", en: "Gant" },
+      { he: "212", ar: "212", en: "212" },
+    ],
+  },
+  {
+    key: "nature",
+    title: { he: "טבע ואוקיינוס", ar: "الطبيعة والمحيط", en: "Nature & Ocean" },
+    items: [
+      { he: "רוח האוקיינוס", ar: "نسيم المحيط", en: "Ocean Breeze" },
+      { he: "שביל הבמבוק", ar: "ممر الخيزران", en: "Bamboo Trail" },
+      { he: "גן עדן טרופי", ar: "جنة استوائية", en: "Tropical Paradise" },
+      { he: "שקיעה במדבר", ar: "غروب الصحراء", en: "Desert Sunset" },
+      { he: "קסם הדרים", ar: "سحر الحمضيات", en: "Citrus Magic" },
+      { he: "למון גראס", ar: "ليمون غراس", en: "Lemongrass" },
+      { he: "תה ירוק", ar: "شاي أخضر", en: "Green Tea" },
+      { he: "פצ׳ולי", ar: "باتشولي", en: "Patchouli" },
+    ],
+  },
+  {
+    key: "sweet",
+    title: { he: "גורמה וממתקים", ar: "نكهات حلوة", en: "Gourmand & Sweet" },
+    items: [
+      { he: "שוקולד", ar: "شوكولاتة", en: "Chocolate" },
+      { he: "מסטיק בזוקה", ar: "علكة بازوكا", en: "Bazooka Gum" },
+      { he: "יין ורוד", ar: "نبيذ روز", en: "Rosé Wine" },
+      { he: "פינוק", ar: "تدليل", en: "Pampering" },
+    ],
+  },
+  {
+    key: "unique",
+    title: { he: "ייחודיים ואקזוטיים", ar: "فريدة وغريبة", en: "Unique & Exotic" },
+    items: [
+      { he: "דובאי", ar: "دبي", en: "Dubai" },
+      { he: "תאילנד", ar: "تايلاند", en: "Thailand" },
+      { he: "בראשית", ar: "بداية", en: "Genesis" },
+      { he: "פתאל", ar: "فاتال", en: "Fatale" },
+      { he: "בלאק יסמין", ar: "ياسمين أسود", en: "Black Jasmine" },
+      { he: "רנואר", ar: "رينوار", en: "Renoir" },
+      { he: "כרמים", ar: "الكروم", en: "Vineyards" },
+      { he: "מינראל ספא", ar: "سبا معدني", en: "Mineral Spa" },
+      { he: "סן לוקוס", ar: "سان لوكاس", en: "San Lucas" },
+      { he: "טלק", ar: "تالك", en: "Talc" },
+    ],
+  },
+];
+
 /* ---------- Language state ---------- */
 const RTL = ["he", "ar"];
 let currentLang = localStorage.getItem("aromify-lang") || "he";
@@ -1651,6 +1852,56 @@ function renderFAQ() {
   });
 }
 
+/* ---------- Fragrance oils section ---------- */
+function fragranceChipHTML(item) {
+  const name = item[currentLang];
+  if (item.premium) {
+    return `<span class="fragrance-chip premium reveal" title="${tr("fragrances.premiumBadge")}">
+              ${name}<span class="chip-star">★</span>
+            </span>`;
+  }
+  return `<span class="fragrance-chip reveal">${name}</span>`;
+}
+
+function renderFragrances() {
+  const el = document.getElementById("fragrances-grid");
+  if (!el) return;
+  el.innerHTML = fragranceGroups
+    .map(
+      (group) => `
+      <div class="fragrance-group reveal">
+        <h3 class="fragrance-group-title">${group.title[currentLang]}</h3>
+        <div class="fragrance-chips">
+          ${group.items.map(fragranceChipHTML).join("")}
+        </div>
+      </div>`
+    )
+    .join("");
+  observeReveals();
+}
+
+/* Generic scroll reveal: any element with class "reveal" fades + rises
+   into place the first time it enters the viewport. Re-run after any
+   render that injects new .reveal elements (it safely skips ones
+   already revealed/observed). */
+let revealObserver = null;
+function observeReveals() {
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+    );
+  }
+  document.querySelectorAll(".reveal:not(.in-view)").forEach((el) => revealObserver.observe(el));
+}
+
 /* ---------- WhatsApp + contact links ---------- */
 function setupContactLinks() {
   document.querySelectorAll("[data-whatsapp-link]").forEach((el) => (el.href = waLink()));
@@ -1693,7 +1944,7 @@ function buildParticles(containerId, count = 18) {
 }
 
 /* ---------- Router (hash-based, no backend needed) ---------- */
-const views = ["home", "products", "product", "about", "contact", "faq"];
+const views = ["home", "products", "product", "fragrances", "about", "contact", "faq"];
 
 function router() {
   const hash = location.hash.replace("#", "") || "home";
@@ -1717,6 +1968,7 @@ function router() {
     renderProductsGrid();
   }
   if (target === "product") renderProductDetail(param);
+  if (target === "fragrances") renderFragrances();
   if (target === "faq") renderFAQ();
 
   document.getElementById("mobile-menu").classList.remove("open");
