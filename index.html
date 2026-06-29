@@ -71,27 +71,18 @@ ul { margin: 0; padding: 0; list-style: none; }
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
 
-/* FIX (Android gradient-text bug): added solid-gold `color` fallback
-   plus -webkit-text-fill-color, which Samsung Internet / Android
-   WebView require to actually hide the glyph fill under the clipped
-   gradient. Chrome already worked because it doesn't need this
-   property in the same way. */
 .gold-text {
-  color: var(--gold);
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
   color: transparent;
 }
 
 .gold-shimmer {
-  color: var(--gold);
   background-image: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 25%, var(--gold) 50%, var(--gold-dark) 75%, var(--gold) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
-  -webkit-text-fill-color: transparent;
   color: transparent;
   animation: shimmer 5s linear infinite;
 }
@@ -488,21 +479,7 @@ section.block { padding: 88px 0; }
 }
 .product-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
 .product-card-body h3 { font-size: 19px; margin: 0 0 4px; font-family: inherit; }
-
-/* FIX (Android gradient-text bug): same fallback + -webkit-text-fill-color
-   added here as for .gold-text/.gold-shimmer above. */
-.product-card-price {
-  color: var(--gold);
-  font-size: 16px;
-  font-weight: 700;
-  margin: 0 0 8px;
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
+.product-card-price { font-size: 16px; font-weight: 700; margin: 0 0 8px; background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .product-card-desc { font-size: 13.5px; color: var(--ivory-dim); margin: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .product-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
 .coverage-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-light); opacity: 0.85; }
@@ -650,20 +627,7 @@ html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
   font-size: 14.5px; color: rgba(247,243,236,0.8);
 }
 .pricing-row:last-of-type { border-bottom: none; }
-
-/* FIX (Android gradient-text bug): same fallback + -webkit-text-fill-color
-   added here as for .gold-text/.gold-shimmer/.product-card-price above. */
-.pricing-value {
-  color: var(--gold);
-  font-weight: 700;
-  font-size: 17px;
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
+.pricing-value { font-weight: 700; font-size: 17px; background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .pricing-note { margin: 14px 0 0; font-size: 12.5px; color: rgba(247,243,236,0.5); }
 
 .fragrances-grid-title { text-align: center; font-size: 22px; margin: 70px 0 8px; font-family: inherit; }
