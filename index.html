@@ -349,17 +349,17 @@ html[lang="en"] h1, html[lang="en"] h2 { font-family: "Cormorant Garamond", seri
   bottom: 48%;
   left: 50%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(247, 243, 236, 0.4), rgba(247, 243, 236, 0) 70%);
-  filter: blur(6px);
-  animation: riseMist 6s ease-in infinite;
+  background: radial-gradient(circle, rgba(247, 243, 236, 0.32), rgba(247, 243, 236, 0) 70%);
+  filter: blur(8px);
+  animation: riseMist 7s ease-in infinite;
 }
-.mist-1 { width: 50px; height: 80px; margin-left: -50px; animation-delay: 0s; }
-.mist-2 { width: 60px; height: 95px; margin-left: -10px; animation-delay: 1.6s; }
-.mist-3 { width: 46px; height: 72px; margin-left: 30px; animation-delay: 3.2s; }
+.mist-1 { width: 42px; height: 68px; margin-left: -46px; animation-delay: 0s; }
+.mist-2 { width: 50px; height: 80px; margin-left: -8px; animation-delay: 1.8s; }
+.mist-3 { width: 38px; height: 60px; margin-left: 28px; animation-delay: 3.6s; }
 @keyframes riseMist {
-  0% { transform: translate(-50%, 0) scale(0.75); opacity: 0; }
-  25% { opacity: 0.55; }
-  100% { transform: translate(-50%, -180px) scale(1.7); opacity: 0; }
+  0% { transform: translate(-50%, 0) scale(0.7); opacity: 0; }
+  25% { opacity: 0.38; }
+  100% { transform: translate(-50%, -170px) scale(1.6); opacity: 0; }
 }
 
 .scroll-hint {
@@ -728,7 +728,7 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
     <nav class="nav-links">
       <a href="#home" class="nav-link" data-route="home" data-i18n="nav.home">Home</a>
       <a href="#products" class="nav-link" data-route="products" data-i18n="nav.products">Products</a>
-      <a href="#fragrances" class="nav-link" data-route="fragrances" data-i18n="nav.fragrances">Fragrances</a>
+      <a href="#home" class="nav-link" data-scroll-to="fragrances-section" data-i18n="nav.fragrances">Fragrances</a>
       <a href="#about" class="nav-link" data-route="about" data-i18n="nav.about">About</a>
       <a href="#faq" class="nav-link" data-route="faq" data-i18n="nav.faq">FAQ</a>
       <a href="#contact" class="nav-link" data-route="contact" data-i18n="nav.contact">Contact</a>
@@ -743,7 +743,7 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
 <div id="mobile-menu" class="glass">
   <a href="#home" class="nav-link" data-route="home" data-i18n="nav.home">Home</a>
   <a href="#products" class="nav-link" data-route="products" data-i18n="nav.products">Products</a>
-  <a href="#fragrances" class="nav-link" data-route="fragrances" data-i18n="nav.fragrances">Fragrances</a>
+  <a href="#home" class="nav-link" data-scroll-to="fragrances-section" data-i18n="nav.fragrances">Fragrances</a>
   <a href="#about" class="nav-link" data-route="about" data-i18n="nav.about">About</a>
   <a href="#faq" class="nav-link" data-route="faq" data-i18n="nav.faq">FAQ</a>
   <a href="#contact" class="nav-link" data-route="contact" data-i18n="nav.contact">Contact</a>
@@ -776,14 +776,9 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
             <span class="mist-2"></span>
             <span class="mist-3"></span>
           </div>
-          <!--
-            Real product photo, background removed. This expects a TRUE
-            transparent PNG named hero-product.png sitting next to this
-            index.html file — see the chat reply for exactly how to export
-            one from your photo (98981c7e-...jpeg) in under a minute.
-          -->
+          <!-- Real product photo, background already removed (transparent PNG). -->
           <div class="hero-product-frame">
-            <img src="hero-product.png" alt="Aromifystore — featured diffuser" class="hero-product-img" />
+            <img src="98981c7e-0f8c-4d36-be85-8b1ce2cddb0f-removebg-preview.png" alt="Aromifystore — featured diffuser" class="hero-product-img" />
           </div>
         </div>
       </div>
@@ -845,47 +840,8 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
       </div>
     </section>
 
-    <section class="block" style="padding-top:0">
-      <div class="container">
-        <div class="cta-band glass">
-          <h2 class="font-display" data-i18n="home.ctaBandTitle">Ready to elevate your space?</h2>
-          <p data-i18n="home.ctaBandBody">We'll guide you from choice to installation.</p>
-          <a href="#contact" class="btn btn-gold" data-i18n="home.ctaBandButton">Request a Quote</a>
-        </div>
-      </div>
-    </section>
-  </section>
-
-  <!-- ============ PRODUCTS ============ -->
-  <section id="view-products" class="view">
-    <section class="block">
-      <div class="container">
-        <div class="heading">
-          <p class="section-eyebrow" data-i18n="nav.products">Products</p>
-          <h2 class="font-display" data-i18n="products.title">All Products</h2>
-          <p data-i18n="products.subtitle">Our curated collection.</p>
-        </div>
-        <div id="category-filters" class="category-filters"></div>
-        <div id="products-grid" class="grid-3"></div>
-      </div>
-    </section>
-  </section>
-
-  <!-- ============ PRODUCT DETAIL ============ -->
-  <section id="view-product" class="view">
-    <section class="block">
-      <div class="container">
-        <a href="#products" class="btn-ghost btn" style="margin-bottom:34px;display:inline-flex">
-          <span data-i18n="product.back">Back to all products</span>
-        </a>
-        <div id="product-detail-content"></div>
-      </div>
-    </section>
-  </section>
-
-  <!-- ============ FRAGRANCE OILS ============ -->
-  <section id="view-fragrances" class="view">
-    <section class="block">
+    <!-- ============ FRAGRANCE OILS (lives inside Home, not a separate page) ============ -->
+    <section class="block" id="fragrances-section">
       <div class="container">
         <div class="heading">
           <p class="section-eyebrow" data-i18n="fragrances.eyebrow">Our Collection</p>
@@ -925,6 +881,43 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
 
         <h3 class="fragrances-grid-title" data-i18n="fragrances.gridTitle">All Fragrances</h3>
         <div id="fragrances-grid" class="fragrances-grid"></div>
+      </div>
+    </section>
+
+    <section class="block" style="padding-top:0">
+      <div class="container">
+        <div class="cta-band glass">
+          <h2 class="font-display" data-i18n="home.ctaBandTitle">Ready to elevate your space?</h2>
+          <p data-i18n="home.ctaBandBody">We'll guide you from choice to installation.</p>
+          <a href="#contact" class="btn btn-gold" data-i18n="home.ctaBandButton">Request a Quote</a>
+        </div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ PRODUCTS ============ -->
+  <section id="view-products" class="view">
+    <section class="block">
+      <div class="container">
+        <div class="heading">
+          <p class="section-eyebrow" data-i18n="nav.products">Products</p>
+          <h2 class="font-display" data-i18n="products.title">All Products</h2>
+          <p data-i18n="products.subtitle">Our curated collection.</p>
+        </div>
+        <div id="category-filters" class="category-filters"></div>
+        <div id="products-grid" class="grid-3"></div>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ PRODUCT DETAIL ============ -->
+  <section id="view-product" class="view">
+    <section class="block">
+      <div class="container">
+        <a href="#products" class="btn-ghost btn" style="margin-bottom:34px;display:inline-flex">
+          <span data-i18n="product.back">Back to all products</span>
+        </a>
+        <div id="product-detail-content"></div>
       </div>
     </section>
   </section>
@@ -1660,6 +1653,7 @@ function applyLanguage(lang) {
     el.classList.toggle("active", el.dataset.langLabel === lang);
   });
   translateStaticText();
+  renderFragrances();
   // Re-render whichever dynamic view is currently active
   router();
 }
@@ -1944,7 +1938,7 @@ function buildParticles(containerId, count = 18) {
 }
 
 /* ---------- Router (hash-based, no backend needed) ---------- */
-const views = ["home", "products", "product", "fragrances", "about", "contact", "faq"];
+const views = ["home", "products", "product", "about", "contact", "faq"];
 
 function router() {
   const hash = location.hash.replace("#", "") || "home";
@@ -1968,7 +1962,6 @@ function router() {
     renderProductsGrid();
   }
   if (target === "product") renderProductDetail(param);
-  if (target === "fragrances") renderFragrances();
   if (target === "faq") renderFAQ();
 
   document.getElementById("mobile-menu").classList.remove("open");
@@ -1983,6 +1976,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupContactLinks();
   setupContactForm();
   buildParticles("hero-particles", 22);
+  renderFragrances(); // permanent Home content — render once, independent of routing
 
   // language dropdown
   const langToggle = document.getElementById("lang-toggle");
@@ -2002,6 +1996,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const burger = document.getElementById("burger");
   const mobileMenu = document.getElementById("mobile-menu");
   burger.addEventListener("click", () => mobileMenu.classList.toggle("open"));
+
+  // Nav links that point at an in-page section (e.g. "Fragrances") instead
+  // of a separate routed page: go home first if needed, then smooth-scroll.
+  document.querySelectorAll("[data-scroll-to]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetId = link.dataset.scrollTo;
+      const currentRoute = location.hash.replace("#", "").split("/")[0] || "home";
+      if (currentRoute !== "home") location.hash = "home";
+      mobileMenu.classList.remove("open");
+      setTimeout(() => {
+        document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 60);
+    });
+  });
 
   // sticky header style on scroll
   const header = document.getElementById("site-header");
