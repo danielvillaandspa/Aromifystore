@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#0a0a0b" />
-<meta name="color-scheme" content="dark" />
 <title>Aromifystore | מכשירי ריח חכמים יוקרתיים</title>
 <meta name="description" content="Aromifystore — מכשירי ריחות חכמים ופתרונות ארומה יוקרתיים לעסקים ולבית, לרכב ולמשרד." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a0a0b%22/><text x=%2216%22 y=%2222%22 font-family=%22Georgia,serif%22 font-size=%2218%22 fill=%22%23c9a227%22 text-anchor=%22middle%22>A</text></svg>" />
@@ -33,14 +32,7 @@
   color-scheme: dark;
 }
 
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; /* removes gray flash on tap in Samsung Internet/Chrome Android */
-}
-html {
-  -webkit-text-size-adjust: 100%; /* stops Samsung Internet auto-enlarging text in landscape/columns */
-  text-size-adjust: 100%;
-}
+* { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
@@ -72,43 +64,49 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- Reusable utility classes ---------- */
 .glass {
-  /* Fallback for browsers without backdrop-filter support: a slightly
-     lighter, semi-opaque background so panels remain legible instead of
-     nearly disappearing into the page background. */
-  background: rgba(30, 28, 32, 0.72);
+  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
-@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-  }
-}
 
-.gold-text {
-  background: var(--gold-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: var(--gold); /* fallback color if background-clip:text isn't supported */
-  -webkit-text-fill-color: transparent;
-}
-@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-  .gold-text { color: var(--gold); }
-}
-
+/* ROOT-CAUSE FIX for the "solid gold bar" bug seen in Brave / Samsung
+   Internet / some Safari builds:
+   The old code set -webkit-text-fill-color: transparent UNCONDITIONALLY.
+   In any browser where the background-clip:text trick fails or is
+   stripped (Brave's shields, some Samsung/Safari builds), the fill
+   became invisible but the gradient background was never clipped to
+   the glyph shapes — so it painted as a solid rectangular gold block
+   with invisible text on top. That block is exactly the bar in the
+   screenshot.
+   Fix: only apply the transparent-fill/clip-to-text technique inside
+   an @supports guard. Browsers that can't do the clip simply keep
+   solid gold text (readable, no bar). Browsers that can do the clip
+   get the gradient text as designed. This is universally safe. */
+.gold-text,
 .gold-shimmer {
-  background-image: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 25%, var(--gold) 50%, var(--gold-dark) 75%, var(--gold) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: var(--gold); /* fallback color if background-clip:text isn't supported */
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 5s linear infinite;
+  color: var(--gold); /* solid-color fallback: used whenever clip isn't supported */
 }
-@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-  .gold-shimmer { color: var(--gold-light); animation: none; }
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gold-text {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .gold-shimmer {
+    background-image: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 25%, var(--gold) 50%, var(--gold-dark) 75%, var(--gold) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer 5s linear infinite;
+  }
 }
 
 .gold-divider {
@@ -149,7 +147,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* ---------- Header / Nav ---------- */
 #site-header {
   position: fixed;
-  left: 0; right: 0; /* fallback for browsers without inset-inline support */
   inset-inline: 0;
   top: 0;
   z-index: 40;
@@ -168,18 +165,13 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 #site-header.scrolled { padding: 8px 0; }
 #site-header.scrolled .nav-wrap {
-  background: rgba(30, 28, 32, 0.78); /* fallback if backdrop-filter unsupported */
+  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
   margin: 0 16px;
   padding: 10px 22px;
-}
-@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  #site-header.scrolled .nav-wrap {
-    background: var(--glass-bg);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-  }
 }
 
 .brand {
@@ -279,7 +271,6 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Mobile menu */
 #mobile-menu {
   position: fixed;
-  left: 16px; right: 16px; /* fallback for browsers without inset-inline support */
   inset-inline: 16px;
   top: 84px;
   z-index: 35;
@@ -497,29 +488,11 @@ section.block { padding: 88px 0; }
   border-color: rgba(201, 162, 39, 0.4);
 }
 .product-card .badge {
-  position: absolute; top: 14px;
-  right: 14px; /* fallback: matches RTL default (Hebrew/Arabic) */
-  inset-inline-start: 14px;
-  z-index: 3;
+  position: absolute; top: 14px; inset-inline-start: 14px; z-index: 3;
   background: var(--gold-gradient); color: var(--ink);
   font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px;
 }
-html[dir="ltr"] .product-card .badge { right: auto; left: 14px; }
-.product-card-media {
-  position: relative;
-  background: var(--ink-soft);
-  overflow: hidden;
-  flex-shrink: 0;
-  /* Fallback for browsers without aspect-ratio support: padding-top trick
-     keeps a 4:5 box instead of collapsing to zero height. Overridden by
-     aspect-ratio below on browsers that support it. */
-  padding-top: 125%;
-  height: 0;
-}
-@supports (aspect-ratio: 4 / 5) {
-  .product-card-media { aspect-ratio: 4/5; padding-top: 0; height: auto; }
-}
-.product-card-media > * { position: absolute; inset: 0; }
+.product-card-media { position: relative; aspect-ratio: 4/5; background: var(--ink-soft); overflow: hidden; flex-shrink: 0; }
 .product-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .product-card:hover .product-card-media img { transform: scale(1.08); }
 .product-card-media::after {
@@ -528,7 +501,27 @@ html[dir="ltr"] .product-card .badge { right: auto; left: 14px; }
 }
 .product-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
 .product-card-body h3 { font-size: 19px; margin: 0 0 4px; font-family: inherit; }
-.product-card-price { font-size: 16px; font-weight: 700; margin: 0 0 8px; background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ROOT-CAUSE FIX (see .gold-text comment above): guarded with @supports
+   so unsupported browsers show solid gold text instead of an invisible
+   price sitting on a solid gold block. This is the exact element that
+   produced the gold bar in the reported screenshot. */
+.product-card-price {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: var(--gold); /* fallback: always readable */
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .product-card-price {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
 .product-card-desc { font-size: 13.5px; color: var(--ivory-dim); margin: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 .product-card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,0.06); }
 .coverage-tag { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-light); opacity: 0.85; }
@@ -549,17 +542,8 @@ html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
 .product-detail-grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
 @media (min-width: 960px) { .product-detail-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
 
-.gallery {
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  padding-top: 125%; /* fallback box size for browsers without aspect-ratio */
-  height: 0;
-}
-@supports (aspect-ratio: 4 / 5) {
-  .gallery { aspect-ratio: 4/5; padding-top: 0; height: auto; }
-}
-.gallery-track { position: absolute; inset: 0; display: flex; height: 100%; transition: transform 0.45s ease; }
+.gallery { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; }
+.gallery-track { display: flex; height: 100%; transition: transform 0.45s ease; }
 .gallery-slide { min-width: 100%; height: 100%; }
 .gallery-slide img { width: 100%; height: 100%; object-fit: cover; }
 .slide-placeholder {
@@ -582,10 +566,8 @@ html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
   transition: background-color 0.2s ease;
 }
 .gallery-nav:hover { background: rgba(201,162,39,0.55); }
-.gallery-nav.prev { right: 12px; inset-inline-start: 12px; } /* fallback matches RTL default */
-.gallery-nav.next { left: 12px; inset-inline-end: 12px; }
-html[dir="ltr"] .gallery-nav.prev { right: auto; left: 12px; }
-html[dir="ltr"] .gallery-nav.next { left: auto; right: 12px; }
+.gallery-nav.prev { inset-inline-start: 12px; }
+.gallery-nav.next { inset-inline-end: 12px; }
 .gallery-dots { position: absolute; bottom: 14px; left: 0; right: 0; display: flex; justify-content: center; gap: 7px; z-index: 3; }
 .gallery-dots .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: all 0.2s ease; }
 .gallery-dots .dot.active { background: var(--gold); width: 18px; border-radius: 4px; }
@@ -602,20 +584,8 @@ html[dir="ltr"] .gallery-nav.next { left: auto; right: 12px; }
 .product-info h2 { font-size: 18px; margin: 0 0 14px; }
 
 .feature-list { margin-bottom: 28px; }
-.feature-list li {
-  position: relative;
-  padding-right: 20px; /* fallback matches RTL default */
-  padding-inline-start: 20px;
-  margin-bottom: 9px; font-size: 14.5px; color: var(--ivory-dim);
-}
-html[dir="ltr"] .feature-list li { padding-right: 0; padding-left: 20px; }
-.feature-list li::before {
-  content: ""; position: absolute;
-  right: 0; /* fallback matches RTL default */
-  inset-inline-start: 0;
-  top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
-}
-html[dir="ltr"] .feature-list li::before { right: auto; left: 0; }
+.feature-list li { position: relative; padding-inline-start: 20px; margin-bottom: 9px; font-size: 14.5px; color: var(--ivory-dim); }
+.feature-list li::before { content: ""; position: absolute; inset-inline-start: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 
 .spec-list { margin-bottom: 30px; }
 .spec-row {
@@ -699,7 +669,23 @@ html[dir="ltr"] .feature-list li::before { right: auto; left: 0; }
   font-size: 14.5px; color: rgba(247,243,236,0.8);
 }
 .pricing-row:last-of-type { border-bottom: none; }
-.pricing-value { font-weight: 700; font-size: 17px; background: var(--gold-gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ROOT-CAUSE FIX (see .gold-text comment above). */
+.pricing-value {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--gold); /* fallback: always readable */
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .pricing-value {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
 .pricing-note { margin: 14px 0 0; font-size: 12.5px; color: rgba(247,243,236,0.5); }
 
 .fragrances-grid-title { text-align: center; font-size: 22px; margin: 70px 0 8px; font-family: inherit; }
@@ -741,6 +727,39 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
 .footer-contact { display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: rgba(247,243,236,0.78); }
 .footer-contact a:hover { color: var(--gold-light); }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); text-align: center; padding: 20px 0; font-size: 12px; color: rgba(247,243,236,0.35); }
+
+/* ---------- Bit payment button ---------- */
+.btn-bit {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.btn-bit:hover { border-color: rgba(255,255,255,0.4); background: #141414; }
+.btn-bit .bit-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #ffffff; color: #000000;
+  font-size: 12px; font-weight: 800; font-family: Arial, sans-serif;
+}
+#bit-fallback-modal {
+  position: fixed; inset: 0; z-index: 60;
+  display: none;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.6);
+  padding: 20px;
+}
+#bit-fallback-modal.open { display: flex; }
+#bit-fallback-modal .modal-card {
+  border-radius: 22px; padding: 30px; max-width: 340px; width: 100%;
+  text-align: center;
+}
+#bit-fallback-modal .modal-card h3 { margin: 4px 0 10px; font-size: 18px; }
+#bit-fallback-modal .modal-card p { color: var(--ivory-dim); font-size: 14px; margin: 0 0 18px; }
+#bit-fallback-modal .bit-phone-display {
+  font-size: 22px; font-weight: 700; letter-spacing: 0.04em;
+  color: var(--gold); direction: ltr; margin-bottom: 18px;
+}
+#bit-fallback-modal .modal-actions { display: flex; flex-direction: column; gap: 10px; }
 
 /* ---------- WhatsApp floating button ---------- */
 #wa-button {
@@ -1073,6 +1092,10 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
               <div class="row">🗺️ <span data-i18n="contact.locationValue">Isfiya, Israel</span></div>
             </div>
             <a href="#" data-whatsapp-link target="_blank" rel="noopener" class="btn btn-gold btn-block" data-i18n="contact.whatsappCta">Message us on WhatsApp</a>
+            <button type="button" class="btn btn-bit btn-block" style="margin-top:12px" data-bit-pay>
+              <span class="bit-badge">B</span>
+              <span data-i18n="contact.bitCta">Pay with Bit</span>
+            </button>
             <div class="map-embed">
               <iframe title="map" loading="lazy" src="https://www.google.com/maps?q=Isfiya,Israel&output=embed"></iframe>
             </div>
@@ -1123,6 +1146,20 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
   </div>
   <div class="footer-bottom">© <span id="footer-year"></span> <span data-i18n="footer.rights">Aromifystore. All rights reserved.</span></div>
 </footer>
+
+<!-- Bit payment fallback modal: shown if the Bit app can't be opened -->
+<div id="bit-fallback-modal">
+  <div class="modal-card glass">
+    <span class="bit-badge" style="width:40px;height:40px;font-size:18px;margin-bottom:10px">B</span>
+    <h3 data-i18n="contact.bitModalTitle">Pay with Bit</h3>
+    <p data-i18n="contact.bitModalBody">The Bit app didn't open automatically. You can pay directly using this phone number:</p>
+    <div class="bit-phone-display" id="bit-phone-display">050-607-5320</div>
+    <div class="modal-actions">
+      <a href="#" id="bit-call-link" class="btn btn-gold btn-block" data-i18n="contact.bitCall">Call this number</a>
+      <button type="button" class="btn btn-ghost btn-block" id="bit-modal-close" data-i18n="contact.bitClose">Close</button>
+    </div>
+  </div>
+</div>
 
 <a id="wa-button" data-whatsapp-link href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
   <span class="ping"></span>
@@ -1226,6 +1263,11 @@ const translations = {
       formName: "שם מלא", formPhone: "טלפון", formEmail: "אימייל", formMessage: "הודעה", formSubmit: "שליחה",
       directTitle: "פרטי התקשרות", location: "מיקום", locationValue: "אִסְפִיָּה, השכונה המזרחית, ישראל",
       whatsappCta: "שלחו הודעה בוואטסאפ",
+      bitCta: "תשלום ב-Bit",
+      bitModalTitle: "תשלום ב-Bit",
+      bitModalBody: "אפליקציית Bit לא נפתחה אוטומטית. ניתן לשלם ישירות למספר הבא:",
+      bitCall: "התקשרו למספר הזה",
+      bitClose: "סגירה",
     },
     faq: { eyebrow: "שאלות נפוצות", title: "כל מה שרציתם לדעת" },
     footer: { tagline: "ארומה יוקרתית לעסקים ולבית.", quickLinks: "קישורים מהירים", contactTitle: "צרו קשר", rights: "Aromifystore. כל הזכויות שמורות." },
@@ -1304,6 +1346,11 @@ const translations = {
       formName: "الاسم الكامل", formPhone: "رقم الهاتف", formEmail: "البريد الإلكتروني", formMessage: "الرسالة", formSubmit: "إرسال",
       directTitle: "بيانات التواصل", location: "الموقع", locationValue: "إسفيا، الحي الشرقي، إسرائيل",
       whatsappCta: "أرسلوا رسالة عبر واتساب",
+      bitCta: "الدفع عبر Bit",
+      bitModalTitle: "الدفع عبر Bit",
+      bitModalBody: "لم يفتح تطبيق Bit تلقائيًا. يمكنكم الدفع مباشرة عبر هذا الرقم:",
+      bitCall: "اتصلوا بهذا الرقم",
+      bitClose: "إغلاق",
     },
     faq: { eyebrow: "الأسئلة الشائعة", title: "كل ما تريدون معرفته" },
     footer: { tagline: "عطور فاخرة للأعمال والمنازل.", quickLinks: "روابط سريعة", contactTitle: "تواصلوا معنا", rights: "Aromifystore. جميع الحقوق محفوظة." },
@@ -1382,6 +1429,11 @@ const translations = {
       formName: "Full name", formPhone: "Phone", formEmail: "Email", formMessage: "Message", formSubmit: "Send",
       directTitle: "Contact details", location: "Location", locationValue: "Isfiya, Eastern Neighborhood, Israel",
       whatsappCta: "Message us on WhatsApp",
+      bitCta: "Pay with Bit",
+      bitModalTitle: "Pay with Bit",
+      bitModalBody: "The Bit app didn't open automatically. You can pay directly using this phone number:",
+      bitCall: "Call this number",
+      bitClose: "Close",
     },
     faq: { eyebrow: "FAQ", title: "Everything you wanted to know" },
     footer: { tagline: "Luxury scent diffusion for business & home.", quickLinks: "Quick links", contactTitle: "Contact", rights: "Aromifystore. All rights reserved." },
@@ -1862,6 +1914,10 @@ function renderProductDetail(slug) {
         <div class="cta-row">
           <a href="#contact" class="btn btn-gold">${tr("product.contactUs")}</a>
           <a href="${waLink(tr("product.whatsapp") + " — " + t.name)}" target="_blank" rel="noopener" class="btn btn-ghost">${tr("product.whatsapp")}</a>
+          <button type="button" class="btn btn-bit" data-bit-pay>
+            <span class="bit-badge">B</span>
+            <span>${tr("contact.bitCta")}</span>
+          </button>
         </div>
       </div>
     </div>
@@ -1979,6 +2035,66 @@ function setupContactLinks() {
   document.querySelectorAll("[data-alt-phone-text]").forEach((el) => (el.textContent = CONTACT.altPhone));
 }
 
+/* ---------- Bit payment ----------
+   Bit doesn't publish an official universal deep-link scheme, so this
+   tries the commonly-used "bituponline://" custom scheme (used by
+   several Bit integrations) via a hidden navigation. If the Bit app is
+   installed, the OS intercepts it and switches apps — this page loses
+   focus/visibility and we never show the fallback. If nothing is
+   installed to handle it, nothing happens and we show the phone-number
+   fallback modal after a short timeout.
+   NOTE: adjust BIT_DEEPLINK below if Bit later publishes an official
+   scheme/Universal Link for direct-to-app payments. */
+const BIT_DEEPLINK = "bituponline://";
+
+function openBitFallbackModal() {
+  const modal = document.getElementById("bit-fallback-modal");
+  const phoneDisplay = document.getElementById("bit-phone-display");
+  const callLink = document.getElementById("bit-call-link");
+  phoneDisplay.textContent = CONTACT.phone;
+  callLink.href = `tel:${CONTACT.phoneIntl}`;
+  modal.classList.add("open");
+}
+
+function closeBitFallbackModal() {
+  document.getElementById("bit-fallback-modal").classList.remove("open");
+}
+
+function tryPayWithBit() {
+  let handedOff = false;
+
+  const onHide = () => {
+    if (document.visibilityState === "hidden") handedOff = true;
+  };
+  document.addEventListener("visibilitychange", onHide);
+
+  // Attempt to hand off to the Bit app.
+  window.location.href = BIT_DEEPLINK;
+
+  // Give the OS a moment to switch apps before assuming it failed.
+  setTimeout(() => {
+    document.removeEventListener("visibilitychange", onHide);
+    if (!handedOff) openBitFallbackModal();
+  }, 900);
+}
+
+function setupBitPayment() {
+  // Event delegation: covers the static Bit button in the Contact
+  // section AND the one injected dynamically on product detail pages.
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-bit-pay]");
+    if (btn) tryPayWithBit();
+  });
+  const closeBtn = document.getElementById("bit-modal-close");
+  const modal = document.getElementById("bit-fallback-modal");
+  if (closeBtn) closeBtn.addEventListener("click", closeBitFallbackModal);
+  if (modal) {
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeBitFallbackModal();
+    });
+  }
+}
+
 function setupContactForm() {
   const form = document.getElementById("contact-form");
   if (!form) return;
@@ -2047,6 +2163,7 @@ document.addEventListener("DOMContentLoaded", () => {
   translateStaticText();
   setupContactLinks();
   setupContactForm();
+  setupBitPayment();
   buildParticles("hero-particles", 22);
   renderFragrances(); // permanent Home content — render once, independent of routing
 
