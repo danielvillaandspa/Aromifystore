@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#0a0a0b" />
+<meta name="color-scheme" content="dark" />
 <title>Aromifystore | מכשירי ריח חכמים יוקרתיים</title>
 <meta name="description" content="Aromifystore — מכשירי ריחות חכמים ופתרונות ארומה יוקרתיים לעסקים ולבית, לרכב ולמשרד." />
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><rect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%230a0a0b%22/><text x=%2216%22 y=%2222%22 font-family=%22Georgia,serif%22 font-size=%2218%22 fill=%22%23c9a227%22 text-anchor=%22middle%22>A</text></svg>" />
@@ -32,7 +33,14 @@
   color-scheme: dark;
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* removes gray flash on tap in Samsung Internet/Chrome Android */
+}
+html {
+  -webkit-text-size-adjust: 100%; /* stops Samsung Internet auto-enlarging text in landscape/columns */
+  text-size-adjust: 100%;
+}
 html, body { margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
@@ -64,18 +72,30 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- Reusable utility classes ---------- */
 .glass {
-  background: var(--glass-bg);
+  /* Fallback for browsers without backdrop-filter support: a slightly
+     lighter, semi-opaque background so panels remain legible instead of
+     nearly disappearing into the page background. */
+  background: rgba(30, 28, 32, 0.72);
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
 }
 
 .gold-text {
   background: var(--gold-gradient);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold); /* fallback color if background-clip:text isn't supported */
+  -webkit-text-fill-color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gold-text { color: var(--gold); }
 }
 
 .gold-shimmer {
@@ -83,8 +103,12 @@ ul { margin: 0; padding: 0; list-style: none; }
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold); /* fallback color if background-clip:text isn't supported */
+  -webkit-text-fill-color: transparent;
   animation: shimmer 5s linear infinite;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gold-shimmer { color: var(--gold-light); animation: none; }
 }
 
 .gold-divider {
@@ -125,6 +149,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* ---------- Header / Nav ---------- */
 #site-header {
   position: fixed;
+  left: 0; right: 0; /* fallback for browsers without inset-inline support */
   inset-inline: 0;
   top: 0;
   z-index: 40;
@@ -143,13 +168,18 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 #site-header.scrolled { padding: 8px 0; }
 #site-header.scrolled .nav-wrap {
-  background: var(--glass-bg);
+  background: rgba(30, 28, 32, 0.78); /* fallback if backdrop-filter unsupported */
   border: 1px solid var(--glass-border);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
   margin: 0 16px;
   padding: 10px 22px;
+}
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  #site-header.scrolled .nav-wrap {
+    background: var(--glass-bg);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
 }
 
 .brand {
@@ -249,6 +279,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* Mobile menu */
 #mobile-menu {
   position: fixed;
+  left: 16px; right: 16px; /* fallback for browsers without inset-inline support */
   inset-inline: 16px;
   top: 84px;
   z-index: 35;
@@ -466,11 +497,29 @@ section.block { padding: 88px 0; }
   border-color: rgba(201, 162, 39, 0.4);
 }
 .product-card .badge {
-  position: absolute; top: 14px; inset-inline-start: 14px; z-index: 3;
+  position: absolute; top: 14px;
+  right: 14px; /* fallback: matches RTL default (Hebrew/Arabic) */
+  inset-inline-start: 14px;
+  z-index: 3;
   background: var(--gold-gradient); color: var(--ink);
   font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 999px;
 }
-.product-card-media { position: relative; aspect-ratio: 4/5; background: var(--ink-soft); overflow: hidden; flex-shrink: 0; }
+html[dir="ltr"] .product-card .badge { right: auto; left: 14px; }
+.product-card-media {
+  position: relative;
+  background: var(--ink-soft);
+  overflow: hidden;
+  flex-shrink: 0;
+  /* Fallback for browsers without aspect-ratio support: padding-top trick
+     keeps a 4:5 box instead of collapsing to zero height. Overridden by
+     aspect-ratio below on browsers that support it. */
+  padding-top: 125%;
+  height: 0;
+}
+@supports (aspect-ratio: 4 / 5) {
+  .product-card-media { aspect-ratio: 4/5; padding-top: 0; height: auto; }
+}
+.product-card-media > * { position: absolute; inset: 0; }
 .product-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
 .product-card:hover .product-card-media img { transform: scale(1.08); }
 .product-card-media::after {
@@ -500,8 +549,17 @@ html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
 .product-detail-grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
 @media (min-width: 960px) { .product-detail-grid { grid-template-columns: 1fr 1fr; align-items: start; } }
 
-.gallery { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 4/5; }
-.gallery-track { display: flex; height: 100%; transition: transform 0.45s ease; }
+.gallery {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  padding-top: 125%; /* fallback box size for browsers without aspect-ratio */
+  height: 0;
+}
+@supports (aspect-ratio: 4 / 5) {
+  .gallery { aspect-ratio: 4/5; padding-top: 0; height: auto; }
+}
+.gallery-track { position: absolute; inset: 0; display: flex; height: 100%; transition: transform 0.45s ease; }
 .gallery-slide { min-width: 100%; height: 100%; }
 .gallery-slide img { width: 100%; height: 100%; object-fit: cover; }
 .slide-placeholder {
@@ -524,8 +582,10 @@ html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
   transition: background-color 0.2s ease;
 }
 .gallery-nav:hover { background: rgba(201,162,39,0.55); }
-.gallery-nav.prev { inset-inline-start: 12px; }
-.gallery-nav.next { inset-inline-end: 12px; }
+.gallery-nav.prev { right: 12px; inset-inline-start: 12px; } /* fallback matches RTL default */
+.gallery-nav.next { left: 12px; inset-inline-end: 12px; }
+html[dir="ltr"] .gallery-nav.prev { right: auto; left: 12px; }
+html[dir="ltr"] .gallery-nav.next { left: auto; right: 12px; }
 .gallery-dots { position: absolute; bottom: 14px; left: 0; right: 0; display: flex; justify-content: center; gap: 7px; z-index: 3; }
 .gallery-dots .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.4); transition: all 0.2s ease; }
 .gallery-dots .dot.active { background: var(--gold); width: 18px; border-radius: 4px; }
@@ -542,8 +602,20 @@ html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
 .product-info h2 { font-size: 18px; margin: 0 0 14px; }
 
 .feature-list { margin-bottom: 28px; }
-.feature-list li { position: relative; padding-inline-start: 20px; margin-bottom: 9px; font-size: 14.5px; color: var(--ivory-dim); }
-.feature-list li::before { content: ""; position: absolute; inset-inline-start: 0; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+.feature-list li {
+  position: relative;
+  padding-right: 20px; /* fallback matches RTL default */
+  padding-inline-start: 20px;
+  margin-bottom: 9px; font-size: 14.5px; color: var(--ivory-dim);
+}
+html[dir="ltr"] .feature-list li { padding-right: 0; padding-left: 20px; }
+.feature-list li::before {
+  content: ""; position: absolute;
+  right: 0; /* fallback matches RTL default */
+  inset-inline-start: 0;
+  top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--gold);
+}
+html[dir="ltr"] .feature-list li::before { right: auto; left: 0; }
 
 .spec-list { margin-bottom: 30px; }
 .spec-row {
