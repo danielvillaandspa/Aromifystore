@@ -57,6 +57,42 @@ html[lang="he"] .font-display { font-family: "Frank Ruhl Libre", serif; }
 html[lang="ar"] .font-display { font-family: "Aref Ruqaa", serif; }
 html[lang="en"] .font-display { font-family: "Cormorant Garamond", serif; }
 
+/* ---------- Arabic readability fixes ----------
+   Arabic is a cursive script — letters must stay visually connected
+   to read correctly. The luxury look elsewhere on the site relies on
+   positive letter-spacing (eyebrows, nav links, buttons, badges,
+   footer headings, fragrance labels, etc.). Applied to Arabic, that
+   same letter-spacing pulls joined letters apart and makes words hard
+   to read. These rules restore normal spacing and slightly heavier
+   weights only when the page is displayed in Arabic, without changing
+   anything about the Hebrew or English versions. */
+html[lang="ar"] * {
+  letter-spacing: normal !important;
+}
+html[lang="ar"] body {
+  line-height: 1.9;
+}
+html[lang="ar"] .hero h1,
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] .font-display {
+  font-weight: 700;
+}
+html[lang="ar"] .section-eyebrow,
+html[lang="ar"] .fragrance-group-title,
+html[lang="ar"] .footer-col h4,
+html[lang="ar"] .coverage-tag {
+  font-weight: 700;
+}
+html[lang="ar"] p,
+html[lang="ar"] .product-card-desc,
+html[lang="ar"] .feature-card p,
+html[lang="ar"] .value-card p,
+html[lang="ar"] .faq-answer p,
+html[lang="ar"] .about-card p {
+  font-weight: 400;
+}
+
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
 img { max-width: 100%; display: block; }
