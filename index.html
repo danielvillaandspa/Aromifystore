@@ -1977,7 +1977,6 @@ function setupGallery() {
   let index = 0;
   function goTo(i) {
     index = (i + dots.length) % dots.length;
-    track.style.transform = `translateX(${currentLang !== "en" ? "" : "-"}${index * 100}%)`;
     track.style.transform = document.documentElement.dir === "rtl" ? `translateX(${index * 100}%)` : `translateX(-${index * 100}%)`;
     dots.forEach((d, di) => d.classList.toggle("active", di === index));
   }
