@@ -109,22 +109,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
 }
 
-/* ROOT-CAUSE FIX for the "solid gold bar" bug seen in Brave / Samsung
-   Internet / some Safari builds:
-   The old code set -webkit-text-fill-color: transparent UNCONDITIONALLY.
-   In any browser where the background-clip:text trick fails or is
-   stripped (Brave's shields, some Samsung/Safari builds), the fill
-   became invisible but the gradient background was never clipped to
-   the glyph shapes — so it painted as a solid rectangular gold block
-   with invisible text on top. That block is exactly the bar in the
-   screenshot.
-   Fix: only apply the transparent-fill/clip-to-text technique inside
-   an @supports guard. Browsers that can't do the clip simply keep
-   solid gold text (readable, no bar). Browsers that can do the clip
-   get the gradient text as designed. This is universally safe. */
 .gold-text,
 .gold-shimmer {
-  color: var(--gold); /* solid-color fallback: used whenever clip isn't supported */
+  color: var(--gold);
 }
 
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
@@ -377,8 +364,6 @@ html[lang="en"] h1, html[lang="en"] h2 { font-family: "Cormorant Garamond", seri
   justify-content: center;
 }
 
-/* Real product photo (background removed), centered on the site's own
-   dark background — no extra frame, glow or backdrop added around it. */
 .hero-product-frame {
   position: relative;
   z-index: 2;
@@ -401,8 +386,6 @@ html[lang="en"] h1, html[lang="en"] h2 { font-family: "Cormorant Garamond", seri
 }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-/* Elegant rising mist behind/around the diffuser — the only animated
-   effect added around the product, as requested (a light fragrance-spray cue). */
 .mist { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .mist span {
   position: absolute;
@@ -540,15 +523,11 @@ section.block { padding: 88px 0; }
 .product-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
 .product-card-body h3 { font-size: 19px; margin: 0 0 4px; font-family: inherit; }
 
-/* ROOT-CAUSE FIX (see .gold-text comment above): guarded with @supports
-   so unsupported browsers show solid gold text instead of an invisible
-   price sitting on a solid gold block. This is the exact element that
-   produced the gold bar in the reported screenshot. */
 .product-card-price {
   font-size: 16px;
   font-weight: 700;
   margin: 0 0 8px;
-  color: var(--gold); /* fallback: always readable */
+  color: var(--gold);
 }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .product-card-price {
@@ -708,11 +687,10 @@ html[dir="rtl"] .product-card:hover .view-link { transform: translateX(-3px); }
 }
 .pricing-row:last-of-type { border-bottom: none; }
 
-/* ROOT-CAUSE FIX (see .gold-text comment above). */
 .pricing-value {
   font-weight: 700;
   font-size: 17px;
-  color: var(--gold); /* fallback: always readable */
+  color: var(--gold);
 }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .pricing-value {
@@ -905,7 +883,6 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
             <span class="mist-2"></span>
             <span class="mist-3"></span>
           </div>
-          <!-- Real product photo, background already removed (transparent PNG). -->
           <div class="hero-product-frame">
             <img src="98981c7e-0f8c-4d36-be85-8b1ce2cddb0f-removebg-preview.png" alt="Aromifystore — featured diffuser" class="hero-product-img" />
           </div>
@@ -981,14 +958,14 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
         <!-- Pricing tiers -->
         <div class="pricing-cards">
           <div class="pricing-card glass reveal">
-            <h3 data-i18n="fragrances.standardName">Signature Fragrances</h3>
+            <h3 data-i18n="fragrances.standardName">Premium Plus Fragrances</h3>
             <div class="pricing-row">
               <span data-i18n="fragrances.size500">500ml</span>
-              <span class="pricing-value">₪200</span>
+              <span class="pricing-value">₪250</span>
             </div>
             <div class="pricing-row">
               <span data-i18n="fragrances.size1l">1 Liter</span>
-              <span class="pricing-value">₪350</span>
+              <span class="pricing-value">₪450</span>
             </div>
             <p class="pricing-note" data-i18n="fragrances.standardNote">Applies to every fragrance below, except Royal Oud.</p>
           </div>
@@ -998,11 +975,11 @@ footer { border-top: 1px solid rgba(255,255,255,0.06); background: var(--ink-sof
             <h3 dir="ltr">Royal Oud</h3>
             <div class="pricing-row">
               <span data-i18n="fragrances.size500">500ml</span>
-              <span class="pricing-value">₪250</span>
+              <span class="pricing-value">₪300</span>
             </div>
             <div class="pricing-row">
               <span data-i18n="fragrances.size1l">1 Liter</span>
-              <span class="pricing-value">₪400</span>
+              <span class="pricing-value">₪550</span>
             </div>
             <p class="pricing-note" data-i18n="fragrances.premiumNote">Contains higher-quality ingredients.</p>
           </div>
@@ -1277,7 +1254,7 @@ const translations = {
       title: "שמני בישום יוקרתיים",
       subtitle: "מבחר ניחוחות יוקרתיים המאושרים על ידי IFRA ומתאימים לכל מכשירי הבישום שלנו.",
       pricingTitle: "מחירון",
-      standardName: "ניחוחות קלאסיים",
+      standardName: "ניחוחות Premium בלאס",
       standardNote: "המחיר חל על כל הניחוחות המופיעים למטה, פרט ל-Royal Oud",
       size500: "500 מ״ל",
       size1l: "1 ליטר",
@@ -1360,7 +1337,7 @@ const translations = {
       title: "زيوت تعطير فاخرة",
       subtitle: "تشكيلة من العطور الفاخرة المعتمدة من IFRA، تناسب جميع أجهزة التعطير الخاصة بنا.",
       pricingTitle: "قائمة الأسعار",
-      standardName: "العطور الكلاسيكية",
+      standardName: "عطور بريميوم بلس",
       standardNote: "السعر ينطبق على جميع العطور أدناه، باستثناء Royal Oud",
       size500: "500 مل",
       size1l: "1 لتر",
@@ -1443,7 +1420,7 @@ const translations = {
       title: "Premium Fragrance Oils",
       subtitle: "A curated selection of premium fragrances, IFRA-certified and compatible with all our scenting devices.",
       pricingTitle: "Pricing",
-      standardName: "Signature Fragrances",
+      standardName: "Premium Plus Fragrances",
       standardNote: "This price applies to every fragrance listed below, except Royal Oud",
       size500: "500ml",
       size1l: "1 Liter",
@@ -1500,12 +1477,6 @@ const faqItems = {
 };
 
 /* ---------- Product catalog (real products, real image filenames) ---------- */
-/*
-  IMPORTANT: the JPEG files referenced below (IMG_0014.jpeg, IMG_0043.jpeg, etc.)
-  must sit in the SAME FOLDER as index.html — exactly like in your GitHub repo.
-  Do not rename them and do not move them into a subfolder, or the images
-  won't load. Each product only uses its own listed files — nothing is mixed.
-*/
 const products = [
   {
     id: "p1", slug: "battery-electric-diffuser", category: "home",
@@ -1721,10 +1692,7 @@ const products = [
   },
 ];
 
-/* ---------- Fragrance oils catalog ----------
-   Grouped thematically so the section stays easy to browse despite
-   having many items. `premium: true` marks Royal Oud, which gets its
-   own pricing tier and a small badge wherever it appears. */
+/* ---------- Fragrance oils catalog ---------- */
 const fragranceGroups = [
   {
     key: "hotel",
@@ -1816,7 +1784,6 @@ function applyLanguage(lang) {
   });
   translateStaticText();
   renderFragrances();
-  // Re-render whichever dynamic view is currently active
   router();
 }
 
@@ -1831,23 +1798,16 @@ function translateStaticText() {
   document.getElementById("current-lang-label").textContent = langNames[currentLang];
 }
 
-/* Returns the right coverage-area string whether it's a plain string
-   (same in every language) or a per-language object like the car items use */
 function coverageText(p) {
   return typeof p.coverageArea === "string" ? p.coverageArea : p.coverageArea[currentLang];
 }
 
-/* ---------- Gallery slide: renders the real product photo.
-   If a file is missing/not-yet-uploaded, it falls back to a clean
-   placeholder instead of a broken-image icon. ---------- */
 function renderSlide(src, alt) {
   return `<div class="slide-placeholder" style="display:none"><span>Aromifystore</span></div>
           <img src="${src}" alt="${alt}" loading="lazy"
                onerror="this.style.display='none'; this.previousElementSibling.style.display='flex';" />`;
 }
 
-
-/* ---------- Product card ---------- */
 function productCardHTML(p) {
   const t = p.t[currentLang];
   const badge = p.badge ? p.badge[currentLang] : null;
@@ -1868,7 +1828,6 @@ function productCardHTML(p) {
     </a>`;
 }
 
-/* ---------- Views ---------- */
 function renderFeaturedProducts() {
   const el = document.getElementById("featured-products-grid");
   if (!el) return;
@@ -2039,10 +1998,6 @@ function renderFragrances() {
   observeReveals();
 }
 
-/* Generic scroll reveal: any element with class "reveal" fades + rises
-   into place the first time it enters the viewport. Re-run after any
-   render that injects new .reveal elements (it safely skips ones
-   already revealed/observed). */
 let revealObserver = null;
 function observeReveals() {
   if (!revealObserver) {
@@ -2072,16 +2027,6 @@ function setupContactLinks() {
   document.querySelectorAll("[data-alt-phone-text]").forEach((el) => (el.textContent = CONTACT.altPhone));
 }
 
-/* ---------- Bit payment ----------
-   Bit doesn't publish an official universal deep-link scheme, so this
-   tries the commonly-used "bituponline://" custom scheme (used by
-   several Bit integrations) via a hidden navigation. If the Bit app is
-   installed, the OS intercepts it and switches apps — this page loses
-   focus/visibility and we never show the fallback. If nothing is
-   installed to handle it, nothing happens and we show the phone-number
-   fallback modal after a short timeout.
-   NOTE: adjust BIT_DEEPLINK below if Bit later publishes an official
-   scheme/Universal Link for direct-to-app payments. */
 const BIT_DEEPLINK = "bituponline://";
 
 function openBitFallbackModal() {
@@ -2105,10 +2050,8 @@ function tryPayWithBit() {
   };
   document.addEventListener("visibilitychange", onHide);
 
-  // Attempt to hand off to the Bit app.
   window.location.href = BIT_DEEPLINK;
 
-  // Give the OS a moment to switch apps before assuming it failed.
   setTimeout(() => {
     document.removeEventListener("visibilitychange", onHide);
     if (!handedOff) openBitFallbackModal();
@@ -2116,8 +2059,6 @@ function tryPayWithBit() {
 }
 
 function setupBitPayment() {
-  // Event delegation: covers the static Bit button in the Contact
-  // section AND the one injected dynamically on product detail pages.
   document.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-bit-pay]");
     if (btn) tryPayWithBit();
@@ -2146,7 +2087,6 @@ function setupContactForm() {
   });
 }
 
-/* ---------- Particles (ambient hero animation) ---------- */
 function buildParticles(containerId, count = 18) {
   const el = document.getElementById(containerId);
   if (!el || el.dataset.built) return;
@@ -2162,7 +2102,6 @@ function buildParticles(containerId, count = 18) {
   el.innerHTML = html;
 }
 
-/* ---------- Router (hash-based, no backend needed) ---------- */
 const views = ["home", "products", "product", "about", "contact", "faq"];
 
 function router() {
@@ -2192,7 +2131,6 @@ function router() {
   document.getElementById("mobile-menu").classList.remove("open");
 }
 
-/* ---------- Init ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   document.documentElement.lang = currentLang;
   document.documentElement.dir = RTL.includes(currentLang) ? "rtl" : "ltr";
@@ -2202,9 +2140,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupContactForm();
   setupBitPayment();
   buildParticles("hero-particles", 22);
-  renderFragrances(); // permanent Home content — render once, independent of routing
+  renderFragrances();
 
-  // language dropdown
   const langToggle = document.getElementById("lang-toggle");
   const langMenu = document.getElementById("lang-menu");
   langToggle.addEventListener("click", () => langMenu.classList.toggle("open"));
@@ -2218,13 +2155,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) langMenu.classList.remove("open");
   });
 
-  // mobile menu
   const burger = document.getElementById("burger");
   const mobileMenu = document.getElementById("mobile-menu");
   burger.addEventListener("click", () => mobileMenu.classList.toggle("open"));
 
-  // Nav links that point at an in-page section (e.g. "Fragrances") instead
-  // of a separate routed page: go home first if needed, then smooth-scroll.
   document.querySelectorAll("[data-scroll-to]").forEach((link) => {
     link.addEventListener("click", (e) => {
       e.preventDefault();
@@ -2238,7 +2172,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // sticky header style on scroll
   const header = document.getElementById("site-header");
   window.addEventListener("scroll", () => {
     header.classList.toggle("scrolled", window.scrollY > 24);
