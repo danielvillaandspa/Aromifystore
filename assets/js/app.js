@@ -8,6 +8,7 @@ let currentLang = 'he';
 try { const saved = localStorage.getItem('aromify-lang'); if (['he','ar','en'].includes(saved)) currentLang = saved; } catch {}
 let currentFilter = 'all';
 let searchQuery = '';
+let renderedHash = '';
 function waLink(msg) { const base = 'https://wa.me/' + CONTACT.whatsappNumber; return msg ? base + '?text=' + encodeURIComponent(msg) : base; }
 function money(value) { return '<bdi dir="ltr">₪' + value.toLocaleString('en-US') + '</bdi>'; }
 function bundleCopy(p) { const offer = activeOffer(p); return offer ? tr(offer.bottles === 2 ? 'offers.two' : 'offers.one') : ''; }
@@ -398,7 +399,7 @@ function router() {
 
   if (target === "home") renderFeaturedProducts();
   if (target === "products") {
-    if (param === "offers" && !document.querySelector('#category-filters [data-cat="offers"]')) currentFilter = "offers";
+    if (param === "offers" && hash !== renderedHash) currentFilter = "offers";
     setupProductFilters();
     renderProductsGrid();
   }
@@ -407,6 +408,7 @@ function router() {
 
   document.getElementById("mobile-menu").classList.remove("open");
   document.getElementById("burger").setAttribute("aria-expanded", "false");
+  renderedHash = hash;
   observeReveals();
 }
 
@@ -482,4 +484,3 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener('visibilitychange', refreshOffers);
   router();
 });
-
