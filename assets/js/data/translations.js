@@ -12,9 +12,9 @@ export const translations = {
     },
     "hero": {
       "eyebrow": "ארומה יוקרתית לעסקים ולבית",
-      "title1": "הניחוח שמספר",
-      "title2": "את הסיפור שלכם",
-      "subtitle": "מכשירי ריח חכמים ברמה מקצועית, המעניקים לכל חלל אופי, אווירה וזיכרון חושי שנשאר.",
+      "title1": "מכשירי ריח ושמנים",
+      "title2": "לבית, לעסק ולרכב",
+      "subtitle": "מכשירי ריח ושמנים ארומטיים לבית, למשרד, לעסק ולרכב. השוו דגמים ובדקו התאמה לחלל עם Aromifystore בטלפון או בוואטסאפ.",
       "ctaPrimary": "גלו את הקולקציה",
       "ctaSecondary": "דברו איתנו בוואטסאפ",
       "scroll": "המשיכו לגלוש"
@@ -168,9 +168,9 @@ export const translations = {
     },
     "hero": {
       "eyebrow": "عطور فاخرة للأعمال والمنازل",
-      "title1": "رائحة تحبها",
-      "title2": "في كل مساحة",
-      "subtitle": "أجهزة تعطير للمنزل والمكتب والسيارة، مع زيوت عطرية تختارها على ذوقك.",
+      "title1": "أجهزة تعطير وزيوت عطرية",
+      "title2": "للمنزل والأعمال والسيارة",
+      "subtitle": "أروميفاي ستور: أجهزة تعطير وزيوت عطرية للمنزل والمكتب والمحلات والسيارة. قارن الأجهزة وتواصل معنا لمساعدتك في اختيار الجهاز والرائحة المناسبين.",
       "ctaPrimary": "تسوق الأجهزة",
       "ctaSecondary": "تواصل عبر واتساب",
       "scroll": "استمروا بالتمرير"
@@ -324,9 +324,9 @@ export const translations = {
     },
     "hero": {
       "eyebrow": "Luxury scent diffusion, for business & home",
-      "title1": "The Scent That Tells",
-      "title2": "Your Story",
-      "subtitle": "Professional-grade smart fragrance systems that give every space character, atmosphere, and a memory that lingers.",
+      "title1": "Scent diffusers & fragrance oils",
+      "title2": "For homes, businesses & cars",
+      "subtitle": "Explore scent diffusers and fragrance oils for homes, offices, businesses and cars. Compare Aromifystore devices and contact us for help choosing your scent.",
       "ctaPrimary": "Explore the Collection",
       "ctaSecondary": "Chat on WhatsApp",
       "scroll": "Keep scrolling"
