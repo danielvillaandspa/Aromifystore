@@ -5,6 +5,10 @@
   "type": "module",
   "scripts": {
     "start": "node scripts/serve.js",
-    "test": "node --test tests/*.test.js"
+    "test": "node --test tests/*.test.js",
+    "build:seo": "node scripts/build-seo.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "30.0.1"
   }
 }
