@@ -1,0 +1,50 @@
+/* Aromify — warm, readable storefront. Shared by every language and route. */
+:root{color-scheme:light;--ink:#f8f7f2;--ink-soft:#eeeee5;--ink-raised:#fff;--ivory:#203b32;--ivory-dim:#5d6962;--gold:#856637;--gold-light:#856637;--gold-dark:#574122;--gold-gradient:linear-gradient(135deg,#294c3e,#18372c);--glass-bg:#fff;--glass-border:#dfe3d9}
+body{background:#f8f7f2;color:#203b32}
+.glass{background:#fff;border-color:#dfe3d9;box-shadow:0 8px 32px #253c3007;backdrop-filter:none}
+#site-header,#site-header.scrolled{background:#f8f7f2f5;border-bottom:1px solid #dfe3d9;box-shadow:none;padding:8px 0;backdrop-filter:blur(16px)}
+#site-header .nav-wrap,#site-header.scrolled .nav-wrap{padding:10px 24px}
+.brand{color:#203b32;font-weight:600;letter-spacing:-1.4px}.brand .gold-text{color:#856637}
+.nav-link{color:#59665e}.nav-link:hover,.nav-link.active{color:#203b32}.nav-link::after{background:#856637}
+#lang-toggle{border-color:#d7ddd2;background:transparent;color:#203b32;border-radius:8px}
+#lang-menu,#mobile-menu{background:#fff;color:#203b32;border:1px solid #dfe3d9;box-shadow:0 16px 40px #203b3215}
+#mobile-menu{top:81px}.lang-option{color:#203b32}.lang-option:hover,#mobile-menu .nav-link:hover{background:#f0f2e9}
+main{padding-top:81px}.promotion-strip{background:#203b32;color:#f5f0df;padding:10px 20px;gap:10px 24px;font-size:12px;line-height:1.7}.promotion-strip a{color:#f5f0df;text-underline-offset:4px}
+.hero{min-height:590px;background:linear-gradient(110deg,#f3f1e8,#e8ede2);border-bottom:1px solid #dce2d5}
+.hero-grid{width:100%;max-width:1240px;box-sizing:border-box;padding:56px 32px 64px;gap:56px;position:relative}
+.section-eyebrow{color:#856637;font-weight:600;letter-spacing:.17em;font-size:12px}
+.hero h1{font-size:clamp(38px,4.8vw,64px);font-weight:500;line-height:1.15;margin:20px 0}
+html[lang=ar] .hero h1{font-size:clamp(29px,3.5vw,47px);font-weight:600;line-height:1.65}
+.gold-shimmer{color:#856637;background:none;-webkit-text-fill-color:currentColor;animation:none}
+.hero p.subtitle{font-size:16px;line-height:1.9;max-width:490px;color:#526158}
+.hero-ctas{gap:12px;margin-top:26px}.btn{border-radius:8px;min-height:48px;font-weight:600;font-size:14px;box-sizing:border-box}
+.btn-gold{background:#203b32;color:#fff;box-shadow:0 5px 14px #203b3210}.btn-gold:hover{background:#315647;box-shadow:0 8px 20px #203b3220;transform:translateY(-2px)}
+.btn-ghost{color:#203b32;border:1px solid #a8b5a7;background:transparent}.btn-ghost:hover{background:#e4e9dd;border-color:#738570}
+.hero-visual{height:430px;border-radius:48% 48% 12px 12px;border:1px solid #c8d2bd;background:radial-gradient(ellipse at 50% 45%,#fdfdf7 0,#e0e7d5 65%,#d0dbc5 100%);isolation:isolate}
+.hero-visual::before{content:"";position:absolute;inset:15px;border:1px solid #ffffffa0;border-radius:inherit;pointer-events:none}
+.hero-visual::after{content:"AROMIFY";position:absolute;bottom:16px;letter-spacing:.32em;font:11px Inter,sans-serif;color:#667b5f}
+.hero-product-frame{width:94%;max-width:460px;filter:drop-shadow(0 20px 16px #233b3026);animation:none}.hero-product-img{max-height:350px;object-fit:contain}.mist,.scroll-hint{display:none}
+section.block{padding:70px 0}.heading{max-width:720px}.heading h2{font-weight:500;font-size:clamp(28px,3.5vw,40px)}html[lang=ar] .heading h2{font-size:clamp(25px,3vw,34px);font-weight:600;line-height:1.65}
+.collection-block{background:#fff}.collection-block .heading{text-align:start;max-width:none;border-bottom:1px solid #e4e7de;padding-bottom:24px}.collection-block .section-eyebrow{margin-top:0}
+.grid-3{gap:24px;margin-top:30px}.product-card{background:#fff;border:1px solid #dfe3d9;border-radius:14px;box-shadow:none}.product-card:hover{border-color:#a5b39b;box-shadow:0 14px 36px #203b3210;transform:translateY(-5px)}
+.product-card-media{background:#f2f1eb;aspect-ratio:1.08}.product-card-media img{padding:15px;box-sizing:border-box;mix-blend-mode:multiply;object-fit:contain}.product-card:hover .product-card-media img{transform:scale(1.035)}
+.product-card .badge{background:#203b32;color:#fff;border:0;font-size:11px;padding:7px 13px;box-shadow:none;letter-spacing:0;z-index:2}
+.product-card-body{padding:22px}.product-card-body h3{font-size:18px;font-weight:600;line-height:1.65}.product-card-price,.detail-price,.pricing-value{color:#203b32;background:none;-webkit-text-fill-color:currentColor;font-weight:600}.product-card-price{font-size:26px}.product-card-desc{color:#5d6962;line-height:1.8}
+.product-card-footer{border-color:#e5e8df;gap:12px}.coverage-tag{color:#64715f;opacity:1}.view-link{color:#365b42}
+.bundle-note{background:#eef3e9;border-color:#d2dfc8;border-radius:8px}.bundle-note strong{color:#355239}.bundle-note span{color:#58674e}
+.intro-text{max-width:820px}.intro-text h2{color:#203b32;font-size:30px}.intro-text p{line-height:2}
+.feature-grid{gap:16px}.feature-card{border-radius:12px;padding:25px 20px;background:#f8f7f2;border:1px solid #e0e4d8;box-shadow:none}.feature-icon{background:#e8eedf;border:0;box-shadow:none;border-radius:50%;color:#203b32}.feature-card p{line-height:1.9}
+#fragrances-section{background:#eaf0e3;border-top:1px solid #d9e2d0;border-bottom:1px solid #d9e2d0}.pricing-card{background:#fdfdf8;border-color:#d4ddc9;box-shadow:none;border-radius:14px}.pricing-card.premium{border-color:#ad986e;box-shadow:none}.pricing-row{border-color:#e1e4d7;color:#526158}.pricing-note{color:#65705c}.pricing-value{font-size:26px}.badge.inline{color:#76572d;background:#f0e8d7;border-radius:4px;padding:5px 12px}
+.fragrance-group-title{color:#637459}.fragrance-chip,.fragrance-chip.premium{background:#fdfdf8;color:#43563c;border:1px solid #ccd6bf;box-shadow:none}.fragrance-chip:hover{color:#203b32;background:#fff;border-color:#849b72}
+.cta-band{background:#203b32;border:0;border-radius:18px;color:#fff;padding:52px 24px}.cta-band p{color:#d5dfd1}.cta-band .btn-gold{background:#e8d9b9;color:#203b32}
+.filter-btn{background:#fff;color:#53644e;border:1px solid #d7dfd0;border-radius:8px}.filter-btn.active{background:#203b32;color:#fff}.product-search{background:#fff!important;color:#203b32!important;border-color:#ccd6c3!important}.product-search::placeholder{color:#74806d}
+.gallery{border:1px solid #d8dfd1;border-radius:18px;background:#f0f0e9}.gallery-track img{background:#f0f0e9;mix-blend-mode:multiply}.gallery-arrow{background:#203b32;color:#fff}.gallery-dot{background:#a7b19c}.gallery-dot.active{background:#203b32}
+.spec-list dt,.specs dt{color:#62705b}.spec-list dd,.specs dd{color:#203b32}.spec-row{border-color:#dde3d5}.detail-description{color:#5d6962}.detail-tag{background:#e9efdf;color:#455c39;border-color:#ccd7bf}
+.contact-form input,.contact-form textarea,.contact-form select,input,textarea,select{background:#fff;color:#203b32;border-color:#c9d3bf}.contact-form label,.form-field label{color:#526449}.contact-links a{color:#203b32}.faq-item{border-color:#d9e1d0;background:#fff;border-radius:10px}.faq-question{color:#203b32}.faq-answer{color:#596953}.about-card{background:#fff;border-color:#dfe3d9}
+.btn-bit{background:#182323;color:#fff}.btn-bit:hover{color:#fff}.bit-phone-display{color:#203b32}
+footer{background:#18352b;color:#f6f4e9;border-top:0;margin-top:0}.footer-col h4,footer .brand,footer .brand .gold-text{color:#e4d7b5}.footer-col p,.footer-links a,.footer-contact{color:#d5dfd1}.footer-bottom{color:#aebfad;border-color:#ffffff18}.footer-links a:hover,.footer-contact a:hover{color:#fff}
+:focus-visible{outline:3px solid #977541;outline-offset:4px}
+.contact-link-list a,.contact-link-list .row{color:#40553b}.field label{color:#526449}.field input,.field textarea{background:#fff;border-color:#c9d3bf}.reveal{opacity:1;transform:none}
+@media(min-width:860px){.hero-grid{grid-template-columns:1.15fr 1fr}.hero-visual{margin-inline-start:12px}}
+@media(max-width:859px){#site-header .nav-wrap,#site-header.scrolled .nav-wrap{padding:10px 18px;gap:12px}.brand{font-size:25px}.hero{min-height:0}.hero-grid{padding:32px 22px 36px;gap:26px}.hero h1{font-size:39px;margin:12px 0}html[lang=ar] .hero h1{font-size:29px;line-height:1.6}.hero p.subtitle{font-size:14px;line-height:1.85}.hero-ctas{margin-top:20px;gap:10px}.hero-ctas .btn{font-size:12px;padding:12px 17px}.hero-visual{height:260px;max-width:440px;width:100%;margin:auto;border-radius:140px 140px 12px 12px}.hero-product-img{max-height:225px}.hero-product-frame{max-width:340px}.hero-visual::after{font-size:9px;bottom:12px}section.block{padding:46px 0}.container{padding:0 20px}.feature-grid{grid-template-columns:1fr 1fr}.feature-card{padding:20px 13px}.feature-card h3{font-size:16px}.feature-card p{font-size:12px}.product-card-body{padding:20px}.collection-block .heading{padding-bottom:18px}.grid-3{gap:20px}.footer-grid{padding:42px 0}.promotion-strip{font-size:11px;gap:3px 14px}.cta-band{padding:36px 20px}}
+@media(max-width:380px){.brand{font-size:22px}#lang-toggle{font-size:11px;padding:8px}.hero-grid{padding-inline:18px}html[lang=ar] .hero h1{font-size:26px}.hero-ctas .btn{padding:11px 13px}.feature-grid{gap:10px}}
