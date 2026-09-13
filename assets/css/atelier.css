@@ -48,3 +48,38 @@ footer{background:#18352b;color:#f6f4e9;border-top:0;margin-top:0}.footer-col h4
 @media(min-width:860px){.hero-grid{grid-template-columns:1.15fr 1fr}.hero-visual{margin-inline-start:12px}}
 @media(max-width:859px){#site-header .nav-wrap,#site-header.scrolled .nav-wrap{padding:10px 18px;gap:12px}.brand{font-size:25px}.hero{min-height:0}.hero-grid{padding:32px 22px 36px;gap:26px}.hero h1{font-size:39px;margin:12px 0}html[lang=ar] .hero h1{font-size:29px;line-height:1.6}.hero p.subtitle{font-size:14px;line-height:1.85}.hero-ctas{margin-top:20px;gap:10px}.hero-ctas .btn{font-size:12px;padding:12px 17px}.hero-visual{height:260px;max-width:440px;width:100%;margin:auto;border-radius:140px 140px 12px 12px}.hero-product-img{max-height:225px}.hero-product-frame{max-width:340px}.hero-visual::after{font-size:9px;bottom:12px}section.block{padding:46px 0}.container{padding:0 20px}.feature-grid{grid-template-columns:1fr 1fr}.feature-card{padding:20px 13px}.feature-card h3{font-size:16px}.feature-card p{font-size:12px}.product-card-body{padding:20px}.collection-block .heading{padding-bottom:18px}.grid-3{gap:20px}.footer-grid{padding:42px 0}.promotion-strip{font-size:11px;gap:3px 14px}.cta-band{padding:36px 20px}}
 @media(max-width:380px){.brand{font-size:22px}#lang-toggle{font-size:11px;padding:8px}.hero-grid{padding-inline:18px}html[lang=ar] .hero h1{font-size:26px}.hero-ctas .btn{padding:11px 13px}.feature-grid{gap:10px}}
+
+/* Motion studio: progressive enhancement; content stays readable without animation support. */
+@keyframes aromify-enter{from{opacity:.35;translate:0 18px}to{opacity:1;translate:0 0}}
+@keyframes aromify-float{0%,100%{translate:0 0;rotate:0deg}35%{translate:0 -12px;rotate:-1deg}70%{translate:0 -5px;rotate:.6deg}}
+@keyframes aromify-light{from{translate:-30% 0;opacity:0}45%{opacity:.65}to{translate:30% 0;opacity:0}}
+@keyframes aromify-scroll{from{opacity:.4;translate:0 28px}to{opacity:1;translate:0 0}}
+@keyframes aromify-progress{from{scale:0 1}to{scale:1 1}}
+@media(prefers-reduced-motion:no-preference){
+ .view.active .hero .section-eyebrow{animation:aromify-enter .65s ease-out both}
+ .view.active .hero h1{animation:aromify-enter .8s .08s ease-out both}
+ .view.active .hero .subtitle{animation:aromify-enter .8s .16s ease-out both}
+ .view.active .hero-ctas{animation:aromify-enter .8s .24s ease-out both}
+ .view.active .hero-product-frame{animation:aromify-float 4.8s .2s ease-in-out 1}
+ .hero-visual{overflow:hidden}
+ .hero-visual::before{background:linear-gradient(115deg,transparent 30%,#ffffff88 50%,transparent 70%);animation:aromify-light 4.8s ease-in-out 1}
+ .btn,.filter-btn,.fragrance-chip,.feature-icon,.gallery-nav{transition:transform .25s ease,background-color .25s ease,box-shadow .25s ease,border-color .25s ease}
+ .btn:active,.filter-btn:active{transform:scale(.97)}
+ .product-card:focus-visible{transform:translateY(-5px);box-shadow:0 16px 32px #203b3218}
+ @supports(animation-timeline:view()){
+  .view.active :is(.block>.container>.heading,.intro-text,.feature-card,.product-card,.pricing-card,.fragrance-group,.cta-band,.about-card,.value-card,.contact-form,.contact-direct){animation:aromify-scroll linear both;animation-timeline:view();animation-range:entry 0% entry 85%}
+  .view.active :is(.product-card,.feature-card,.pricing-card):focus-within{animation:none;opacity:1;translate:0 0}
+ }
+ @supports(animation-timeline:scroll()){
+  #site-header::after{content:"";position:absolute;inset-inline:0;bottom:-1px;height:3px;background:linear-gradient(90deg,#856637,#b7ca96);transform-origin:left;animation:aromify-progress linear;animation-timeline:scroll(root block);pointer-events:none}
+  html[dir=rtl] #site-header::after{transform-origin:right}
+ }
+ @media(hover:hover) and (pointer:fine){
+  .feature-card:hover .feature-icon{transform:translateY(-4px) rotate(-7deg)}
+  .product-card:hover .product-card-media img{transform:scale(1.055)}
+  .hero-visual:hover .hero-product-img{transform:translateY(-7px) scale(1.025)}
+  .hero-product-img{transition:transform .6s cubic-bezier(.22,1,.36,1)}
+  .btn-gold:hover{transform:translateY(-3px);box-shadow:0 10px 24px #203b3226}
+ }
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
