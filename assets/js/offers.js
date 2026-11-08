@@ -1,9 +1,11 @@
-import { promotion } from './data/config.js';
+import { promotion } from './data/config.js?v=202611-offers';
 
-// Explicit Israel offsets avoid visitor timezone differences. End is exclusive.
+// Optional dates use explicit Israel offsets. End is exclusive.
 export function activeOffer(product, now = new Date()) {
   const time = new Date(now).getTime();
-  if (time < Date.parse(promotion.startsAt) || time >= Date.parse(promotion.endsAt) || !Number.isFinite(time)) return null;
+  if (!Number.isFinite(time)) return null;
+  if (promotion.startsAt && time < Date.parse(promotion.startsAt)) return null;
+  if (promotion.endsAt && time >= Date.parse(promotion.endsAt)) return null;
   return promotion.items.find(offer => offer.productId === product.id) || null;
 }
 

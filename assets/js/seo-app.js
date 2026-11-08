@@ -1,8 +1,8 @@
-import { pageUrl, updateSEO } from './seo.js';
+import { pageUrl, updateSEO } from './seo.js?v=202611-offers';
 import { products, fragranceGroups } from './data/catalog.js';
-import { translations, faqItems } from './data/translations.js?v=seo-20260913';
-import { CONTACT } from './data/config.js';
-import { activeOffer, effectivePrice } from './offers.js';
+import { translations, faqItems } from './data/translations.js?v=202611-offers';
+import { CONTACT, promotion } from './data/config.js?v=202611-offers';
+import { activeOffer, effectivePrice } from './offers.js?v=202611-offers';
 
 const RTL = ["he", "ar"];
 let currentLang = document.documentElement.lang || 'he';
@@ -11,9 +11,31 @@ let currentFilter = 'all';
 let searchQuery = '';
 let renderedHash = '';
 function waLink(msg) { const base = 'https://wa.me/' + CONTACT.whatsappNumber; return msg ? base + '?text=' + encodeURIComponent(msg) : base; }
-function money(value) { return '<bdi dir="ltr">₪' + value.toLocaleString('en-US') + '</bdi>'; }
-function bundleCopy(p) { const offer = activeOffer(p); return offer ? tr(offer.bottles === 2 ? 'offers.two' : 'offers.one') : ''; }
-function offerHTML(p) { return activeOffer(p) ? '<div class="bundle-note"><strong>' + bundleCopy(p) + '</strong><span>' + tr('offers.dates') + '</span></div>' : ''; }
+function priceMarkup(product) {
+  const price = effectivePrice(product);
+  return `<bdi dir="ltr" data-live-price="${product.id}">${price ? '₪' + price.toLocaleString('en-US') : tr('product.priceOnRequest')}</bdi>`;
+}
+
+function bundleCopy(offer) {
+  if (offer.gift) return tr('offers.gift');
+  if (offer.chooseFragrance) return tr('offers.choice');
+  return tr(offer.bottles === 2 ? 'offers.two' : 'offers.one');
+}
+
+function warrantyText(offer) {
+  if (offer.warrantyMonths === 12) return tr('offers.yearWarranty');
+  if (offer.warrantyMonths === 6) return tr('offers.halfYearWarranty');
+  return '';
+}
+
+function offerHTML(offer) {
+  if (!offer) return '';
+  return `<div class="bundle-note"><strong>${bundleCopy(offer)}</strong>${offer.shippingExcluded ? `<span>${tr('offers.shippingExcluded')}</span>` : ''}</div>`;
+}
+
+function cartButton(product) {
+  return `<button type="button" class="btn btn-gold" data-cart-add="${product.id}">${tr('offers.addToCart')}</button>`;
+}
 
 function tr(path) {
   const parts = path.split(".");
@@ -56,8 +78,10 @@ function translateStaticText() {
   document.getElementById("current-lang-label").textContent = langNames[currentLang];
 }
 
-function coverageText(p) {
-  return typeof p.coverageArea === "string" ? p.coverageArea : p.coverageArea[currentLang];
+function coverageText(product, offer) {
+  if (offer?.omitCoverage) return '';
+  if (offer?.coverageM2) return tr('offers.coverage').replace('{area}', String(offer.coverageM2));
+  return product.coverageArea[currentLang];
 }
 
 function renderSlide(src, alt) {
@@ -68,23 +92,55 @@ function renderSlide(src, alt) {
 
 function productCardHTML(p) {
   const t = p.t[currentLang];
-  const badge = activeOffer(p) ? tr('offers.badge') : p.badge?.[currentLang];
-  const priceTag = effectivePrice(p) ? money(effectivePrice(p)) : tr("product.priceOnRequest");
+  const offer = activeOffer(p);
+  const badge = offer ? tr('offers.badge') : p.badge?.[currentLang];
+  const coverage = coverageText(p, offer);
   return `
     <a class="product-card glass" href="${pageUrl('product',currentLang,p.slug)}">
       ${badge ? `<span class="badge">${badge}</span>` : ""}
       <div class="product-card-media">${renderSlide(p.images[0], t.name)}</div>
       <div class="product-card-body">
         <h3>${t.name}</h3>
-        <p class="product-card-price">${priceTag}</p>
-        ${offerHTML(p)}
+        <p class="product-card-price">${priceMarkup(p)}</p>
+        ${offerHTML(offer)}
         <p class="product-card-desc">${t.shortDescription}</p>
-        <div class="product-card-footer">
-          <span class="coverage-tag">${coverageText(p)}</span>
+        <div class="product-card-footer">${coverage ? `
+          <span class="coverage-tag">${coverage}</span>` : ''}
           <span class="view-link">${tr("ui.view")} <span aria-hidden="true">${RTL.includes(currentLang) ? "←" : "→"}</span></span>
         </div>
       </div>
     </a>`;
+}
+
+function renderOffersGrid() {
+  const grid = document.getElementById('offers-grid');
+  const cards = [];
+  for (const {productId} of promotion.items) {
+    const product = products.find(p => p.id === productId);
+    const offer = product && activeOffer(product);
+    if (!offer) continue;
+    const copy = product.t[currentLang];
+    const productLink = pageUrl('product', currentLang, product.slug);
+    const terms = [
+      bundleCopy(offer),
+      offer.coverageM2 && coverageText(product, offer),
+      warrantyText(offer),
+      offer.shippingExcluded && tr('offers.shippingExcluded')
+    ].filter(Boolean);
+    cards.push(`<article class="product-card offer-card glass">
+      <a class="product-card-media" href="${productLink}">${renderSlide(product.images[0], copy.name)}</a>
+      <div class="product-card-body">
+        <h2><a href="${productLink}">${copy.name}</a></h2>
+        <div class="offer-card-price"><span>${tr('offers.bundle')}</span><strong>${priceMarkup(product)}</strong></div>
+        <ul class="offer-card-terms">${terms.map(term => `<li>${term}</li>`).join('')}</ul>
+        <div class="offer-card-actions">
+          ${cartButton(product)}
+          <a class="btn btn-ghost" href="${productLink}">${tr('ui.view')}</a>
+        </div>
+      </div>
+    </article>`);
+  }
+  grid.innerHTML = cards.length ? cards.join('') : `<p class="empty-state" role="status">${tr('offers.empty')}</p>`;
 }
 
 function renderFeaturedProducts() {
@@ -128,7 +184,15 @@ function renderProductDetail(slug) {
     return;
   }
   const t = product.t[currentLang];
-  const priceText = effectivePrice(product) ? money(effectivePrice(product)) : tr("product.priceOnRequest");
+  const offer = activeOffer(product);
+  const coverage = coverageText(product, offer);
+  const warranty = offer ? warrantyText(offer) : product.warranty[currentLang];
+  const coverageLabel = tr('product.coverageArea');
+  const specs = t.specs.flatMap(([label, value]) => {
+    if (label !== coverageLabel) return [[label, value]];
+    if (!coverage) return [];
+    return [[label, offer?.coverageM2 ? coverage : value]];
+  });
 
   container.innerHTML = `
     <div class="product-detail-grid">
@@ -148,12 +212,12 @@ function renderProductDetail(slug) {
         ${product.badge ? `<span class="badge inline">${product.badge[currentLang]}</span>` : ""}
         <h1>${t.name}</h1>
         <p class="muted">${t.shortDescription}</p>
-        <p class="price">${priceText}</p>
-        ${offerHTML(product)}
+        <p class="price">${priceMarkup(product)}</p>
+        ${offerHTML(offer)}
 
-        <div class="pill-row">
-          <span class="pill glass">📍 ${tr("product.coverageArea")}: ${coverageText(product)}</span>
-          <span class="pill glass">🛡 ${product.warranty[currentLang]}</span>
+        <div class="pill-row">${coverage ? `
+          <span class="pill glass">📍 ${coverage}</span>` : ''}${warranty ? `
+          <span class="pill glass">🛡 ${warranty}</span>` : ''}
         </div>
 
         ${product.colors ? `
@@ -169,12 +233,13 @@ function renderProductDetail(slug) {
 
         <h2>${tr("product.specifications")}</h2>
         <dl class="spec-list">
-          ${t.specs.map(([label, value]) => `<div class="spec-row"><dt>${label}</dt><dd>${value}</dd></div>`).join("")}
+          ${specs.map(([label, value]) => `<div class="spec-row"><dt>${label}</dt><dd>${value}</dd></div>`).join("")}
         </dl>
 
         <div class="cta-row">
-          <a href="#contact" class="btn btn-gold">${tr("product.contactUs")}</a>
-          <a href="${waLink(tr("product.whatsapp") + " — " + t.name + (activeOffer(product) ? " — ₪" + effectivePrice(product) + " — " + bundleCopy(product) : ""))}" target="_blank" rel="noopener" class="btn btn-ghost">${tr("product.whatsapp")}</a>
+          ${cartButton(product)}
+          <a href="#contact" class="btn btn-ghost">${tr("product.contactUs")}</a>
+          <a href="${waLink(tr("product.whatsapp") + " — " + t.name + (offer ? " — " + bundleCopy(offer) : ""))}" target="_blank" rel="noopener" class="btn btn-ghost">${tr("product.whatsapp")}</a>
           <button type="button" class="btn btn-bit" data-bit-pay>
             <span class="bit-badge">B</span>
             <span>${tr("contact.bitCta")}</span>
@@ -261,10 +326,6 @@ function renderFragrances() {
       </div>`
     )
     .join("");
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    const raw=a.getAttribute('href').slice(1), [r,p]=raw.split('/');
-    if (['home','products','product','about','contact','faq'].includes(r)) a.href=pageUrl(r,currentLang,p)+(r==='products'&&p==='offers'?'#products/offers':'');
-  });
   observeReveals();
 }
 
@@ -384,7 +445,7 @@ function buildParticles(containerId, count = 18) {
   el.innerHTML = html;
 }
 
-const views = ["home", "products", "product", "about", "contact", "faq"];
+const views = ["home", "offers", "products", "product", "about", "contact", "faq"];
 
 function router() {
   const hash = location.hash.replace("#", "") || document.documentElement.dataset.route || "home";
@@ -403,6 +464,7 @@ function router() {
   window.scrollTo({ top: 0, behavior: "instant" });
 
   if (target === "home") renderFeaturedProducts();
+  if (target === "offers") renderOffersGrid();
   if (target === "products") {
     if (param === "offers" && hash !== renderedHash) currentFilter = "offers";
     setupProductFilters();
@@ -417,7 +479,7 @@ function router() {
   updateSEO(target,currentLang,param);
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     const raw=a.getAttribute('href').slice(1), [r,p]=raw.split('/');
-    if (['home','products','product','about','contact','faq'].includes(r)) a.href=pageUrl(r,currentLang,p)+(r==='products'&&p==='offers'?'#products/offers':'');
+    if (views.includes(r) || r === 'cart') a.href = pageUrl(r, currentLang, p);
   });
   observeReveals();
 }

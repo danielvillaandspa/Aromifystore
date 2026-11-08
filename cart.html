@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>סל הקניות | AromifyStore</title>
+  <link rel="stylesheet" href="/assets/css/store-tools.css">
+  <script type="module" src="/assets/js/cart.js"></script>
+</head>
+<body>
+  <header class="store-header"><a id="home" href="/">AromifyStore</a><nav aria-label="Languages"><a lang="he" href="?lang=he">עברית</a><a lang="ar" href="?lang=ar">العربية</a><a lang="en" href="?lang=en">English</a></nav></header>
+  <main class="store-main">
+    <div class="store-heading"><a id="offers" href="/offers.html"></a><h1 id="title">סל הקניות</h1><p id="intro"></p></div>
+    <div class="store-grid" id="cart-grid" hidden>
+      <section class="store-panel" aria-labelledby="items-title"><h2 id="items-title"></h2><ul id="items" class="store-list"></ul></section>
+      <section class="store-panel" aria-labelledby="summary-title"><h2 id="summary-title"></h2>
+        <form id="coupon" hidden><label for="code" id="code-label"></label><div class="store-inline"><input id="code" maxlength="32" autocomplete="off" spellcheck="false" dir="ltr"><button id="apply" type="submit"></button></div></form>
+        <dl class="store-summary"><div><dt id="subtotal-label"></dt><dd><bdi id="subtotal"></bdi></dd></div><div id="discount-row" hidden><dt id="discount-label"></dt><dd><bdi id="discount"></bdi></dd></div><div><dt id="total-label"></dt><dd><bdi id="total"></bdi></dd></div></dl>
+        <p id="shipping" class="store-note"></p><p id="status" class="store-note" role="status"></p>
+        <button id="quote" type="button" hidden></button><a class="store-button" id="order" target="_blank" rel="noopener noreferrer" hidden></a>
+      </section>
+    </div>
+    <p id="empty" class="store-panel" hidden></p>
+    <noscript>JavaScript is required to use the cart. <a href="/">AromifyStore</a></noscript>
+  </main>
+</body>
+</html>

@@ -71,7 +71,7 @@ export const translations = {
       "office": "למשרד",
       "commercial": "מסחרי",
       "car": "לרכב",
-      "offers": "מבצעי החודש"
+      "offers": "מבצעים"
     },
     "fragrances": {
       "eyebrow": "האוסף שלנו",
@@ -144,15 +144,24 @@ export const translations = {
       "map": "מפה: עספיא"
     },
     "offers": {
-      "title": "מכשיר + ניחוח לבחירתכם",
-      "eyebrow": "מבצעי החודש",
-      "subtitle": "חבילות בישום לבית, למשרד ולרכב",
-      "badge": "חבילת החודש",
-      "one": "כולל בקבוק ניחוח אחד לבחירה",
-      "two": "כולל 2 בקבוקי ניחוח לבחירה",
-      "dates": "בתוקף מ־9.9.2026 עד 8.10.2026 כולל",
+      "title": "מבצעי הבישום של Aromifystore",
+      "eyebrow": "מבצעים",
+      "subtitle": "מכשירי ריח עם בקבוקי ניחוח לבית, לעסק ולרכב. להזמנות כמות אפשר לפנות אלינו.",
+      "badge": "מחיר מבצע",
+      "one": "כולל בקבוק ניחוח אחד",
+      "two": "כולל שני בקבוקי ניחוח",
+      "choice": "כולל בקבוק ניחוח אחד לבחירתכם",
+      "gift": "בקבוק ניחוח אחד במתנה",
+      "coverage": "כיסוי עד {area} מ״ר",
+      "yearWarranty": "אחריות לשנה",
+      "halfYearWarranty": "אחריות ל־6 חודשים",
+      "shippingExcluded": "המשלוח אינו כלול",
+      "empty": "אין מבצעים זמינים כרגע.",
+      "banner": "מכשיר ריח ובקבוקי ניחוח בחבילה אחת",
       "cta": "לכל המבצעים",
-      "bundle": "מחיר החבילה"
+      "bundle": "מחיר החבילה",
+      "cart": "סל קניות",
+      "addToCart": "הוספה לסל"
     }
   },
   "ar": {
@@ -227,7 +236,7 @@ export const translations = {
       "office": "للمكتب",
       "commercial": "تجاري",
       "car": "للسيارة",
-      "offers": "عروض الشهر"
+      "offers": "العروض"
     },
     "fragrances": {
       "eyebrow": "تشكيلتنا",
@@ -300,15 +309,24 @@ export const translations = {
       "map": "خريطة إسفيا"
     },
     "offers": {
-      "title": "جهاز تعطير ورائحتك المفضلة",
-      "eyebrow": "عروض الشهر",
-      "subtitle": "باقات تعطير للمنزل والمكتب والسيارة",
-      "badge": "باقة الشهر",
-      "one": "تشمل عبوة عطر واحدة من اختيارك",
-      "two": "تشمل عبوتي عطر من اختيارك",
-      "dates": "من 9 سبتمبر حتى نهاية 8 أكتوبر 2026",
+      "title": "عروض التعطير من أروميفاي ستور",
+      "eyebrow": "العروض",
+      "subtitle": "أجهزة تعطير مع عبوات عطر للمنزل والعمل والسيارة. تواصل معنا لطلبات الكميات.",
+      "badge": "سعر العرض",
+      "one": "يشمل عبوة عطر واحدة",
+      "two": "يشمل عبوتي عطر",
+      "choice": "يشمل عبوة عطر واحدة من اختيارك",
+      "gift": "عبوة عطر واحدة هدية",
+      "coverage": "تغطية حتى {area} م²",
+      "yearWarranty": "كفالة سنة",
+      "halfYearWarranty": "كفالة 6 أشهر",
+      "shippingExcluded": "السعر لا يشمل التوصيل",
+      "empty": "لا توجد عروض متاحة حاليًا.",
+      "banner": "جهاز تعطير وعبوات عطر في باقة واحدة",
       "cta": "شاهد جميع العروض",
-      "bundle": "سعر الباقة"
+      "bundle": "سعر الباقة",
+      "cart": "سلة التسوق",
+      "addToCart": "أضف إلى السلة"
     }
   },
   "en": {
@@ -383,7 +401,7 @@ export const translations = {
       "office": "Office",
       "commercial": "Commercial",
       "car": "Car",
-      "offers": "Monthly offers"
+      "offers": "Offers"
     },
     "fragrances": {
       "eyebrow": "Our Collection",
@@ -456,15 +474,24 @@ export const translations = {
       "map": "Map of Isfiya"
     },
     "offers": {
-      "title": "Your diffuser. Your favorite scent.",
-      "eyebrow": "Monthly offers",
-      "subtitle": "Fragrance bundles for home, office and car",
-      "badge": "Monthly bundle",
-      "one": "Includes 1 fragrance bottle of your choice",
-      "two": "Includes 2 fragrance bottles of your choice",
-      "dates": "September 9–October 8, 2026 inclusive",
+      "title": "Aromifystore fragrance offers",
+      "eyebrow": "Offers",
+      "subtitle": "Diffuser and fragrance bundles for home, work and the car. Contact us about quantity orders.",
+      "badge": "Offer price",
+      "one": "Includes one fragrance bottle",
+      "two": "Includes two fragrance bottles",
+      "choice": "Includes one fragrance bottle of your choice",
+      "gift": "One complimentary fragrance bottle",
+      "coverage": "Covers up to {area} m²",
+      "yearWarranty": "One-year warranty",
+      "halfYearWarranty": "Six-month warranty",
+      "shippingExcluded": "Delivery not included",
+      "empty": "There are no active offers right now.",
+      "banner": "Diffusers and fragrance bottles in one bundle",
       "cta": "Explore all offers",
-      "bundle": "Bundle price"
+      "bundle": "Bundle price",
+      "cart": "Cart",
+      "addToCart": "Add to cart"
     }
   }
 };

@@ -15,6 +15,7 @@
 <link rel="stylesheet" href="assets/css/styles.css" />
 <link rel="stylesheet" href="assets/css/refinements.css" />
 <link rel="stylesheet" href="assets/css/atelier.css?v=20260913-motion" />
+<link rel="stylesheet" href="assets/css/offers.css" />
 <meta name="google-site-verification" content="o-NnGwRatxIis8nK59Ka-VhDPD4aRoxkCX4xJoABUFY" />
 </head>
 <body>
@@ -27,12 +28,13 @@
     <nav class="nav-links">
       <a href="#home" class="nav-link" data-route="home" data-i18n="nav.home">Home</a>
       <a href="#products" class="nav-link" data-route="products" data-i18n="nav.products">Products</a>
+      <a href="#offers" class="nav-link" data-route="offers" data-i18n="offers.eyebrow">Offers</a>
       <a href="#home" class="nav-link" data-scroll-to="fragrances-section" data-i18n="nav.fragrances">Fragrances</a>
       <a href="#about" class="nav-link" data-route="about" data-i18n="nav.about">About</a>
       <a href="#faq" class="nav-link" data-route="faq" data-i18n="nav.faq">FAQ</a>
       <a href="#contact" class="nav-link" data-route="contact" data-i18n="nav.contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn btn-gold nav-cta" data-i18n="nav.cta">Get in touch</a>
+    <a href="#cart" class="store-cart-link"><span data-i18n="offers.cart">Cart</span> <span data-cart-count hidden></span></a>
     <!-- Language selector — always top-left -->
 <div id="lang-switch">
   <button id="lang-toggle" class="glass" data-i18n-aria="ui.language" aria-expanded="false" aria-controls="lang-menu">
@@ -56,6 +58,7 @@
 <div id="mobile-menu" class="glass">
   <a href="#home" class="nav-link" data-route="home" data-i18n="nav.home">Home</a>
   <a href="#products" class="nav-link" data-route="products" data-i18n="nav.products">Products</a>
+  <a href="#offers" class="nav-link" data-route="offers" data-i18n="offers.eyebrow">Offers</a>
   <a href="#home" class="nav-link" data-scroll-to="fragrances-section" data-i18n="nav.fragrances">Fragrances</a>
   <a href="#about" class="nav-link" data-route="about" data-i18n="nav.about">About</a>
   <a href="#faq" class="nav-link" data-route="faq" data-i18n="nav.faq">FAQ</a>
@@ -68,7 +71,7 @@
   <!-- ============ HOME ============ -->
   <section id="view-home" class="view active">
 
-    <div class="promotion-strip" data-promotion><span data-i18n="offers.eyebrow"></span><span data-i18n="offers.dates"></span><a href="#products/offers" data-i18n="offers.cta"></a></div>
+    <div class="promotion-strip" data-promotion><span data-i18n="offers.eyebrow"></span><span data-i18n="offers.banner"></span><a href="#offers" data-i18n="offers.cta"></a></div>
     <section class="hero">
       <div class="particles" id="hero-particles"></div>
       <div class="hero-grid">
@@ -226,6 +229,20 @@
     </section>
   </section>
 
+  <section id="view-offers" class="view">
+    <header class="offers-intro">
+      <div class="container">
+        <p class="section-eyebrow" data-i18n="offers.eyebrow">Offers</p>
+        <h1 class="font-display" data-i18n="offers.title">Aromifystore fragrance offers</h1>
+        <p data-i18n="offers.subtitle">Diffuser and fragrance bundles for home, work and the car.</p>
+        <a href="#cart" class="btn btn-gold" data-i18n="offers.cart">Cart</a>
+      </div>
+    </header>
+    <div class="container offers-collection">
+      <div id="offers-grid" class="grid-3"></div>
+    </div>
+  </section>
+
   <!-- ============ PRODUCT DETAIL ============ -->
   <section id="view-product" class="view">
     <section class="block">
@@ -357,6 +374,7 @@
       <div class="footer-links">
         <a href="#home" data-i18n="nav.home">Home</a>
         <a href="#products" data-i18n="nav.products">Products</a>
+        <a href="#offers" data-i18n="offers.eyebrow">Offers</a>
         <a href="#about" data-i18n="nav.about">About</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </div>
@@ -393,6 +411,7 @@
 </a>
 
 <script type="module" src="assets/js/app.js"></script>
+<script type="module" src="/assets/js/cart-buttons.js"></script>
 
 </body>
 </html>

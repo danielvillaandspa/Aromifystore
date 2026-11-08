@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>لوحة إدارة AromifyStore</title>
+  <link rel="stylesheet" href="/assets/css/store-tools.css">
+  <script type="module" src="/assets/js/admin.js"></script>
+</head>
+<body>
+  <header class="store-header"><a href="/index-ar.html">AromifyStore</a><span>لوحة إدارة المتجر</span><button id="logout" type="button" hidden>تسجيل الخروج</button></header>
+  <main class="store-main">
+    <div class="store-heading"><h1>إدارة الأسعار وأكواد الكميات</h1><p id="status" role="status"></p></div>
+    <section class="store-panel store-login" id="login-panel" hidden>
+      <h2>دخول صاحب المتجر</h2>
+      <form id="login-form" class="store-form"><label>اسم المستخدم <input name="username" autocomplete="username" required maxlength="120" dir="ltr"></label><label>كلمة المرور <input name="password" type="password" autocomplete="current-password" required maxlength="256" dir="ltr"></label><button type="submit">تسجيل الدخول</button></form>
+    </section>
+    <div class="store-grid" id="controls" hidden>
+      <section class="store-panel"><h2>أسعار العروض</h2><p class="store-note">السعر بالشيكل للباقة الواحدة. يظهر السعر المحدّث في المتجر بعد حفظه.</p>
+        <form id="price-form" class="store-form"><label>المنتج <select name="id" required></select></label><label>السعر ₪ <input name="price" type="number" min="0.01" max="100000" step="0.01" dir="ltr" required></label><button type="submit">حفظ السعر</button></form>
+      </section>
+      <section class="store-panel" id="coupon-panel" hidden><h2>أكواد الخصم للكميات</h2><p class="store-note">شارك الكود بشكل خاص مع العميل. حد الكمية هو مجموع عدد الباقات في السلة.</p>
+        <form id="coupon-form" class="store-form"><label>الكود <input name="code" placeholder="اختياري، يُولّد تلقائيًا" autocomplete="off" maxlength="32" pattern="[A-Za-z0-9][A-Za-z0-9_\-]{3,31}" dir="ltr"></label><label>نسبة الخصم % <input name="percent" type="number" min="1" max="100" dir="ltr" required></label><label>الحد الأدنى للكمية <input name="minQuantity" type="number" min="2" max="500" dir="ltr" required></label><button type="submit">إنشاء كود</button></form>
+        <ul id="coupons" class="store-coupon-list" aria-label="الأكواد"></ul>
+      </section>
+      <section class="store-panel"><h2>تحقق من مرجع طلب</h2><p class="store-note">خذ المرجع من رسالة واتساب وطابق المنتجات والكميات والمجموع قبل تأكيد الطلب.</p>
+        <form id="lookup-form" class="store-form"><label>مرجع الطلب <input name="reference" autocomplete="off" maxlength="100" dir="ltr" required></label><button type="submit">عرض التفاصيل</button></form>
+        <div id="lookup" hidden></div>
+      </section>
+      <section class="store-panel" id="accounts-panel" hidden><h2>حسابات الإدارة</h2><p class="store-note">حسابات المشرفين تعدّل الأسعار وتتحقق من الطلبات. إنشاء الأكواد وحسابات الإدارة خاص بصاحب المتجر.</p>
+        <form id="account-form" class="store-form"><label>اسم المستخدم <input name="username" autocomplete="off" required minlength="3" maxlength="48" pattern="[A-Za-z0-9][A-Za-z0-9_.\-]{2,47}" dir="ltr"></label><label>كلمة مرور الحساب <input name="password" type="password" autocomplete="new-password" required minlength="16" maxlength="256" dir="ltr"></label><button type="submit">إضافة مشرف</button></form>
+        <ul id="accounts" class="store-coupon-list" aria-label="حسابات المشرفين"></ul>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

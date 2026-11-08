@@ -11,8 +11,19 @@ let searchQuery = '';
 let renderedHash = '';
 function waLink(msg) { const base = 'https://wa.me/' + CONTACT.whatsappNumber; return msg ? base + '?text=' + encodeURIComponent(msg) : base; }
 function money(value) { return '<bdi dir="ltr">₪' + value.toLocaleString('en-US') + '</bdi>'; }
-function bundleCopy(p) { const offer = activeOffer(p); return offer ? tr(offer.bottles === 2 ? 'offers.two' : 'offers.one') : ''; }
-function offerHTML(p) { return activeOffer(p) ? '<div class="bundle-note"><strong>' + bundleCopy(p) + '</strong><span>' + tr('offers.dates') + '</span></div>' : ''; }
+function bundleCopy(p) {
+  const offer = activeOffer(p);
+  if (!offer) return '';
+  if (offer.gift) return tr('offers.gift');
+  if (offer.chooseFragrance) return tr('offers.choice');
+  return tr(offer.bottles === 2 ? 'offers.two' : 'offers.one');
+}
+function offerHTML(p) {
+  const offer = activeOffer(p);
+  if (!offer) return '';
+  return '<div class="bundle-note"><strong>' + bundleCopy(p) + '</strong>' +
+    (offer.shippingExcluded ? '<span>' + tr('offers.shippingExcluded') + '</span>' : '') + '</div>';
+}
 
 function tr(path) {
   const parts = path.split(".");
@@ -173,7 +184,7 @@ function renderProductDetail(slug) {
 
         <div class="cta-row">
           <a href="#contact" class="btn btn-gold">${tr("product.contactUs")}</a>
-          <a href="${waLink(tr("product.whatsapp") + " — " + t.name + (activeOffer(product) ? " — ₪" + effectivePrice(product) + " — " + bundleCopy(product) : ""))}" target="_blank" rel="noopener" class="btn btn-ghost">${tr("product.whatsapp")}</a>
+          <a href="${waLink(tr("product.whatsapp") + " — " + t.name + (activeOffer(product) ? " — " + bundleCopy(product) : ""))}" target="_blank" rel="noopener" class="btn btn-ghost">${tr("product.whatsapp")}</a>
           <button type="button" class="btn btn-bit" data-bit-pay>
             <span class="bit-badge">B</span>
             <span>${tr("contact.bitCta")}</span>

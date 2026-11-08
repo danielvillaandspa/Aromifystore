@@ -33,8 +33,8 @@ if(!fs.existsSync(templatePath))fs.copyFileSync(path.join(store,'index.html'),te
 const template=fs.readFileSync(templatePath,'utf8');
 let app=fs.readFileSync(path.join(store,'assets/js/seo-app.js'),'utf8').replace(/^import .*;\r?\n/gm,'');
 // Build with the same rendering functions used by visitors, without network resources.
-app='const {products,fragranceGroups,translations,faqItems,CONTACT,activeOffer,effectivePrice,pageUrl,updateSEO}=window.__build;\n'+app;
-const routes=['home','products',...products.map(p=>'product/'+p.slug)];const urls=[];
+app='const {products,fragranceGroups,translations,faqItems,CONTACT,promotion,activeOffer,effectivePrice,pageUrl,updateSEO}=window.__build;\n'+app;
+const routes=['home','products','offers',...products.map(p=>'product/'+p.slug)];const urls=[];
 for(const route of routes)for(const lang of ['he','ar','en']) {
  const [r,slug]=route.split('/'), file=seo.pageUrl(r,lang,slug), url='https://shoparomify.store'+file;
  const dom=new JSDOM(template,{url,runScripts:'outside-only',pretendToBeVisual:true}),w=dom.window,d=w.document;
@@ -55,7 +55,7 @@ for(const route of routes)for(const lang of ['he','ar','en']) {
  if(p)graph.push({'@type':'Product',name:p.t[lang].name,description:p.t[lang].description,image:p.images.map(i=>'https://shoparomify.store/'+i),sku:p.id,url});
  addHead(d,{domain:'shoparomify.store',url,title:meta.title,description:meta.description,lang,alternates:Object.fromEntries(['he','ar','en','x-default'].map(l=>[l,'https://shoparomify.store'+seo.pageUrl(r,l==='x-default'?'he':l,slug)])),image:'https://shoparomify.store/'+meta.image,graph});
  // Cache-bust changed scripts so older cached modules cannot reset the page language.
- d.querySelector('script[type="module"]').src='assets/js/seo-app.js?v=seo-20260913';
+ d.querySelector('script[type="module"]').src='assets/js/seo-app.js?v=202611-offers';
  fs.writeFileSync(path.join(store,file==='/'?'index.html':file.slice(1)),dom.serialize());urls.push(url);w.close();
 }
 saveSitemap(store,'shoparomify.store',urls);

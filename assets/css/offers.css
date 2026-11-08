@@ -1,0 +1,77 @@
+.store-cart-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  min-height: 44px;
+  padding: .35rem .65rem;
+  border: 1px solid #a8b5a7;
+  border-radius: 8px;
+  color: #203b32;
+  font-size: .85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.store-cart-link:hover { background: #e4e9dd; }
+.store-cart-link [data-cart-count]:not([hidden]) {
+  padding-inline: .38rem;
+  border-radius: 1rem;
+  background: #203b32;
+  color: #fff;
+}
+
+[data-promotion][hidden] { display: none; }
+
+.offers-intro {
+  padding-block: clamp(2.4rem, 7vw, 5.5rem);
+  background: linear-gradient(135deg, #f4eee0, #e7eee0);
+  border-bottom: 1px solid #dfe3d9;
+}
+
+.offers-intro h1 {
+  margin-block: .35em;
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  line-height: 1.25;
+}
+
+.offers-intro p:not(.section-eyebrow) { max-width: 58ch; color: #47564c; }
+.offers-intro .btn { margin-top: 1rem; }
+.offers-collection { padding-block: .4rem clamp(2.5rem, 8vw, 5rem); }
+
+.offer-card { display: flex; flex-direction: column; }
+.offer-card .product-card-media { display: block; }
+.offer-card .product-card-body { display: flex; flex: 1; flex-direction: column; }
+.offer-card h2 {
+  font-size: clamp(1.13rem, 2vw, 1.32rem);
+  font-weight: 650;
+  line-height: 1.45;
+  margin-bottom: .85rem;
+}
+.offer-card h2 a:hover { text-decoration: underline; }
+.offer-card-price {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .3rem .9rem;
+  color: #59665e;
+  font-size: .875rem;
+}
+.offer-card-price strong { color: #203b32; font-size: 1.75rem; line-height: 1.2; }
+.offer-card-terms {
+  display: grid;
+  gap: .4rem;
+  list-style: disc;
+  padding-inline-start: 1.2rem;
+  margin-block: 1rem 1.35rem;
+  color: #455b4e;
+}
+.offer-card-terms li::marker { color: #856637; }
+.offer-card-actions { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: auto; }
+.offer-card-actions .btn { flex: 1 1 auto; padding-inline: .8rem; }
+
+@media (max-width: 460px) {
+  #site-header .nav-wrap, #site-header.scrolled .nav-wrap { gap: .45rem; padding-inline: .65rem; }
+  .store-cart-link { margin-inline-start: auto; font-size: .75rem; padding-inline: .4rem; }
+  #site-header .brand { font-size: clamp(1.15rem, 5vw, 1.45rem); }
+}

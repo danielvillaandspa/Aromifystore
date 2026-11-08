@@ -4,6 +4,8 @@ export function pageUrl(route='home', lang='he', slug='') {
   const suffix = lang === 'he' ? '' : '-' + lang;
   if (route === 'home') return lang === 'he' ? '/' : '/index-' + lang + '.html';
   if (route === 'products') return '/products' + suffix + '.html';
+  if (route === 'offers') return '/offers' + suffix + '.html';
+  if (route === 'cart') return '/cart.html?lang=' + lang;
   if (route === 'product' && products.some(p=>p.slug===slug)) return '/product-' + slug + suffix + '.html';
   return pageUrl('home',lang) + '#' + route;
 }
@@ -12,10 +14,16 @@ const home = {
  ar:['Aromifystore | أجهزة تعطير وزيوت عطرية للمنزل والأعمال','أروميفاي ستور: أجهزة تعطير وزيوت عطرية للمنزل والمكتب والمحلات والسيارة. قارن الأجهزة وتواصل معنا لمساعدتك في اختيار الجهاز والرائحة المناسبين.'],
  en:['Aromifystore | Scent Diffusers & Fragrance Oils','Explore scent diffusers and fragrance oils for homes, offices, businesses and cars. Compare Aromifystore devices and contact us for help choosing your scent.']
 };
+const offers = {
+ he:['מבצעי מכשירי ריח ושמנים','מארזי בישום לבית, למשרד, לעסק ולרכב. השוו מחירים וראו אילו ניחוחות כלולים בכל מארז.'],
+ ar:['عروض أجهزة التعطير والزيوت العطرية','تسوّق باقات تعطير للمنزل والمكتب والأعمال والسيارة. قارن الأسعار وتعرّف على عبوات العطر المشمولة.'],
+ en:['Diffuser and fragrance offers','Shop fragrance bundles for home, work, commercial spaces, and cars. Compare prices and see what each bundle includes.']
+};
 export function pageMeta(route,lang,slug) {
  const p=products.find(p=>p.slug===slug);
  if(route==='product'&&p) return {title:p.t[lang].name+' | Aromifystore',description:p.t[lang].shortDescription+'. '+({he:'צפו בתמונות ובמפרט, ובדקו התאמה לחלל שלכם עם Aromifystore.',ar:'شاهد الصور والمواصفات وتواصل مع أروميفاي ستور لاختيار الجهاز المناسب لمساحتك.',en:'View photos and specifications, and contact Aromifystore to check the right fit for your space.'})[lang],image:p.images[0]};
  if(route==='products') return {title:({he:'מכשירי ריח ושמנים ארומטיים',ar:'أجهزة التعطير والزيوت العطرية',en:'Scent Diffusers & Fragrance Oils'})[lang]+' | Aromifystore',description:home[lang][1],image:products[2].images[0]};
+ if(route==='offers') return {title:offers[lang][0]+' | Aromifystore',description:offers[lang][1],image:products[0].images[0]};
  return {title:home[lang][0],description:home[lang][1],image:products[2].images[0]};
 }
 export function updateSEO(route,lang,slug) {
