@@ -1,2 +1,2 @@
-// Set to the deployed checkout Worker origin, without a trailing slash.
-export const checkoutApi = '';
+// Public checkout Worker origin. Credentials stay in Cloudflare.
+export const checkoutApi = 'https://aromify-checkout.aromifystore-tools.workers.dev';
